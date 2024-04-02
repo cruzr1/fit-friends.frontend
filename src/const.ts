@@ -44,3 +44,63 @@ export enum UserRole {
   Trainer = 'Trainer',
   User = 'User',
 }
+
+export enum TrainType {
+  Yoga = 'Yoga',
+  Running = 'Running',
+  Boxing = 'Boxing',
+  Stretching = 'Stretching',
+  Crossfit = 'Crossfit',
+  Aerobics = 'Aerobics',
+  Pilates = 'Pilates',
+}
+
+export enum TrainTypeCaption {
+  Yoga = 'йога',
+  Running = 'бег',
+  Boxing = 'бокс',
+  Stretching = 'стрейчинг',
+  Crossfit = 'кроссфит',
+  Aerobics = 'аэробика',
+  Pilates = 'пилатес',
+}
+
+export enum Duration {
+  From10to30min = '10-30min',
+  From30to50min = '30-50min',
+  From50to80min = '50-80min',
+  From80to100min = '80-100min',
+}
+
+export enum DurationCaption {
+  From10to30min = '10 мин - 30 мин',
+  From30to50min = '30 мин - 50 мин',
+  From50to80min = '50 мин - 80 мин',
+  From80to100min = '80 мин - 100 мин',
+}
+
+export enum Level {
+  Newby = 'Newby',
+  Amateur = 'Amateur',
+  Professional = 'Professional',
+}
+
+export enum Gender {
+  Male = 'Male',
+  Female = 'Female',
+  Any = 'Any',
+}
+
+export enum LevelCaption {
+  Newby = 'Новичок',
+  Amateur = 'Любитель',
+  Professional = 'Профессионал',
+}
+
+export enum GenderCaption {
+  Male = 'Мужской',
+  Female = 'Женский',
+  Any = 'Любой',
+}
+
+

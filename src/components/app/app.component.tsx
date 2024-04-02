@@ -7,7 +7,7 @@ import PrivateRouteRole from '../private-route-role/private-route-role';
 import {CreateTrainingPage, SignPage, QuestionnairePage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListCoachPage, FriendsListUserPage, MainPage, MyPurchasesPage, UserCardCoachPage, UserCardUserPage, UsersCataloguePage, TrainingCardCoachPage, TrainingCardUserPage, TrainingCataloguePage, IntroPage} from '../../pages/index'
 
 
-export const userRole: string = UserRole.Trainer;
+export const userRole: string = UserRole.User;
 export const authStatus: string = AuthStatus.Auth;
 
 export default function AppComponent(): JSX.Element {
