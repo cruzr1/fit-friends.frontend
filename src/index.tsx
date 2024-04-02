@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import browserHistory from './browser-history';
+import AppComponent from './components/app/app.component';
+import HistoryRouter from './history-router/history-router';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -7,6 +10,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <h1>Hello, World!</h1>
+    <HistoryRouter history={browserHistory}>
+      <AppComponent />
+    </HistoryRouter>
   </React.StrictMode>
 );
