@@ -1,9 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppRoute, UserRole } from '../../const';
+import { AppRoute, UserRole, AuthStatus } from '../../const';
 import LayoutComponent from '../layout/layout.component';
 import AnonymRoute from '../anonym-route/anonym-route';
 import PrivateRoute from '../private-route/private-route';
-import {CreateTrainingPage, SignInPage, SignUpPage, QuestionnaireCoachPage, QuestionnaireUserPage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListCoachPage, FriendsListUserPage, MainPage, MyPurchasesPage, UserCardCoachPage, UserCardUserPage, UsersCataloguePage, TrainingCardCoachPage, TrainingCardUserPage, TrainingCataloguePage, IntroPage} from '../../pages/index'
+import PrivateRouteRole from '../private-route-role/private-route-role';
+import {CreateTrainingPage, SignInPage, SignUpPage, QuestionnairePage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListCoachPage, FriendsListUserPage, MainPage, MyPurchasesPage, UserCardCoachPage, UserCardUserPage, UsersCataloguePage, TrainingCardCoachPage, TrainingCardUserPage, TrainingCataloguePage, IntroPage} from '../../pages/index'
+
+
+export const userRole: string = UserRole.User;
+export const authStatus: string = AuthStatus.Auth;
 
 export default function AppComponent(): JSX.Element {
 return (
@@ -27,115 +32,107 @@ return (
         }
       />
       <Route
-        path={AppRoute.QuestCoach}
+        path={AppRoute.Quest}
         element={
-          <PrivateRoute role={UserRole.Trainer}>
-            <QuestionnaireCoachPage />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={AppRoute.QuestUser}
-        element={
-          <PrivateRoute role={UserRole.User}>
-            <QuestionnaireUserPage />
+          <PrivateRoute>
+            <QuestionnairePage />
           </PrivateRoute>
         }
       />
       <Route
         path={AppRoute.PersonalAccountCoach}
         element={
-          <PrivateRoute role={UserRole.Trainer}>
+          <PrivateRouteRole role={UserRole.Trainer}>
             <PersonalAccountCoachPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.PersonalAccountUser}
         element={
-          <PrivateRoute role={UserRole.User}>
+          <PrivateRouteRole role={UserRole.User}>
             <PersonalAccountUserPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.CreateTraining}
         element={
-          <PrivateRoute role={UserRole.Trainer}>
+          <PrivateRouteRole role={UserRole.Trainer}>
             <CreateTrainingPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.MyTrainings}
         element={
-          <PrivateRoute role={UserRole.Trainer}>
+          <PrivateRouteRole role={UserRole.Trainer}>
             <MyTrainingsPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.MyOrders}
         element={
-          <PrivateRoute role={UserRole.Trainer}>
+          <PrivateRouteRole role={UserRole.Trainer}>
             <MyOrdersPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.MyFriendsCoach}
         element={
-          <PrivateRoute role={UserRole.Trainer}>
+          <PrivateRouteRole role={UserRole.Trainer}>
             <FriendsListCoachPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.MyFriendsUser}
         element={
-          <PrivateRoute role={UserRole.User}>
+          <PrivateRouteRole role={UserRole.User}>
             <FriendsListUserPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.Main}
         element={
-          <PrivateRoute role={UserRole.User}>
+          <PrivateRouteRole role={UserRole.User}>
             <MainPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.TrainingCatalogue}
         element={
-          <PrivateRoute role={UserRole.User}>
+          <PrivateRouteRole role={UserRole.User}>
             <TrainingCataloguePage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.TrainingCardCoach}
         element={
-          <PrivateRoute role={UserRole.Trainer}>
+          <PrivateRouteRole role={UserRole.Trainer}>
             <TrainingCardCoachPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.TrainingCardUser}
         element={
-          <PrivateRoute role={UserRole.Trainer}>
+          <PrivateRouteRole role={UserRole.Trainer}>
             <TrainingCardUserPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
         path={AppRoute.UserCatalogue}
         element={
-          <PrivateRoute role={UserRole.User}>
+          <PrivateRouteRole role={UserRole.User}>
             <UsersCataloguePage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
       <Route
@@ -149,9 +146,9 @@ return (
       <Route
         path={AppRoute.MyPurchases}
         element={
-          <PrivateRoute role={UserRole.User}>
+          <PrivateRouteRole role={UserRole.User}>
             <MyPurchasesPage />
-          </PrivateRoute>
+          </PrivateRouteRole>
         }
       />
     </Route>
