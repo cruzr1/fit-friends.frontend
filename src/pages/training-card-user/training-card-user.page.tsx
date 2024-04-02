@@ -1,4 +1,4 @@
-export default function TrainingCardUser(): JSX.Element {
+export default function TrainingCardUserPage(): JSX.Element {
   return (
     <section className="inner-page">
     <div className="container">

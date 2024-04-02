@@ -1,4 +1,4 @@
-export default function TrainingCatalog(): JSX.Element {
+export default function TrainingsCataloguePage(): JSX.Element {
   return (
     <section className="inner-page">
       <div className="container">

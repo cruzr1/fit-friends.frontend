@@ -1,4 +1,4 @@
-export default function UserCardUser(): JSX.Element {
+export default function UserCardUserPage(): JSX.Element {
   return (
     <div className="inner-page inner-page--no-sidebar">
     <div className="container">

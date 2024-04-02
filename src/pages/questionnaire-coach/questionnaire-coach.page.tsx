@@ -1,4 +1,4 @@
-export default function QuestionnaireCoachaPage(): JSX.Element {
+export default function QuestionnaireCoachPage(): JSX.Element {
   return (
     <>
       <div className="background-logo">

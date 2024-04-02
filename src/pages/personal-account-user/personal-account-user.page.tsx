@@ -1,4 +1,4 @@
-export default function PersonalAccountUser(): JSX.Element {
+export default function PersonalAccountUserPage(): JSX.Element {
   return (
     <section className="inner-page">
       <div className="container">
