@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode } from 'react'
 import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthStatus, UserRole} from '../../const';
+import { AppRoute, AuthStatus } from '../../const';
 import LoadingPage from '../../pages/loading/loading.page';
 import { authStatus } from '../app/app.component';
 

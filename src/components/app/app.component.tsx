@@ -4,10 +4,10 @@ import LayoutComponent from '../layout/layout.component';
 import AnonymRoute from '../anonym-route/anonym-route';
 import PrivateRoute from '../private-route/private-route';
 import PrivateRouteRole from '../private-route-role/private-route-role';
-import {CreateTrainingPage, SignInPage, SignUpPage, QuestionnairePage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListCoachPage, FriendsListUserPage, MainPage, MyPurchasesPage, UserCardCoachPage, UserCardUserPage, UsersCataloguePage, TrainingCardCoachPage, TrainingCardUserPage, TrainingCataloguePage, IntroPage} from '../../pages/index'
+import {CreateTrainingPage, SignPage, QuestionnairePage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListCoachPage, FriendsListUserPage, MainPage, MyPurchasesPage, UserCardCoachPage, UserCardUserPage, UsersCataloguePage, TrainingCardCoachPage, TrainingCardUserPage, TrainingCataloguePage, IntroPage} from '../../pages/index'
 
 
-export const userRole: string = UserRole.User;
+export const userRole: string = UserRole.Trainer;
 export const authStatus: string = AuthStatus.Auth;
 
 export default function AppComponent(): JSX.Element {
@@ -19,7 +19,7 @@ return (
         path={AppRoute.Signin}
         element={
           <AnonymRoute>
-            <SignInPage />
+            <SignPage isSignin />
           </AnonymRoute>
         }
       />
@@ -27,7 +27,7 @@ return (
         path={AppRoute.Signup}
         element={
           <AnonymRoute>
-            <SignUpPage />
+            <SignPage />
           </AnonymRoute>
         }
       />
