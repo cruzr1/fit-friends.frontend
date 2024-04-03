@@ -1,6 +1,10 @@
+import { useLocation } from 'react-router-dom';
 import { PaginationComponent, TrainingFilterComponent, TrainingsListComponent } from '../../components';
+import { adaptPathname } from '../../helpers';
+import trainings from '../../mocks/mock-trainings.json';
 
 export default function MyTrainingsPage(): JSX.Element {
+  const {pathname} = useLocation();
   return (
     <section className="inner-page">
       <div className="container">
@@ -9,7 +13,7 @@ export default function MyTrainingsPage(): JSX.Element {
           <TrainingFilterComponent isMyTrainingsPage />
           <div className="inner-page__content">
             <div className="my-trainings">
-              <TrainingsListComponent isMyTrainingPage />
+              <TrainingsListComponent classApply={adaptPathname(pathname)} trainingsList={trainings} />
               <PaginationComponent />
             </div>
           </div>

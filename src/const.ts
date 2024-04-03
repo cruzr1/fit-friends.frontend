@@ -103,4 +103,10 @@ export enum GenderCaption {
   Any = 'Любой',
 }
 
+export const TrainingItemClassApply = {
+  [AppRoute.MyTrainings]: 'my-trainings',
+  [AppRoute.MyOrders]: 'my-orders',
+  [AppRoute.MyPurchases]: 'my-purchases',
+  [AppRoute.TrainingCatalogue]: 'training-catalog',
+} as const;
 
