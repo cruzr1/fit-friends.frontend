@@ -14,3 +14,5 @@ export { default as TrainingsListComponent } from './trainings-list/trainings-li
 export { default as SortOrdersComponent } from './sort-orders/sort-orders.component';
 export { default as BackButtonComponent } from './back-button/back-button.component';
 export { default as PurchasesControlsComponent } from './purchases-controls/purchases-controls.component';
+export { default as FriendsListItemComponent } from './friends-list-item/friends-list-item.component';
+export { default as FriendsListComponent } from './friends-list/friends-list.component';

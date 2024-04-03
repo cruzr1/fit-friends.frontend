@@ -4,6 +4,8 @@ export const BASE_URL = 'http://localhost:3000/api';
 
 export const REQUEST_TIMEOUT = 5000;
 
+export const TIMEOUT_SHOW_ERROR = 5000;
+
 export const RequestStatus = {
   Idle: 'idle',
   Pending: 'pending',
@@ -22,8 +24,7 @@ export const AppRoute = {
   MyTrainings: '/my-trainings',
   MyOrders: '/my-orders',
   MyPurchases: '/my-purchases',
-  MyFriendsCoach: '/my-friends-coach',
-  MyFriendsUser: '/my-friends-user',
+  MyFriends: '/friends-list',
   Main: '/main',
   TrainingCatalogue: '/training-catalog',
   TrainingCardUser: '/training-card-user',
@@ -33,6 +34,21 @@ export const AppRoute = {
   UserCardCoach: '/user-card-coach',
 } as const;
 
+export const APIPath = {
+  Signin: 'users/signin',
+  Login: 'users/login',
+  Verify: 'users/check',
+} as const;
+
+export const Action = {
+  Create: 'create',
+  Get: 'get',
+  Update: 'update',
+  Delete: 'delete',
+  Login: 'login',
+  Logout: 'logout',
+  Redirect: 'redirect',
+} as const;
 
 export const AuthStatus = {
   Auth: 'auth',
@@ -53,6 +69,22 @@ export enum TrainType {
   Crossfit = 'Crossfit',
   Aerobics = 'Aerobics',
   Pilates = 'Pilates',
+}
+
+export enum Location {
+  Pionerskaya = 'Pionerskaya',
+  Petrogradskaya = 'Petrogradskaya',
+  Udelnaya = 'Udelnaya',
+  Zvezdnaya = 'Zvezdnaya',
+  Sportivnaya = 'Sportivnaya',
+}
+
+export enum LocationCaption {
+  Pionerskaya = 'Пионерская',
+  Petrogradskaya = 'Петроградская',
+  Udelnaya = 'Удельная',
+  Zvezdnaya = 'Звездная',
+  Sportivnaya = 'Спортивная',
 }
 
 export enum TrainTypeCaption {
@@ -111,3 +143,16 @@ export const TrainingItemClassApply = {
   TrainingFormBackButton: 'my-training-form__btnback',
 } as const;
 
+export const NameSpace = {
+  AuthStatus: 'auth',
+  User: 'user',
+  Error: 'error',
+  Route: 'route',
+} as const;
+
+export const ErrorMessage = {
+  UserUnauthorised: 'User is unauthorised',
+  FailedUserLogout: 'Failed to log user out',
+  FailedUserLogin: 'Failed to log user in',
+  FailedUserSignin: 'Failed to sign user in',
+} as const;

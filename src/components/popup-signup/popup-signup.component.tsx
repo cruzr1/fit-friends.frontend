@@ -1,4 +1,5 @@
 export default function PopupSigninComponent(): JSX.Element {
+
   return (
     <div className="popup-form popup-form--sign-up">
       <div className="popup-form__wrapper">
