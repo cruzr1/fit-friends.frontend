@@ -16,7 +16,6 @@ export type TrainingItemComponentProps = {
 }
 
 export default function TrainingItemComponent({price, name, trainType, calories, description, rating, backgroundImage, isOrdered, trainingsCount, trainingsSum}: TrainingItemComponentProps): JSX.Element {
-  console.log(backgroundImage, name);
   return (
       <div className="thumbnail-training">
         <div className="thumbnail-training__inner">
@@ -47,8 +46,20 @@ export default function TrainingItemComponent({price, name, trainType, calories,
             <p className="thumbnail-training__text">{description}</p>
           </div>
           <div className="thumbnail-training__button-wrapper">
-            <a className="btn btn--small thumbnail-training__button-catalog" href="#">Подробнее</a>
-           {isOrdered && <a className="btn btn--small btn--outlined thumbnail-training__button-catalog" href="#">Отзывы</a>}
+            {!isOrdered &&
+              <>
+                <a className="btn btn--small thumbnail-training__button-catalog" href="#">Подробнее</a>
+                <a className="btn btn--small btn--outlined thumbnail-training__button-catalog" href="#">Отзывы</a>
+              </>
+            }
+           {isOrdered &&
+              <a className="btn-flat btn-flat--underlined thumbnail-training__button-orders" href="#">
+                <svg width="18" height="18" aria-hidden="true">
+                  <use xlinkHref="#icon-info"></use>
+                </svg><span>Подробнее</span>
+              </a>
+
+            }
           </div>
         </div>
         {isOrdered &&

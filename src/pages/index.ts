@@ -18,3 +18,4 @@ export {default as TrainingDiaryPage } from './training-diary/training-diary.pag
 export {default as UserCardCoachPage } from './user-card-coach/user-card-coach.page';
 export {default as UserCardUserPage } from './user-card-user/user-card-user.page';
 export {default as UsersCataloguePage } from './users-catalog/users-catalog.page';
+

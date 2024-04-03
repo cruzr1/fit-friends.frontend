@@ -5,6 +5,7 @@ import trainings from '../../mocks/mock-trainings.json';
 
 export default function TrainingsCataloguePage(): JSX.Element {
   const {pathname} = useLocation();
+  const classApply=adaptPathname(pathname);
   return (
     <section className="inner-page">
       <div className="container">
@@ -12,8 +13,8 @@ export default function TrainingsCataloguePage(): JSX.Element {
           <h1 className="visually-hidden">Каталог тренировок</h1>
           <TrainingFilterComponent />
           <div className="training-catalog">
-          <TrainingsListComponent classApply={adaptPathname(pathname)} trainingsList={trainings} />
-            <PaginationComponent />
+            <TrainingsListComponent classApply={classApply} trainingsList={trainings} />
+            <PaginationComponent classApply={classApply} />
           </div>
         </div>
       </div>

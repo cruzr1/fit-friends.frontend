@@ -5,6 +5,7 @@ import trainings from '../../mocks/mock-trainings.json';
 
 export default function MyTrainingsPage(): JSX.Element {
   const {pathname} = useLocation();
+  const classApply = adaptPathname(pathname);
   return (
     <section className="inner-page">
       <div className="container">
@@ -13,8 +14,8 @@ export default function MyTrainingsPage(): JSX.Element {
           <TrainingFilterComponent isMyTrainingsPage />
           <div className="inner-page__content">
             <div className="my-trainings">
-              <TrainingsListComponent classApply={adaptPathname(pathname)} trainingsList={trainings} />
-              <PaginationComponent />
+              <TrainingsListComponent classApply={classApply} trainingsList={trainings} />
+              <PaginationComponent classApply={classApply} />
             </div>
           </div>
         </div>

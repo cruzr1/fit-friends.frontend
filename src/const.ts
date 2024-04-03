@@ -108,5 +108,6 @@ export const TrainingItemClassApply = {
   [AppRoute.MyOrders]: 'my-orders',
   [AppRoute.MyPurchases]: 'my-purchases',
   [AppRoute.TrainingCatalogue]: 'training-catalog',
+  TrainingFormBackButton: 'my-training-form__btnback',
 } as const;
 

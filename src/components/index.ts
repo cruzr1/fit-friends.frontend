@@ -12,3 +12,5 @@ export { default as TrainingItemComponent } from './training-item/training-item.
 export { default as PaginationComponent } from './pagination/pagination.component';
 export { default as TrainingsListComponent } from './trainings-list/trainings-list.component';
 export { default as SortOrdersComponent } from './sort-orders/sort-orders.component';
+export { default as BackButtonComponent } from './back-button/back-button.component';
+export { default as PurchasesControlsComponent } from './purchases-controls/purchases-controls.component';
