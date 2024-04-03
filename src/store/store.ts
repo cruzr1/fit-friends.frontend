@@ -4,6 +4,7 @@ import { createApi } from '../services/api';
 import { redirect } from './middlewares/redirect';
 
 export const axiosApi = createApi();
+
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
