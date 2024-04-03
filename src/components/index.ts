@@ -16,3 +16,6 @@ export { default as BackButtonComponent } from './back-button/back-button.compon
 export { default as PurchasesControlsComponent } from './purchases-controls/purchases-controls.component';
 export { default as FriendsListItemComponent } from './friends-list-item/friends-list-item.component';
 export { default as FriendsListComponent } from './friends-list/friends-list.component';
+export { default as UserFilterComponent } from './user-filter/user-filter.component';
+export { default as UsersListComponent } from './users-list/users-list.component';
+export { default as UserItemComponent } from './user-item/user-item.component';

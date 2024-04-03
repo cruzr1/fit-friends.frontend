@@ -1,6 +1,5 @@
 import { BackButtonComponent } from '..';
 import { DurationCaption, TrainTypeCaption, TrainingItemClassApply } from '../../const';
-import { adaptPathname } from '../../helpers';
 
 export type TrainingFilterComponentProps = {
   isMyTrainingsPage?: boolean;

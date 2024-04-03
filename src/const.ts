@@ -29,7 +29,7 @@ export const AppRoute = {
   TrainingCatalogue: '/training-catalog',
   TrainingCardUser: '/training-card-user',
   TrainingCardCoach: '/training-card-coach',
-  UserCatalogue: '/user-catalogue',
+  UserCatalogue: '/users-catalog',
   UserCardUser: '/user-card-user',
   UserCardCoach: '/user-card-coach',
 } as const;
@@ -141,6 +141,7 @@ export const TrainingItemClassApply = {
   [AppRoute.MyPurchases]: 'my-purchases',
   [AppRoute.TrainingCatalogue]: 'training-catalog',
   TrainingFormBackButton: 'my-training-form__btnback',
+  UserFormBackButton: 'user-catalog-form__btnback',
 } as const;
 
 export const NameSpace = {
