@@ -4,7 +4,7 @@ import LayoutComponent from '../layout/layout.component';
 import AnonymRoute from '../anonym-route/anonym-route';
 import PrivateRoute from '../private-route/private-route';
 import PrivateRouteRole from '../private-route-role/private-route-role';
-import {CreateTrainingPage, SignPage, QuestionnairePage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListPage, MainPage, MyPurchasesPage, UserCardCoachPage, UserCardUserPage, UsersCataloguePage, TrainingCardCoachPage, TrainingCardUserPage, TrainingCataloguePage, IntroPage} from '../../pages/index'
+import {CreateTrainingPage, SignPage, QuestionnairePage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListPage, MainPage, MyPurchasesPage, UserCardPage, UsersCataloguePage, TrainingCardPage, TrainingCataloguePage, IntroPage} from '../../pages/index'
 
 
 export const userRole: string = UserRole.User;
@@ -104,19 +104,11 @@ return (
         }
       />
       <Route
-        path={AppRoute.TrainingCardCoach}
+        path={AppRoute.TrainingCard}
         element={
-          <PrivateRouteRole role={UserRole.Trainer}>
-            <TrainingCardCoachPage />
-          </PrivateRouteRole>
-        }
-      />
-      <Route
-        path={AppRoute.TrainingCardUser}
-        element={
-          <PrivateRouteRole role={UserRole.Trainer}>
-            <TrainingCardUserPage />
-          </PrivateRouteRole>
+          <PrivateRoute>
+            <TrainingCardPage />
+          </PrivateRoute>
         }
       />
       <Route
@@ -128,12 +120,8 @@ return (
         }
       />
       <Route
-        path={AppRoute.UserCardCoach}
-        element={<UserCardCoachPage />}
-      />
-      <Route
-        path={AppRoute.UserCardUser}
-        element={<UserCardUserPage />}
+        path={AppRoute.UserCard}
+        element={<UserCardPage />}
       />
       <Route
         path={AppRoute.MyPurchases}

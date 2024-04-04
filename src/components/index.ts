@@ -19,3 +19,7 @@ export { default as FriendsListComponent } from './friends-list/friends-list.com
 export { default as UserFilterComponent } from './user-filter/user-filter.component';
 export { default as UsersListComponent } from './users-list/users-list.component';
 export { default as UserItemComponent } from './user-item/user-item.component';
+export { default as UserCardContentComponent } from './user-card-content/user-card-content.component';
+export { default as ReviewsListComponent } from './reviews-list/reviews-list.component';
+export { default as ReviewItemComponent } from './review-item/review-item.component';
+export { default as TrainingCardComponent } from './training-card/training-card.component';

@@ -1,13 +1,12 @@
 import { BackButtonComponent } from '..';
-import { LocationCaption, TrainTypeCaption, TrainingItemClassApply } from '../../const';
+import { BackButtonClassApply, LocationCaption, TrainTypeCaption, TrainingItemClassApply } from '../../const';
 
 export default function UserFilterComponent(): JSX.Element {
-  const classBackButtonApply = TrainingItemClassApply.UserFormBackButton;
   return (
     <div className="user-catalog-form">
     <h2 className="visually-hidden">Каталог пользователя</h2>
     <div className="user-catalog-form__wrapper">
-      <BackButtonComponent classApply={classBackButtonApply} isTrainingFilter />
+      <BackButtonComponent classApply={BackButtonClassApply.UserForm} />
       <h3 className="user-catalog-form__title">Фильтры</h3>
       <form className="user-catalog-form__form">
         <div className="user-catalog-form__block user-catalog-form__block--location">

@@ -1,18 +1,18 @@
 import { BackButtonComponent } from '..';
-import { DurationCaption, TrainTypeCaption, TrainingItemClassApply } from '../../const';
+import { BackButtonClassApply, DurationCaption, TrainTypeCaption } from '../../const';
 
 export type TrainingFilterComponentProps = {
   isMyTrainingsPage?: boolean;
 }
 
 export default function TrainingFilterComponent({isMyTrainingsPage}: TrainingFilterComponentProps): JSX.Element {
-  const classBackButtonApply = TrainingItemClassApply.TrainingFormBackButton;
   const classApply = isMyTrainingsPage ? 'my-training' : 'gym-catalog';
+  const backButtonClassApply = isMyTrainingsPage ? BackButtonClassApply.TrainingForm : BackButtonClassApply.TrainingCatalog
   return (
     <div className={`${classApply}-form`}>
       <h2 className="visually-hidden">Мои тренировки Фильтр</h2>
       <div className={`${classApply}-form__wrapper`}>
-        <BackButtonComponent classApply={classBackButtonApply} isTrainingFilter />
+        <BackButtonComponent classApply={backButtonClassApply} />
         <h3 className={`${classApply}-form__title`}>Фильтры</h3>
         <form className={`${classApply}-form__form`}>
           <div className={`${classApply}-form__block ${classApply}-form__block--price`}>

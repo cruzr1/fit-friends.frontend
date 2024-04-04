@@ -1,4 +1,4 @@
-import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute } from './const';
+import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply } from './const';
 import { store } from "./store/store";
 
 export type StateType = ReturnType<typeof store.getState>;
@@ -10,6 +10,9 @@ export type AuthStatusType = typeof AuthStatus[keyof typeof AuthStatus];
 export type AppRouteType = typeof AppRoute[keyof typeof AppRoute];
 
 export type RequestStatusType = typeof RequestStatus[keyof typeof RequestStatus];
+
+
+export type BackButtonClassApplyType = typeof BackButtonClassApply[keyof typeof BackButtonClassApply];
 
 export type TrainingType  = {
   id?: string;

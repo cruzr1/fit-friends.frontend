@@ -27,11 +27,9 @@ export const AppRoute = {
   MyFriends: '/friends-list',
   Main: '/main',
   TrainingCatalogue: '/training-catalog',
-  TrainingCardUser: '/training-card-user',
-  TrainingCardCoach: '/training-card-coach',
+  TrainingCard: '/training-card',
   UserCatalogue: '/users-catalog',
-  UserCardUser: '/user-card-user',
-  UserCardCoach: '/user-card-coach',
+  UserCard: '/user-card',
 } as const;
 
 export const APIPath = {
@@ -140,8 +138,18 @@ export const TrainingItemClassApply = {
   [AppRoute.MyOrders]: 'my-orders',
   [AppRoute.MyPurchases]: 'my-purchases',
   [AppRoute.TrainingCatalogue]: 'training-catalog',
-  TrainingFormBackButton: 'my-training-form__btnback',
-  UserFormBackButton: 'user-catalog-form__btnback',
+} as const;
+
+export const BackButtonClassApply = {
+  MyTrainings: 'my-trainings',
+  MyOrders: 'my-orders__back',
+  MyPurchases: 'my-purchases__back',
+  TrainingCatalog: 'gym-catalog-form__btnback',
+  TrainingForm: 'my-training-form__btnback',
+  UserForm: 'user-catalog-form__btnback',
+  UserCard: 'inner-page__back',
+  FriendsList: 'friends-list__back',
+  ReviewsList: 'reviews-side-bar__back',
 } as const;
 
 export const NameSpace = {

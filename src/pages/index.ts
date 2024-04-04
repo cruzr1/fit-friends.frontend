@@ -10,12 +10,10 @@ export { default as PersonalAccountCoachPage } from './personal-account-coach/pe
 export { default as PersonalAccountUserPage } from './personal-account-user/personal-account-user.page';
 export { default as QuestionnairePage } from './questionnaire/questionnaire.page';
 export { default as SignPage } from './sign/sign.page';
-export { default as TrainingCardCoachPage } from './training-card-coach/training-card.coach.page';
-export { default as TrainingCardUserPage } from './training-card-user/training-card-user.page';
+export { default as TrainingCardPage } from './training-card/training-card.page';
 export { default as TrainingCataloguePage } from './training-catalog/training-catalog.page';
 export { default as TrainingDiaryPage } from './training-diary/training-diary.page';
-export { default as UserCardCoachPage } from './user-card-coach/user-card-coach.page';
-export { default as UserCardUserPage } from './user-card-user/user-card-user.page';
+export { default as UserCardPage } from './user-card/user-card.page';
 export { default as UsersCataloguePage } from './users-catalog/users-catalog.page';
 
 
