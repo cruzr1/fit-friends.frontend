@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { store } from './store/store';
 import browserHistory from './browser-history';
 import { authoriseUserAction } from './store/user/user.actions';
@@ -7,6 +8,7 @@ import AppComponent from './components/app/app.component';
 import HistoryRouter from './history-router/history-router';
 import { updateAuthStatus } from './store/user/user.slice';
 import { AuthStatus } from './const';
+import { ErrorMessageComponent } from './components';
 
 
 store.dispatch(updateAuthStatus(AuthStatus.Unknown));
@@ -17,8 +19,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <HistoryRouter history={browserHistory}>
-      <AppComponent />
-    </HistoryRouter>
+    <Provider store={store}>
+      <HistoryRouter history={browserHistory}>
+        <ErrorMessageComponent />
+        <AppComponent />
+      </HistoryRouter>
+    </Provider>
   </React.StrictMode>
 );

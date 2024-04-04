@@ -72,7 +72,7 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
 
   export type SigninType = UserType & Record<'password', string>;
 
-  export type LoggedUserType = {
+  export type LoggedUserType = UserType & {
     accessToken: string;
     refreshToken: string;
   }

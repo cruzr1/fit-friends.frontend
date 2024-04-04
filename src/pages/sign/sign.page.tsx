@@ -1,5 +1,6 @@
 import { BackgroundLogoComponent, PopupSigninComponent, PopupSignupComponent } from '../../components';
 
+
 type SignProps = {
   isSignin?: boolean;
 }

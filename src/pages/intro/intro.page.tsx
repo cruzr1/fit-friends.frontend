@@ -1,4 +1,9 @@
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
 export default function IntroPage(): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <div className="intro">
       <div className="intro__background">
@@ -16,8 +21,8 @@ export default function IntroPage(): JSX.Element {
           </picture>
         </div>
         <div className="intro__buttons">
-          <button className="btn intro__button" type="button">Регистрация</button>
-          <p className="intro__text">Есть аккаунт? <a className="intro__link" href="#">Вход</a>
+          <button className="btn intro__button" type="button" onClick={() => navigate(AppRoute.Signup)}>Регистрация</button>
+          <p className="intro__text">Есть аккаунт? <Link className="intro__link" to={AppRoute.Signin}>Вход</Link>
           </p>
         </div>
       </div>

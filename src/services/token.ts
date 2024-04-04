@@ -1,8 +1,12 @@
-import { AUTH_TOKEN_KEY } from '../const';
+import { AUTH_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../const';
 
 
 export const setToken = (token: string): void => {
   localStorage.setItem(AUTH_TOKEN_KEY, token);
+};
+
+export const setRefreshToken = (token: string): void => {
+  localStorage.setItem(REFRESH_TOKEN_KEY, token);
 };
 
 export const getToken = (): string => {

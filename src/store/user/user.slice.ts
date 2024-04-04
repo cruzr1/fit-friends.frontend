@@ -1,17 +1,17 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatus, NameSpace } from '../../const';
-import { AuthStatusType } from '../../types';
+import { AuthStatusType, UserType } from '../../types';
 import { logoutUser } from '../action';
 import { removeToken } from '../../services/token';
 
 export type UserStateType = {
-  email: string;
   authStatus: AuthStatusType;
+  user: UserType | null;
 }
 
 export const userState: UserStateType = {
-  email: '',
-  authStatus: AuthStatus.Unknown
+  authStatus: AuthStatus.Unknown,
+  user: null,
 };
 
 export const user = createSlice({
@@ -21,8 +21,8 @@ export const user = createSlice({
     updateAuthStatus: (state, {payload}: PayloadAction<AuthStatusType>) => {
       state.authStatus = payload;
     },
-    setEmail: (state, {payload}: PayloadAction<string>) => {
-      state.email = payload;
+    setUser: (state, {payload}: PayloadAction<UserType | null>) => {
+      state.user = payload;
     }
   },
   extraReducers(builder) {
@@ -30,9 +30,9 @@ export const user = createSlice({
       .addCase(logoutUser, () => {
         removeToken();
         updateAuthStatus(AuthStatus.NoAuth);
-        setEmail('');
+        setUser(null);
       })
   },
 });
 
-export const {updateAuthStatus, setEmail} = user.actions;
+export const {updateAuthStatus, setUser} = user.actions;

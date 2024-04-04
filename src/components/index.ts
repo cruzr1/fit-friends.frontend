@@ -23,3 +23,4 @@ export { default as UserCardContentComponent } from './user-card-content/user-ca
 export { default as ReviewsListComponent } from './reviews-list/reviews-list.component';
 export { default as ReviewItemComponent } from './review-item/review-item.component';
 export { default as TrainingCardComponent } from './training-card/training-card.component';
+export { default as ErrorMessageComponent } from './error-message/error-message.component';
