@@ -1,4 +1,4 @@
-import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply } from './const';
+import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location } from './const';
 import { store } from "./store/store";
 
 export type StateType = ReturnType<typeof store.getState>;
@@ -51,15 +51,15 @@ export type UserType = {
   avatar: string;
   passwordHash?: string;
   gender: Gender;
-  birthDate?: Date;
+  birthDate?: string;
   role: UserRole;
   description: string;
   location: Location;
   backgroundImage: string;
-  level: Level;
+  level?: Level;
   friends?: string[];
-  trainType: TrainType[];
-  isReadyTrain: boolean;
+  trainType?: TrainType[];
+  isReadyTrain?: boolean;
   subscribedFor?: string[];
   duration?: Duration;
   caloriesTarget?: number;

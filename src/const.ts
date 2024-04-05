@@ -12,11 +12,18 @@ export const PASSWORD_REGEX = /^.{6,12}$/;
 
 export const NAME_REGEX = /^.{1,15}$/;
 
+export const BIRTHDAY_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
 export const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+export const AVATAR_REGEX = /(.png$|.jpg$|.jpeg$)/;
+
 
 export const NULL_LENGTH = 0;
 
 export const errorStyle = {color: 'red'};
+
+export const DEFAULT_PATH = 'markup/img/content';
 
 export const RequestStatus = {
   Idle: 'idle',
@@ -63,7 +70,8 @@ export const Action = {
 export const AuthStatus = {
   Auth: 'auth',
   NoAuth: 'unauth',
-  Unknown: 'unknown'
+  Unknown: 'unknown',
+  Signed: 'signed'
 } as const;
 
 export enum UserRole {
@@ -176,4 +184,25 @@ export const ErrorMessage = {
   FailedUserLogout: 'Failed to log user out',
   FailedUserLogin: 'Failed to log user in',
   FailedUserSignin: 'Failed to sign user in',
+} as const;
+
+export const UserValidationParams = {
+  Image: {
+    Regex: RegExp(/(.png$|.jpg$|.jpeg$)/i),
+  },
+  Description: {
+    Length: {
+      Minimal: 10,
+      Maximal: 140,
+    },
+  },
+  Calories: {
+    Value: {
+      Minimal: 1000,
+      Maximal: 5000,
+    },
+  },
+  Certificates: {
+    Regex: RegExp(/.pdf/i),
+  },
 } as const;

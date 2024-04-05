@@ -1,4 +1,4 @@
-import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX } from './const';
+import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX } from './const';
 import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOrderedType } from './types';
 
 export const isStatusPending = (status: RequestStatusType) => status === RequestStatus.Pending;
@@ -18,3 +18,9 @@ export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pa
 export const isEmailValid = (mail: string): boolean => EMAIL_REGEX.test(mail);
 
 export const isNameValid = (name: string): boolean => NAME_REGEX.test(name);
+
+export const isBirthDateValid = (birthDate: string): boolean => BIRTHDAY_REGEX.test(birthDate);
+
+export const isAvatarValid = (avatarURL: string): boolean => AVATAR_REGEX.test(avatarURL);
+
+

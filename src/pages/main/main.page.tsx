@@ -3,7 +3,6 @@ import { selectUser } from '../../store/user/user.selectors';
 
 export default function MainPage():JSX.Element {
   const user = useAppSelector(selectUser);
-  console.log(user);
   return(
     <>
       <h1 className="visually-hidden">FitFriends — Время находить тренировки, спортзалы и друзей спортсменов</h1>
