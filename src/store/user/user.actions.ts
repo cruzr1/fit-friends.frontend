@@ -3,8 +3,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { updateAuthStatus, setUser } from './user.slice';
 import { setRefreshToken, setToken} from '../../services/token';
 import { clearErrorAction } from '../error/error.actions';
-import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage } from '../../const';
-import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType } from '../../types';
+import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole } from '../../const';
+import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType } from '../../types';
+import { redirect } from '../middlewares/redirect';
+import { redirectToRoute } from '../action';
 
 
 
@@ -68,6 +70,26 @@ export const loginUserAction = createAsyncThunk<void, LoginType, {
     } catch (message) {
       dispatch(updateAuthStatus(AuthStatus.NoAuth));
       dispatch(clearErrorAction(`${ErrorMessage.FailedUserLogin}: ${message}`));
+    }
+  }
+);
+
+export const updateUserAction = createAsyncThunk<void, UpdateUserType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>(
+  `${NameSpace.User}/${Action.Update}`,
+  async (updateUser, {dispatch, extra: axiosApi}) => {
+    try {
+      const {data} = await axiosApi.patch<UserType>(APIPath.Update, updateUser);
+      dispatch(setUser(data));
+      const newRoute = data.role === UserRole.Trainer ? AppRoute.PersonalAccountCoach : AppRoute.Main;
+      dispatch(redirectToRoute(newRoute));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUserUpdate}: ${message}`));
+      console.log(message);
     }
   }
 );

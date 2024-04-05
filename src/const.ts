@@ -18,6 +18,8 @@ export const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const AVATAR_REGEX = /(.png$|.jpg$|.jpeg$)/;
 
+export const CERTIFICATE_REGEX = /(.pdf$)/;
+
 
 export const NULL_LENGTH = 0;
 
@@ -55,6 +57,7 @@ export const APIPath = {
   Signin: 'users/signin',
   Login: 'users/login',
   Verify: 'users/check',
+  Update: 'users/update',
 } as const;
 
 export const Action = {
@@ -129,6 +132,13 @@ export enum DurationCaption {
   From80to100min = '80 мин - 100 мин',
 }
 
+export enum QuestionDurationCaption {
+  '10-30min' = '10 мин - 30 мин',
+  '30-50min' = '30 мин - 50 мин',
+  '50-80min' = '50 мин - 80 мин',
+  '80-100min' = '80 мин - 100 мин',
+}
+
 export enum Level {
   Newby = 'Newby',
   Amateur = 'Amateur',
@@ -184,6 +194,7 @@ export const ErrorMessage = {
   FailedUserLogout: 'Failed to log user out',
   FailedUserLogin: 'Failed to log user in',
   FailedUserSignin: 'Failed to sign user in',
+  FailedUserUpdate: 'Failed to update user',
 } as const;
 
 export const UserValidationParams = {
@@ -192,14 +203,14 @@ export const UserValidationParams = {
   },
   Description: {
     Length: {
-      Minimal: 10,
-      Maximal: 140,
+      Minimum: 10,
+      Maximum: 140,
     },
   },
   Calories: {
     Value: {
-      Minimal: 1000,
-      Maximal: 5000,
+      Minimum: 1000,
+      Maximum: 5000,
     },
   },
   Certificates: {

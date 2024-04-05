@@ -1,14 +1,10 @@
-import {BackgroundLogoComponent, PopupQuestionnaireCoachComponent, PopupQuestionnaireUserComponent} from '../../components/index';
-import { userRole } from '../../components/app/app.component';
-import { UserRole } from '../../const';
+import {BackgroundLogoComponent, PopupQuestionnaireComponent } from '../../components/index';
 
 export default function QuestionnairePage(): JSX.Element {
-
   return (
     <>
       <BackgroundLogoComponent />
-      {userRole === UserRole.Trainer && <PopupQuestionnaireCoachComponent />}
-      {userRole === UserRole.User && <PopupQuestionnaireUserComponent />}
+      <PopupQuestionnaireComponent />
     </>
   )
 }

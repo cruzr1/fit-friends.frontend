@@ -1,13 +1,11 @@
 import { useRef, ChangeEvent, useState, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
-import { DEFAULT_PATH, Gender, Location, LocationCaption, UserRole, NULL_LENGTH, errorStyle, Level } from '../../const';
+import { DEFAULT_PATH, Gender, Location, LocationCaption, UserRole, NULL_LENGTH, errorStyle } from '../../const';
 import { isBirthDateValid, isEmailValid, isNameValid, isPasswordValid, isAvatarValid } from '../../helpers';
 import { signinUserAction } from '../../store/user/user.actions';
-import { useNavigate } from 'react-router-dom';
 
 export default function PopupSignupComponent(): JSX.Element {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const avatarRef = useRef<HTMLInputElement>(null);
   const [avatarURL, setAvatarURL] = useState<string>('');
   const nameRef = useRef<HTMLInputElement>(null);

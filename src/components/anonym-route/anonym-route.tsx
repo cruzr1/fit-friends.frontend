@@ -9,6 +9,7 @@ type PrivateRouteProps = PropsWithChildren;
 
 export default function AnonymRoute ({children}: PrivateRouteProps): JSX.Element | ReactNode {
   const authStatus = useAppSelector(selectUserAuthStatus);
+  console.log(authStatus);
   const userRole = useAppSelector(selectUser)?.role;
   return (
     <>

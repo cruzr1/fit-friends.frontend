@@ -1,4 +1,4 @@
-import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX } from './const';
+import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX, CERTIFICATE_REGEX, UserValidationParams } from './const';
 import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOrderedType } from './types';
 
 export const isStatusPending = (status: RequestStatusType) => status === RequestStatus.Pending;
@@ -22,5 +22,11 @@ export const isNameValid = (name: string): boolean => NAME_REGEX.test(name);
 export const isBirthDateValid = (birthDate: string): boolean => BIRTHDAY_REGEX.test(birthDate);
 
 export const isAvatarValid = (avatarURL: string): boolean => AVATAR_REGEX.test(avatarURL);
+
+export const isCaloriesValueValid = (value: number) => value <= UserValidationParams.Calories.Value.Maximum && value > UserValidationParams.Calories.Value.Minimum;
+
+export const isDescriptionValid = (description: string) => description.length > UserValidationParams.Description.Length.Minimum && description.length < UserValidationParams.Description.Length.Maximum;
+
+export const isCertificateValid = (certificateURL: string) => CERTIFICATE_REGEX.test(certificateURL);
 
 

@@ -68,6 +68,8 @@ export type UserType = {
   achievements?: string;
 }
 
+export type UpdateUserType = Partial<UserType>;
+
 export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
 
   export type SigninType = UserType & Record<'password', string>;
