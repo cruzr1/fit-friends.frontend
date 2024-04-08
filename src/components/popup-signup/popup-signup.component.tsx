@@ -140,12 +140,9 @@ export default function PopupSignupComponent(): JSX.Element {
                               <use xlinkHref="#arrow-down"></use>
                             </svg></span></button>
                             <ul className="custom-select__list" role="listbox" onClick={(evt) => handleLocationItemChange(evt.target as HTMLUListElement)}>
-                              <li className="custom-select__item" id='Petrogradskaya' role='option'>Петроградская</li>
-                              <li className="custom-select__item" id='Pionerskaya' role='option'>Пионерская</li>
-                              <li className="custom-select__item" id='Udelnaya' role='option'>Удельная</li>
-                              <li className="custom-select__item" id='Zvezdnaya' role='option'>Звездная</li>
-                              <li className="custom-select__item" id='Sportivnaya' role='option'>Спортивная</li>
-                        </ul>
+                              {Object.values(Location).map((option) =>
+                              <li key={option} className="custom-select__item" id={option} role='option'>{LocationCaption[option]}</li>)}
+                            </ul>
                   </div>
                   <div className="custom-input">
                     <label><span className="custom-input__label">Пароль</span><span className="custom-input__wrapper">

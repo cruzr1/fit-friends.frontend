@@ -2,17 +2,20 @@ import { PropsWithChildren, ReactNode } from 'react'
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthStatus, UserRole} from '../../const';
 import LoadingPage from '../../pages/loading/loading.page';
-import { userRole, authStatus } from '../app/app.component';
+import { useAppSelector } from '../../hooks/hooks';
+import { selectUser, selectUserAuthStatus } from '../../store/user/user.selectors';
 
 type PrivateRouteProps = PropsWithChildren<{role: UserRole}>;
 
 
 export default function PrivateRouteRole ({children, role}: PrivateRouteProps): JSX.Element | ReactNode {
+  const authStatus = useAppSelector(selectUserAuthStatus);
+  const user = useAppSelector(selectUser);
   return (
     <>
       {authStatus === AuthStatus.Unknown && <LoadingPage />}
       {authStatus === AuthStatus.NoAuth && <Navigate to={AppRoute.Signin} />}
-      {authStatus === AuthStatus.Auth && role === userRole && children}
+      {user && authStatus === AuthStatus.Auth && role === user.role && children}
     </>
   );
 }

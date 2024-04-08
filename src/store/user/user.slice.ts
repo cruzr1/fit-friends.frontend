@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { AuthStatus, NameSpace } from '../../const';
-import { AuthStatusType, UserType } from '../../types';
+import { AuthStatus, NameSpace, RequestStatus } from '../../const';
+import { AuthStatusType, RequestStatusType, UserType } from '../../types';
 import { logoutUser } from '../action';
 import { removeToken } from '../../services/token';
 
