@@ -10,8 +10,10 @@ export default function PopupSigninComponent(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [submit, setSubmit] = useState<boolean>(false);
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    setSubmit(true);
     if (isEmailValid(email) && isPasswordValid(password)) {
       dispatch(loginUserAction({ email, password}));
     }
@@ -37,8 +39,8 @@ export default function PopupSigninComponent(): JSX.Element {
                         ref={emailRef}
                         onChange={() => setEmail(emailRef.current?.value ?? '')}
                       /></span>
-                      {email.length === NULL_LENGTH && <p style={errorStyle}>Заполните поле</p>}
-                      {!isEmailValid(email) && <p style={errorStyle}>Должен быть указан валидный e-mail</p>}
+                      {email.length === NULL_LENGTH && submit && <p style={errorStyle}>Заполните поле</p>}
+                      {!isEmailValid(email) && submit && <p style={errorStyle}>Должен быть указан валидный e-mail</p>}
                   </label>
                 </div>
                 <div className="custom-input sign-in__input">
@@ -49,8 +51,8 @@ export default function PopupSigninComponent(): JSX.Element {
                         ref={passwordRef}
                         onChange={() => setPassword(passwordRef.current?.value ?? '')}
                       /></span>
-                      {password.length === NULL_LENGTH && <p style={errorStyle}>Заполните поле</p>}
-                      {!isPasswordValid(password) && <p style={errorStyle}>Длина пароля должна составлять от 6 до 12 символов.</p>}
+                      {password.length === NULL_LENGTH && submit && <p style={errorStyle}>Заполните поле</p>}
+                      {!isPasswordValid(password) && submit && <p style={errorStyle}>Длина пароля должна составлять от 6 до 12 символов.</p>}
                   </label>
                 </div>
                 <button className="btn sign-in__button" type="submit">Продолжить</button>
