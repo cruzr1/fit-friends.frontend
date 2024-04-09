@@ -1,24 +1,77 @@
 import { useRef, useState, ChangeEvent } from 'react'
 import { CoachItemComponent } from '../index'
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../store/user/user.selectors';
 import { UserType } from '../../types';
+import { ITEMS_PER_PAGE, NULL_LENGTH, STEP } from '../../const';
+import { updateUserAction } from '../../store/user/user.actions';
 
 
 export default function CoachCertificatesComponent(): JSX.Element {
+  const dispatch = useAppDispatch();
   const { certificates } = useAppSelector(selectUser) as UserType;
   const [trainerCertificates, setTrainerCertificates] = useState<string[]>([certificates!] || []) ;
+  const [first, setFirst] = useState<number>(NULL_LENGTH);
+  const certificatesVisible = trainerCertificates.slice(first, first + ITEMS_PER_PAGE);
+  const [editCertificates, setEditCertificates] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const updateRef = useRef<HTMLInputElement>(null);
+  const [updateCertificate, setUpdateCertificate] = useState<string>('');
   const handleLoadButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault()
     inputRef.current?.click()
+  }
+  const handleSaveButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault();
+    setEditCertificates(editCertificates.filter((certificate) => certificate !== evt.currentTarget.value));
+    dispatch(updateUserAction({certificates: trainerCertificates[0]}))
+  }
+  const handleEditButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault();
+    setEditCertificates(editCertificates.concat(evt.currentTarget.value));
+  }
+  const handleNextButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault();
+    if (first < trainerCertificates.length - ITEMS_PER_PAGE) {
+      setFirst(first + STEP)
+    }
+  }
+  const handlePreviousButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault();
+    if (first > NULL_LENGTH) {
+      setFirst(first - STEP)
+    }
+  }
+  const handleDeleteButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault()
+    setEditCertificates(editCertificates.filter((certificate) => certificate !== evt.currentTarget.value));
+    setTrainerCertificates(trainerCertificates.filter((certificate) => certificate !== evt.currentTarget.value));
+
+  }
+  const handleUpdateButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault()
+    setUpdateCertificate(evt.currentTarget.value);
+    updateRef.current?.click()
+  }
+  const handleUpdateChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const newCertificate = evt.target.files && evt.target.files[0];
+    if (newCertificate && newCertificate.name !== updateCertificate && !trainerCertificates.includes(newCertificate.name)) {
+      setEditCertificates(editCertificates
+        .filter((certificate) => certificate !== updateCertificate)
+        .concat(newCertificate.name)
+      );
+      setTrainerCertificates(trainerCertificates
+        .filter((certificate) => certificate !== updateCertificate)
+        .concat(newCertificate.name));
+    }
+    return;
   }
   const handleFileChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const newCertificate = evt.target.files && evt.target.files[0];
     if (!newCertificate) {
       return;
     }
-
+    setTrainerCertificates(trainerCertificates.concat(newCertificate.name));
   }
   return (
     <div className="personal-account-coach__additional-info">
@@ -30,6 +83,12 @@ export default function CoachCertificatesComponent(): JSX.Element {
           ref={inputRef}
           onChange={(evt) => handleFileChange(evt)}
         />
+         <input
+          type="file"
+          style={{display: 'none'}}
+          ref={updateRef}
+          onChange={(evt) => handleUpdateChange(evt)}
+        />
         <button
           className="btn-flat btn-flat--underlined personal-account-coach__button"
           type="button"
@@ -40,12 +99,22 @@ export default function CoachCertificatesComponent(): JSX.Element {
           </svg><span>Загрузить</span>
         </button>
         <div className="personal-account-coach__controls">
-          <button className="btn-icon personal-account-coach__control" type="button" aria-label="previous">
+          <button
+            className="btn-icon personal-account-coach__control"
+            type="button"
+            aria-label="previous"
+            onClick={(evt) => handlePreviousButtonClick(evt)}
+          >
             <svg width="16" height="14" aria-hidden="true">
               <use xlinkHref="#arrow-left"></use>
             </svg>
           </button>
-          <button className="btn-icon personal-account-coach__control" type="button" aria-label="next">
+          <button
+            className="btn-icon personal-account-coach__control"
+            type="button"
+            aria-label="next"
+            onClick={(evt) => handleNextButtonClick(evt)}
+          >
             <svg width="16" height="14" aria-hidden="true">
               <use xlinkHref="#arrow-right"></use>
             </svg>
@@ -53,7 +122,17 @@ export default function CoachCertificatesComponent(): JSX.Element {
         </div>
       </div>
       <ul className="personal-account-coach__list">
-        <CoachItemComponent />
+        {certificatesVisible.map((certificate) =>
+          <li key={certificate} className="personal-account-coach__item">
+            <CoachItemComponent
+              certificate={certificate}
+              handleDeleteButtonClick={handleDeleteButtonClick}
+              handleUpdateButtonClick={handleUpdateButtonClick}
+              handleSaveButtonClick={handleSaveButtonClick}
+              handleEditButtonClick={handleEditButtonClick}
+              isEdit={editCertificates.includes(certificate)}
+            />
+          </li>)}
       </ul>
     </div>
   )
