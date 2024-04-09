@@ -89,7 +89,6 @@ export const updateUserAction = createAsyncThunk<void, UpdateUserType, {
       dispatch(redirectToRoute(newRoute));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedUserUpdate}: ${message}`));
-      console.log(message);
     }
   }
 );

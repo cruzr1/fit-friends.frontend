@@ -50,9 +50,9 @@ export default function UserCardContentComponent({ classApply, name, location, i
       </div>
       <div className={`${classApply}__gallary`}>
         <ul className={`${classApply}__gallary-list`}>
-          <li className={`${classApply}__gallary-item`}><img src="img/content/user-coach-photo1.jpg" srcSet="img/content/user-coach-photo1@2x.jpg 2x" width="334" height="573" alt="photo1" />
+          <li className={`${classApply}__gallary-item`}><img src="markup/img/content/user-coach-photo1.jpg" srcSet="markup/img/content/user-coach-photo1@2x.jpg 2x" width="334" height="573" alt="photo1" />
           </li>
-          <li className={`${classApply}__gallary-item`}><img src="img/content/user-coach-photo2.jpg" srcSet="img/content/user-coach-photo2@2x.jpg 2x" width="334" height="573" alt="photo2" />
+          <li className={`${classApply}__gallary-item`}><img src="markup/img/content/user-coach-photo2.jpg" srcSet="markup/img/content/user-coach-photo2@2x.jpg 2x" width="334" height="573" alt="photo2" />
           </li>
         </ul>
       </div>

@@ -15,7 +15,7 @@ export default function FriendsListItemComponent({name, location, trainType, isR
           <div className="thumbnail-friend__image-status">
             <div className="thumbnail-friend__image">
               <picture>
-                <source type="image/webp" srcSet="img/content/thumbnails/friend-14.webp, img/content/thumbnails/friend-14@2x.webp 2x" /><img src="img/content/thumbnails/friend-14.jpg" srcSet="img/content/thumbnails/friend-14@2x.jpg 2x" width="78" height="78" alt="" />
+                <source type="image/webp" srcSet="markup/img/content/thumbnails/friend-14.webp, markup/img/content/thumbnails/friend-14@2x.webp 2x" /><img src="markup/img/content/thumbnails/friend-14.jpg" srcSet="markup/img/content/thumbnails/friend-14@2x.jpg 2x" width="78" height="78" alt="" />
               </picture>
               <div className="thumbnail-friend__online-status thumbnail-friend__online-status--is-online"></div>
             </div>

@@ -9,7 +9,7 @@ export default function UserItemComponent({name, location, trainType}: UserItemP
     <div className="thumbnail-user thumbnail-user--role-user">
       <div className="thumbnail-user__image">
         <picture>
-          <source type="image/webp" srcSet="img/content/thumbnails/user-01.webp, img/content/thumbnails/user-01@2x.webp 2x" /><img src="img/content/thumbnails/user-01.jpg" srcSet="img/content/thumbnails/user-01@2x.jpg 2x" width="82" height="82" alt="" />
+          <source type="image/webp" srcSet="markup/img/content/thumbnails/user-01.webp, markup/img/content/thumbnails/user-01@2x.webp 2x" /><img src="markup/img/content/thumbnails/user-01.jpg" srcSet="markup/img/content/thumbnails/user-01@2x.jpg 2x" width="82" height="82" alt="" />
         </picture>
       </div>
       <div className="thumbnail-user__header">

@@ -29,7 +29,7 @@ export default function MainPage():JSX.Element {
                 <div className="thumbnail-preview">
                   <div className="thumbnail-preview__image">
                     <picture>
-                      <source type="image/webp" srcSet="img/content/thumbnails/preview-03.webp, img/content/thumbnails/preview-03@2x.webp 2x" /><img src="img/content/thumbnails/preview-03.jpg" srcSet="img/content/thumbnails/preview-03@2x.jpg 2x" width="452" height="191" alt="" />
+                      <source type="image/webp" srcSet="markup/img/content/thumbnails/preview-03.webp, markup/img/content/thumbnails/preview-03@2x.webp 2x" /><img src="markup/img/content/thumbnails/preview-03.jpg" srcSet="markup/img/content/thumbnails/preview-03@2x.jpg 2x" width="452" height="191" alt="" />
                     </picture>
                   </div>
                   <div className="thumbnail-preview__inner">
@@ -44,7 +44,7 @@ export default function MainPage():JSX.Element {
                 <div className="thumbnail-preview">
                   <div className="thumbnail-preview__image">
                     <picture>
-                      <source type="image/webp" srcSet="img/content/thumbnails/preview-02.webp, img/content/thumbnails/preview-02@2x.webp 2x" /><img src="img/content/thumbnails/preview-02.jpg" srcSet="img/content/thumbnails/preview-02@2x.jpg 2x" width="452" height="191" alt="" />
+                      <source type="image/webp" srcSet="markup/img/content/thumbnails/preview-02.webp, markup/img/content/thumbnails/preview-02@2x.webp 2x" /><img src="markup/img/content/thumbnails/preview-02.jpg" srcSet="markup/img/content/thumbnails/preview-02@2x.jpg 2x" width="452" height="191" alt="" />
                     </picture>
                   </div>
                   <div className="thumbnail-preview__inner">
@@ -59,7 +59,7 @@ export default function MainPage():JSX.Element {
                 <div className="thumbnail-preview">
                   <div className="thumbnail-preview__image">
                     <picture>
-                      <source type="image/webp" srcSet="img/content/thumbnails/preview-01.webp, img/content/thumbnails/preview-01@2x.webp 2x" /><img src="img/content/thumbnails/preview-01.jpg" srcSet="img/content/thumbnails/preview-01@2x.jpg 2x" width="452" height="191" alt="" />
+                      <source type="image/webp" srcSet="markup/img/content/thumbnails/preview-01.webp, markup/img/content/thumbnails/preview-01@2x.webp 2x" /><img src="markup/img/content/thumbnails/preview-01.jpg" srcSet="markup/img/content/thumbnails/preview-01@2x.jpg 2x" width="452" height="191" alt="" />
                     </picture>
                   </div>
                   <div className="thumbnail-preview__inner">
@@ -82,7 +82,7 @@ export default function MainPage():JSX.Element {
               <li className="special-offers__item is-active">
                 <aside className="promo-slider">
                   <div className="promo-slider__overlay"></div>
-                  <div className="promo-slider__image"><img src="img/content/promo-1.png" srcSet="img/content/promo-1@2x.png 2x" width="1040" height="469" alt="promo-photo" />
+                  <div className="promo-slider__image"><img src="markup/img/content/promo-1.png" srcSet="markup/img/content/promo-1@2x.png 2x" width="1040" height="469" alt="promo-photo" />
                   </div>
                   <div className="promo-slider__header">
                     <h3 className="promo-slider__title">Fitball</h3>
@@ -109,7 +109,7 @@ export default function MainPage():JSX.Element {
               <li className="special-offers__item">
                 <aside className="promo-slider">
                   <div className="promo-slider__overlay"></div>
-                  <div className="promo-slider__image"><img src="img/content/promo-2.png" srcSet="img/content/promo-2@2x.png 2x" width="1040" height="469" alt="promo-photo" />
+                  <div className="promo-slider__image"><img src="markup/img/content/promo-2.png" srcSet="markup/img/content/promo-2@2x.png 2x" width="1040" height="469" alt="promo-photo" />
                   </div>
                   <div className="promo-slider__header">
                     <h3 className="promo-slider__title">Fleksbend</h3>
@@ -136,7 +136,7 @@ export default function MainPage():JSX.Element {
               <li className="special-offers__item">
                 <aside className="promo-slider">
                   <div className="promo-slider__overlay"></div>
-                  <div className="promo-slider__image"><img src="img/content/promo-3.png" srcSet="img/content/promo-3@2x.png 2x" width="1040" height="469" alt="promo-photo" />
+                  <div className="promo-slider__image"><img src="markup/img/content/promo-3.png" srcSet="markup/img/content/promo-3@2x.png 2x" width="1040" height="469" alt="promo-photo" />
                   </div>
                   <div className="promo-slider__header">
                     <h3 className="promo-slider__title">Full Body Stretch</h3>
@@ -164,7 +164,7 @@ export default function MainPage():JSX.Element {
             <div className="thumbnail-spec-gym">
               <div className="thumbnail-spec-gym__image">
                 <picture>
-                  <source type="image/webp" srcSet="img/content/thumbnails/nearest-gym-01.webp, img/content/thumbnails/nearest-gym-01@2x.webp 2x" /><img src="img/content/thumbnails/nearest-gym-01.jpg" srcSet="img/content/thumbnails/nearest-gym-01@2x.jpg 2x" width="330" height="190" alt="" />
+                  <source type="image/webp" srcSet="markup/img/content/thumbnails/nearest-gym-01.webp, markup/img/content/thumbnails/nearest-gym-01@2x.webp 2x" /><img src="markup/img/content/thumbnails/nearest-gym-01.jpg" srcSet="markup/img/content/thumbnails/nearest-gym-01@2x.jpg 2x" width="330" height="190" alt="" />
                 </picture>
               </div>
               <p className="thumbnail-spec-gym__type">Ближайший зал</p>
@@ -204,7 +204,7 @@ export default function MainPage():JSX.Element {
                   <div className="thumbnail-training__inner">
                     <div className="thumbnail-training__image">
                       <picture>
-                        <source type="image/webp" srcSet="img/content/thumbnails/training-06.webp, img/content/thumbnails/training-06@2x.webp 2x" /><img src="img/content/thumbnails/training-06.jpg" srcSet="img/content/thumbnails/training-06@2x.jpg 2x" width="330" height="190" alt="" />
+                        <source type="image/webp" srcSet="markup/img/content/thumbnails/training-06.webp, markup/img/content/thumbnails/training-06@2x.webp 2x" /><img src="markup/img/content/thumbnails/training-06.jpg" srcSet="markup/img/content/thumbnails/training-06@2x.jpg 2x" width="330" height="190" alt="" />
                       </picture>
                     </div>
                     <p className="thumbnail-training__price"><span className="thumbnail-training__price-value">1600</span><span>₽</span>
@@ -240,7 +240,7 @@ export default function MainPage():JSX.Element {
                   <div className="thumbnail-training__inner">
                     <div className="thumbnail-training__image">
                       <picture>
-                        <source type="image/webp" srcSet="img/content/thumbnails/training-07.webp, img/content/thumbnails/training-07@2x.webp 2x" /><img src="img/content/thumbnails/training-07.jpg" srcSet="img/content/thumbnails/training-07@2x.jpg 2x" width="330" height="190" alt="" />
+                        <source type="image/webp" srcSet="markup/img/content/thumbnails/training-07.webp, markup/img/content/thumbnails/training-07@2x.webp 2x" /><img src="markup/img/content/thumbnails/training-07.jpg" srcSet="markup/img/content/thumbnails/training-07@2x.jpg 2x" width="330" height="190" alt="" />
                       </picture>
                     </div>
                     <p className="thumbnail-training__price"><span className="thumbnail-training__price-value">1600</span><span>₽</span>
@@ -276,7 +276,7 @@ export default function MainPage():JSX.Element {
                   <div className="thumbnail-training__inner">
                     <div className="thumbnail-training__image">
                       <picture>
-                        <source type="image/webp" srcSet="img/content/thumbnails/training-11.webp, img/content/thumbnails/training-11@2x.webp 2x" /><img src="img/content/thumbnails/training-11.jpg" srcSet="img/content/thumbnails/training-11@2x.jpg 2x" width="330" height="190" alt="" />
+                        <source type="image/webp" srcSet="markup/img/content/thumbnails/training-11.webp, markup/img/content/thumbnails/training-11@2x.webp 2x" /><img src="markup/img/content/thumbnails/training-11.jpg" srcSet="markup/img/content/thumbnails/training-11@2x.jpg 2x" width="330" height="190" alt="" />
                       </picture>
                     </div>
                     <p className="thumbnail-training__price"><span className="thumbnail-training__price-value">2200</span><span>₽</span>
@@ -312,7 +312,7 @@ export default function MainPage():JSX.Element {
                   <div className="thumbnail-training__inner">
                     <div className="thumbnail-training__image">
                       <picture>
-                        <source type="image/webp" srcSet="img/content/thumbnails/training-09.webp, img/content/thumbnails/training-09@2x.webp 2x" /><img src="img/content/thumbnails/training-09.jpg" srcSet="img/content/thumbnails/training-09@2x.jpg 2x" width="330" height="190" alt="" />
+                        <source type="image/webp" srcSet="markup/img/content/thumbnails/training-09.webp, markup/img/content/thumbnails/training-09@2x.webp 2x" /><img src="markup/img/content/thumbnails/training-09.jpg" srcSet="markup/img/content/thumbnails/training-09@2x.jpg 2x" width="330" height="190" alt="" />
                       </picture>
                     </div>
                     <p className="thumbnail-training__price"><span className="thumbnail-training__price-value">1800</span><span>₽</span>
@@ -375,7 +375,7 @@ export default function MainPage():JSX.Element {
                 <div className="thumbnail-user thumbnail-user--role-user thumbnail-user--dark">
                   <div className="thumbnail-user__image">
                     <picture>
-                      <source type="image/webp" srcSet="img/content/thumbnails/user-04.webp, img/content/thumbnails/user-04@2x.webp 2x" /><img src="img/content/thumbnails/user-04.jpg" srcSet="img/content/thumbnails/user-04@2x.jpg 2x" width="82" height="82" alt="" />
+                      <source type="image/webp" srcSet="markup/img/content/thumbnails/user-04.webp, markup/img/content/thumbnails/user-04@2x.webp 2x" /><img src="markup/img/content/thumbnails/user-04.jpg" srcSet="markup/img/content/thumbnails/user-04@2x.jpg 2x" width="82" height="82" alt="" />
                     </picture>
                   </div>
                   <div className="thumbnail-user__top-status thumbnail-user__top-status--role-user">
@@ -404,7 +404,7 @@ export default function MainPage():JSX.Element {
                 <div className="thumbnail-user thumbnail-user--role-user thumbnail-user--dark">
                   <div className="thumbnail-user__image">
                     <picture>
-                      <source type="image/webp" srcSet="img/content/thumbnails/user-05.webp, img/content/thumbnails/user-05@2x.webp 2x" /><img src="img/content/thumbnails/user-05.jpg" srcSet="img/content/thumbnails/user-05@2x.jpg 2x" width="82" height="82" alt="" />
+                      <source type="image/webp" srcSet="markup/img/content/thumbnails/user-05.webp, markup/img/content/thumbnails/user-05@2x.webp 2x" /><img src="markup/img/content/thumbnails/user-05.jpg" srcSet="markup/img/content/thumbnails/user-05@2x.jpg 2x" width="82" height="82" alt="" />
                     </picture>
                   </div>
                   <div className="thumbnail-user__header">
@@ -428,7 +428,7 @@ export default function MainPage():JSX.Element {
                 <div className="thumbnail-user thumbnail-user--role-user thumbnail-user--dark">
                   <div className="thumbnail-user__image">
                     <picture>
-                      <source type="image/webp" srcSet="img/content/thumbnails/user-06.webp, img/content/thumbnails/user-06@2x.webp 2x" /><img src="img/content/thumbnails/user-06.jpg" srcSet="img/content/thumbnails/user-06@2x.jpg 2x" width="82" height="82" alt="" />
+                      <source type="image/webp" srcSet="markup/img/content/thumbnails/user-06.webp, markup/img/content/thumbnails/user-06@2x.webp 2x" /><img src="markup/img/content/thumbnails/user-06.jpg" srcSet="markup/img/content/thumbnails/user-06@2x.jpg 2x" width="82" height="82" alt="" />
                     </picture>
                   </div>
                   <div className="thumbnail-user__header">
@@ -452,7 +452,7 @@ export default function MainPage():JSX.Element {
                 <div className="thumbnail-user thumbnail-user--role-user thumbnail-user--dark">
                   <div className="thumbnail-user__image">
                     <picture>
-                      <source type="image/webp" srcSet="img/content/thumbnails/user-07.webp, img/content/thumbnails/user-07@2x.webp 2x" /><img src="img/content/thumbnails/user-07.jpg" srcSet="img/content/thumbnails/user-07@2x.jpg 2x" width="82" height="82" alt="" />
+                      <source type="image/webp" srcSet="markup/img/content/thumbnails/user-07.webp, markup/img/content/thumbnails/user-07@2x.webp 2x" /><img src="markup/img/content/thumbnails/user-07.jpg" srcSet="markup/img/content/thumbnails/user-07@2x.jpg 2x" width="82" height="82" alt="" />
                     </picture>
                   </div>
                   <div className="thumbnail-user__top-status thumbnail-user__top-status--role-user">

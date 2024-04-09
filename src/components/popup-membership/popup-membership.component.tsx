@@ -15,7 +15,7 @@ export default function PopupMembershipComponent(): JSX.Element {
             <div className="popup__product">
               <div className="popup__product-image">
                 <picture>
-                  <source type="image/webp" srcSet="img/content/popup/popup-worldsport.webp, img/content/popup/popup-worldsport@2x.webp 2x" /><img src="img/content/popup/popup-worldsport.jpg" srcSet="img/content/popup/popup-worldsport@2x.jpg 2x" width="98" height="80" alt="" />
+                  <source type="image/webp" srcSet="markup/img/content/popup/popup-worldsport.webp, markup/img/content/popup/popup-worldsport@2x.webp 2x" /><img src="markup/img/content/popup/popup-worldsport.jpg" srcSet="markup/img/content/popup/popup-worldsport@2x.jpg 2x" width="98" height="80" alt="" />
                 </picture>
               </div>
               <div className="popup__product-info">

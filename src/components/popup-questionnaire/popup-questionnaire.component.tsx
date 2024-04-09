@@ -45,7 +45,6 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
     evt.preventDefault();
     setIsSubmit(true);
     if (!isFormValid) {
-      console.log('wrong');
       return;
     }
     const updateUser ={
@@ -59,7 +58,6 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
       certificates: certificateURL,
       achievements,
     };
-    console.log('popup', updateUser);
     dispatch(updateUserAction(updateUser));
   }
   return (

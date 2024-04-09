@@ -20,8 +20,11 @@ export const AVATAR_REGEX = /(.png$|.jpg$|.jpeg$)/;
 
 export const CERTIFICATE_REGEX = /(.pdf$)/;
 
+export const ITEMS_PER_PAGE = 3;
 
 export const NULL_LENGTH = 0;
+
+export const STEP = 1;
 
 export const errorStyle = {color: 'red'};
 

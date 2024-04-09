@@ -45,7 +45,6 @@ export default function PopupSignupComponent(): JSX.Element {
     evt.preventDefault();
     setSubmit(true);
     if (!isFormValid) {
-      console.log('wrong');
       return;
     }
     const newUser ={

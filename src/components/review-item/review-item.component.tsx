@@ -10,7 +10,7 @@ export default function ReviewItemComponent({name, comment}: ReviewItemComponent
       <div className="review__user-info">
         <div className="review__user-photo">
           <picture>
-            <source type="image/webp" srcSet="img/content/avatars/users//photo-1.webp, img/content/avatars/users//photo-1@2x.webp 2x" /><img src="img/content/avatars/users//photo-1.png" srcSet="img/content/avatars/users//photo-1@2x.png 2x" width="64" height="64" alt="Изображение пользователя" />
+            <source type="image/webp" srcSet="markup/img/content/avatars/users//photo-1.webp, markup/img/content/avatars/users//photo-1@2x.webp 2x" /><img src="markup/img/content/avatars/users//photo-1.png" srcSet="markup/img/content/avatars/users//photo-1@2x.png 2x" width="64" height="64" alt="Изображение пользователя" />
           </picture>
         </div><span className="review__user-name">{name}</span>
         <div className="review__rating">
