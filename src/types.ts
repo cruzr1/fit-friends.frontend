@@ -19,7 +19,7 @@ export type TrainingType  = {
   name: string;
   backgroundImage: string;
   level: string;
-  trainType: string;
+  trainType: TrainType;
   duration: string;
   price: number;
   calories: number;
@@ -68,6 +68,8 @@ export type UserType = {
   achievements?: string;
 }
 
+export type UserFeaturesType = Pick<UserType, 'caloriesDaily' | 'duration' | 'level' | 'trainType'>
+
 export type UpdateUserType = Partial<UserType>;
 
 export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
@@ -77,4 +79,11 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
   export type LoggedUserType = UserType & {
     accessToken: string;
     refreshToken: string;
+  }
+
+  export type EntitiesWithPaginationType<T> = {
+    entities: T[];
+    totalPages: number;
+    currentPage: number;
+    totalItems: number;
   }

@@ -1,6 +1,6 @@
 import { FormEvent, useRef, useState } from 'react';
 import { isPasswordValid, isEmailValid } from '../../helpers';
-import { NULL_LENGTH, errorStyle } from '../../const';
+import { NULL_VALUE, errorStyle } from '../../const';
 import { useAppDispatch } from '../../hooks/hooks';
 import { loginUserAction } from '../../store/user/user.actions';
 
@@ -39,7 +39,7 @@ export default function PopupSigninComponent(): JSX.Element {
                         ref={emailRef}
                         onChange={() => setEmail(emailRef.current?.value ?? '')}
                       /></span>
-                      {email.length === NULL_LENGTH && submit && <p style={errorStyle}>Заполните поле</p>}
+                      {email.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                       {!isEmailValid(email) && submit && <p style={errorStyle}>Должен быть указан валидный e-mail</p>}
                   </label>
                 </div>
@@ -51,7 +51,7 @@ export default function PopupSigninComponent(): JSX.Element {
                         ref={passwordRef}
                         onChange={() => setPassword(passwordRef.current?.value ?? '')}
                       /></span>
-                      {password.length === NULL_LENGTH && submit && <p style={errorStyle}>Заполните поле</p>}
+                      {password.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                       {!isPasswordValid(password) && submit && <p style={errorStyle}>Длина пароля должна составлять от 6 до 12 символов.</p>}
                   </label>
                 </div>

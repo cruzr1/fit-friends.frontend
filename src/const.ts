@@ -1,3 +1,5 @@
+import { loadUsersReadyTrainAction } from './store/user/user.actions';
+
 export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
 
 export const REFRESH_TOKEN_KEY = '==ZGRmZGZkZkBkZmtsamRmLmNvbQ';
@@ -22,7 +24,9 @@ export const CERTIFICATE_REGEX = /(.pdf$)/;
 
 export const ITEMS_PER_PAGE = 3;
 
-export const NULL_LENGTH = 0;
+export const MAIN_ITEMS_PER_PAGE = 4;
+
+export const NULL_VALUE = 0;
 
 export const STEP = 1;
 
@@ -57,10 +61,16 @@ export const AppRoute = {
 } as const;
 
 export const APIPath = {
-  Signin: 'users/signin',
-  Login: 'users/login',
-  Verify: 'users/check',
-  Update: 'users/update',
+  Users: {
+    Signin: 'users/signin',
+    Login: 'users/login',
+    Verify: 'users/check',
+    Update: 'users/update',
+    Index: 'users'
+  },
+  Trainings: {
+    Index: 'trainings'
+  }
 } as const;
 
 export const Action = {
@@ -71,6 +81,10 @@ export const Action = {
   Login: 'login',
   Logout: 'logout',
   Redirect: 'redirect',
+  LoadSpecialOffers: 'loadSpecialOffers',
+  LoadPopularTrainings: 'loadPopularTrainings',
+  LoadChoiseTrainings: 'loadChoiseTrainings',
+  LoadUsersReadyTrain: 'loadUsersReadyTrain',
 } as const;
 
 export const AuthStatus = {
@@ -190,6 +204,7 @@ export const NameSpace = {
   User: 'user',
   Error: 'error',
   Route: 'route',
+  Training: 'training'
 } as const;
 
 export const ErrorMessage = {
@@ -198,6 +213,10 @@ export const ErrorMessage = {
   FailedUserLogin: 'Failed to log user in',
   FailedUserSignin: 'Failed to sign user in',
   FailedUserUpdate: 'Failed to update user',
+  FailedLoadPopularTrainings: 'Failed to load popular trainings',
+  FailedLoadChoiseTrainings: 'Failed to load choise trainings',
+  FailedLoadSpecialOffers: 'Failed to load special offers',
+  FailedLoadUserReadyTrain: 'Failed to load users ready to train',
 } as const;
 
 export const UserValidationParams = {
@@ -220,3 +239,17 @@ export const UserValidationParams = {
     Regex: RegExp(/.pdf/i),
   },
 } as const;
+
+export const SpecialSlideNumbers = ['первый слайд', 'второй слайд', 'третий слайд'] as const;
+
+export const SPECIAL_OFFERS_COUNT = 3;
+
+export const POPULAR_TRAININGS_COUNT = 8;
+
+export const CHOISE_TRAININGS_COUNT = 9;
+
+export const USERS_READY_TRAIN = 8;
+
+export const POPULAR_TRAININGS_VISIBLE_COUNT = 4;
+
+export const POPULAR_TRAININGS_SORT_FIELD = 'rating';

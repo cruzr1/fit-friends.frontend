@@ -1,6 +1,6 @@
 import { useRef, ChangeEvent, useState, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
-import { DEFAULT_PATH, Gender, Location, LocationCaption, UserRole, NULL_LENGTH, errorStyle } from '../../const';
+import { DEFAULT_PATH, Gender, Location, LocationCaption, UserRole, NULL_VALUE, errorStyle } from '../../const';
 import { isBirthDateValid, isEmailValid, isNameValid, isPasswordValid, isAvatarValid } from '../../helpers';
 import { signinUserAction } from '../../store/user/user.actions';
 
@@ -102,7 +102,7 @@ export default function PopupSignupComponent(): JSX.Element {
                           ref={nameRef}
                           onChange={(evt) => setName(evt.target.value)}
                         /></span>
-                        {name.length === NULL_LENGTH && submit && <p style={errorStyle}>Заполните поле</p>}
+                        {name.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                     </label>
                   </div>
                   <div className="custom-input">
@@ -113,7 +113,7 @@ export default function PopupSignupComponent(): JSX.Element {
                           ref={emailRef}
                           onChange={(evt) => setEmail(evt.target.value)}
                         /></span>
-                        {email.length === NULL_LENGTH && submit && <p style={errorStyle}>Заполните поле</p>}
+                        {email.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                     </label>
                   </div>
                   <div className="custom-input">
@@ -125,7 +125,7 @@ export default function PopupSignupComponent(): JSX.Element {
                           ref={birthDateRef}
                           onChange={(evt) => setBirthDate(evt.target.value)}
                         /></span>
-                        {birthDate.length === NULL_LENGTH && submit && <p style={errorStyle}>Заполните поле</p>}
+                        {birthDate.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                     </label>
                   </div>
                   <div className={`custom-select ${locationOpen ? 'is-open' : ''}`}><span className="custom-select__label">Ваша локация</span>
@@ -152,7 +152,7 @@ export default function PopupSignupComponent(): JSX.Element {
                           ref={passwordRef}
                           onChange={(evt) => setPassword(evt.target.value)}
                         /></span>
-                        {password.length === NULL_LENGTH && submit && <p style={errorStyle}>Заполните поле</p>}
+                        {password.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                     </label>
                   </div>
                   <div className="sign-up__radio"><span className="sign-up__label">Пол</span>

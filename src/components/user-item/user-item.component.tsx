@@ -1,7 +1,9 @@
+import { TrainType } from '../../const';
+
 type UserItemProps = {
   location: string;
   name: string;
-  trainType: string[]
+  trainType: TrainType[]
 }
 
 export default function UserItemComponent({name, location, trainType}: UserItemProps): JSX.Element {

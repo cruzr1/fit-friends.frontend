@@ -3,7 +3,7 @@ import { CoachItemComponent } from '../index'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../store/user/user.selectors';
 import { UserType } from '../../types';
-import { ITEMS_PER_PAGE, NULL_LENGTH, STEP } from '../../const';
+import { ITEMS_PER_PAGE, NULL_VALUE, STEP } from '../../const';
 import { updateUserAction } from '../../store/user/user.actions';
 
 
@@ -11,7 +11,7 @@ export default function CoachCertificatesComponent(): JSX.Element {
   const dispatch = useAppDispatch();
   const { certificates } = useAppSelector(selectUser) as UserType;
   const [trainerCertificates, setTrainerCertificates] = useState<string[]>([certificates!] || []) ;
-  const [first, setFirst] = useState<number>(NULL_LENGTH);
+  const [first, setFirst] = useState<number>(NULL_VALUE);
   const certificatesVisible = trainerCertificates.slice(first, first + ITEMS_PER_PAGE);
   const [editCertificates, setEditCertificates] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,7 +38,7 @@ export default function CoachCertificatesComponent(): JSX.Element {
   }
   const handlePreviousButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
-    if (first > NULL_LENGTH) {
+    if (first > NULL_VALUE) {
       setFirst(first - STEP)
     }
   }
@@ -103,6 +103,7 @@ export default function CoachCertificatesComponent(): JSX.Element {
             className="btn-icon personal-account-coach__control"
             type="button"
             aria-label="previous"
+            disabled={first === NULL_VALUE}
             onClick={(evt) => handlePreviousButtonClick(evt)}
           >
             <svg width="16" height="14" aria-hidden="true">
@@ -113,6 +114,7 @@ export default function CoachCertificatesComponent(): JSX.Element {
             className="btn-icon personal-account-coach__control"
             type="button"
             aria-label="next"
+            disabled={first === trainerCertificates.length - ITEMS_PER_PAGE}
             onClick={(evt) => handleNextButtonClick(evt)}
           >
             <svg width="16" height="14" aria-hidden="true">
@@ -122,17 +124,18 @@ export default function CoachCertificatesComponent(): JSX.Element {
         </div>
       </div>
       <ul className="personal-account-coach__list">
-        {certificatesVisible.map((certificate) =>
-          <li key={certificate} className="personal-account-coach__item">
-            <CoachItemComponent
-              certificate={certificate}
-              handleDeleteButtonClick={handleDeleteButtonClick}
-              handleUpdateButtonClick={handleUpdateButtonClick}
-              handleSaveButtonClick={handleSaveButtonClick}
-              handleEditButtonClick={handleEditButtonClick}
-              isEdit={editCertificates.includes(certificate)}
-            />
-          </li>)}
+          {certificatesVisible.map((certificate) =>
+            <li key={certificate}className="personal-account-coach__item">
+              <CoachItemComponent
+                certificate={certificate}
+                handleDeleteButtonClick={handleDeleteButtonClick}
+                handleUpdateButtonClick={handleUpdateButtonClick}
+                handleSaveButtonClick={handleSaveButtonClick}
+                handleEditButtonClick={handleEditButtonClick}
+                isEdit={editCertificates.includes(certificate)}
+              />
+            </li>
+          )}
       </ul>
     </div>
   )

@@ -24,3 +24,9 @@ export { default as ReviewItemComponent } from './review-item/review-item.compon
 export { default as TrainingCardComponent } from './training-card/training-card.component';
 export { default as ErrorMessageComponent } from './error-message/error-message.component';
 export { default as CoachCertificatesComponent } from './coach-certificates/coach-certificates.component';
+export { default as SpecialOffersComponent } from './special-offers/special-offers.component';
+export { default as PopularTrainingsComponent } from './popular-trainings/popular-trainings.component';
+export { default as ThumbnailSpecGymComponent } from './thumbnail-spec-gym/thumbnail-spec-gym.component';
+export { default as LookForCompanyComponent } from './look-for-company/look-for-company.component';
+export { default as SpecialForYouComponent } from './special-for-you/special-for-you.component';
+export { default as ThumbnailTrainingPreviewComponent } from './thumbnail-training-preview/thumbnail-training-prevew.component';

@@ -3,7 +3,13 @@ import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOr
 
 export const isStatusPending = (status: RequestStatusType) => status === RequestStatus.Pending;
 
+export const isStatusFulfilled = (status: RequestStatusType) => status === RequestStatus.Fulfilled;
+
+export const isStatusRejected = (status: RequestStatusType) => status === RequestStatus.Rejected;
+
 export const adaptPrice = (price: number) => price > 0 ? `${price} ₽` : 'Бесплатно';
+
+export const adaptOldPrice = (price: number) => Math.round(price);
 
 export const adaptImage = (image: string) => image.slice(0, image.indexOf('.'));
 
@@ -28,5 +34,4 @@ export const isCaloriesValueValid = (value: number) => value <= UserValidationPa
 export const isDescriptionValid = (description: string) => description.length > UserValidationParams.Description.Length.Minimum && description.length < UserValidationParams.Description.Length.Maximum;
 
 export const isCertificateValid = (certificateURL: string) => CERTIFICATE_REGEX.test(certificateURL);
-
 

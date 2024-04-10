@@ -1,14 +1,35 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateAuthStatus, setUser } from './user.slice';
+import { updateAuthStatus, setUser, setUsersReadyTrain } from './user.slice';
 import { setRefreshToken, setToken} from '../../services/token';
 import { clearErrorAction } from '../error/error.actions';
-import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole } from '../../const';
-import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType } from '../../types';
-import { redirect } from '../middlewares/redirect';
+import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole, USERS_READY_TRAIN } from '../../const';
+import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType } from '../../types';
 import { redirectToRoute } from '../action';
 
-
+export const loadUsersReadyTrainAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadUsersReadyTrain}`,
+  async (_arg, {dispatch, extra: axiosApi}) => {
+    try {
+      const {data: {entities}} = await axiosApi.get<EntitiesWithPaginationType<UserType>>(APIPath.Users.Index, {
+        params: {
+          take: USERS_READY_TRAIN,
+          role: UserRole.User,
+          isReadyTrain: true,
+        }
+      });
+      dispatch(setUsersReadyTrain(entities));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserReadyTrain}: ${message}`));
+    }
+  },
+);
 
 export const signinUserAction = createAsyncThunk<void, SigninType, {
   dispatch: AppDispatchType;
@@ -20,7 +41,7 @@ export const signinUserAction = createAsyncThunk<void, SigninType, {
   `${NameSpace.User}/${Action.Create}`,
   async (newUser, {dispatch, extra: axiosApi}) => {
     try {
-      const {data: {accessToken, refreshToken, ...user}} = await axiosApi.post<LoggedUserType>(APIPath.Signin, newUser);
+      const {data: {accessToken, refreshToken, ...user}} = await axiosApi.post<LoggedUserType>(APIPath.Users.Signin, newUser);
       dispatch(updateAuthStatus(AuthStatus.Signed));
       dispatch(setUser(user));
       setToken(accessToken);
@@ -42,7 +63,7 @@ export const authoriseUserAction = createAsyncThunk<void, undefined, {
   `${NameSpace.User}/${Action.Get}`,
   async (_arg, {dispatch, extra: axiosApi}) => {
     try {
-      const {data} = await axiosApi.post<UserType>(APIPath.Verify, {});
+      const {data} = await axiosApi.post<UserType>(APIPath.Users.Verify, {});
       dispatch(updateAuthStatus(AuthStatus.Auth));
       dispatch(setUser(data));
     } catch (message) {
@@ -62,7 +83,7 @@ export const loginUserAction = createAsyncThunk<void, LoginType, {
   `${NameSpace.User}/${Action.Login}`,
   async (loginUser, {dispatch, extra: axiosApi}) => {
     try {
-      const {data: {accessToken, refreshToken, ...user}} = await axiosApi.post<LoggedUserType>(APIPath.Login, loginUser);
+      const {data: {accessToken, refreshToken, ...user}} = await axiosApi.post<LoggedUserType>(APIPath.Users.Login, loginUser);
       setToken(accessToken);
       setRefreshToken(refreshToken);
       dispatch(updateAuthStatus(AuthStatus.Auth));
@@ -83,7 +104,7 @@ export const updateUserAction = createAsyncThunk<void, UpdateUserType, {
   `${NameSpace.User}/${Action.Update}`,
   async (updateUser, {dispatch, extra: axiosApi}) => {
     try {
-      const {data} = await axiosApi.patch<UserType>(APIPath.Update, updateUser);
+      const {data} = await axiosApi.patch<UserType>(APIPath.Users.Update, updateUser);
       dispatch(setUser(data));
       const newRoute = data.role === UserRole.Trainer ? AppRoute.PersonalAccountCoach : AppRoute.Main;
       dispatch(redirectToRoute(newRoute));
