@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { PaginationComponent, TrainingFilterComponent, TrainingsListComponent } from '../../components';
 import { adaptPathname } from '../../helpers';
-import trainings from '../../mocks/mock-trainings.json';
 
 export default function TrainingsCataloguePage(): JSX.Element {
   const {pathname} = useLocation();
@@ -13,7 +12,7 @@ export default function TrainingsCataloguePage(): JSX.Element {
           <h1 className="visually-hidden">Каталог тренировок</h1>
           <TrainingFilterComponent />
           <div className="training-catalog">
-            <TrainingsListComponent classApply={classApply} trainingsList={trainings} />
+            <TrainingsListComponent classApply={classApply} />
             <PaginationComponent classApply={classApply} />
           </div>
         </div>

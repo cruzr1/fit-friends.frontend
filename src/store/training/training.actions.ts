@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType } from '../../types';
-import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE } from '../../const';
+import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType } from '../../types';
+import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_COUNT, TRAININGS_CATALOG_SORT_FIELD } from '../../const';
 import { clearErrorAction } from '../error/error.actions';
-import { setChoiseTrainings, setPopularTrainings, setSpecialOffers } from './training.slice';
+import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems } from './training.slice';
 
 export const loadSpecialOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -59,23 +59,57 @@ export const loadChoiseTrainingsAction = createAsyncThunk<void, UserFeaturesType
 >
 (
   `${NameSpace.Training}/${Action.LoadChoiseTrainings}`,
-  async (userFeatures, {dispatch, extra: axiosApi}) => {
+  async ({duration, trainType, level,caloriesDaily}, {dispatch, extra: axiosApi}) => {
 
     try {
-      console.log('userFeat: ', userFeatures)
+      console.log({
+        take: CHOISE_TRAININGS_COUNT,
+        caloriesFilter: [NULL_VALUE, caloriesDaily],
+        durationFilter: [duration],
+        trainTypeFilter: trainType,
+        level: level
+      })
       const { data : { entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Index,{
         params: {
           take: CHOISE_TRAININGS_COUNT,
-          caloriesFilter: `${NULL_VALUE},${userFeatures.caloriesDaily}`,
-          durationFilter: [userFeatures.duration],
-          trainTypeFilter: userFeatures.trainType,
-          level: userFeatures.level
+          caloriesFilter: [NULL_VALUE, caloriesDaily],
+          durationFilter: [duration],
+          trainTypeFilter: trainType,
+          level: level
         }
       });
-      console.log('entities: ', entities)
       dispatch(setChoiseTrainings(entities))
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadChoiseTrainings}: ${message}`));
+    }
+  }
+)
+
+export const loadTrainingsAction = createAsyncThunk<void, QueryTrainingsType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.LoadChoiseTrainings}`,
+  async ({take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder}, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data : { totalItems, entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Index,{
+        params: {
+          take,
+          priceFilter,
+          caloriesFilter,
+          ratingFilter,
+          trainTypeFilter,
+          sortByOrder,
+          sortByField: TRAININGS_CATALOG_SORT_FIELD
+        }
+      });
+      dispatch(setTrainingsList(entities));
+      dispatch(setTotalItems(totalItems));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadTrainingsCatalogue}: ${message}`));
     }
   }
 )

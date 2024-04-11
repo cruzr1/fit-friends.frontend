@@ -1,27 +1,46 @@
+import { useEffect } from 'react';
 import { TrainingItemComponent } from '../../components';
-import { TrainingItemClassApplyType, TrainingOrderedType, TrainingType } from '../../types';
-import { isTrainingType, isTrainingOrderedType } from '../../helpers';
+import { TrainingItemClassApplyType } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { loadTrainingsAction } from '../../store/training/training.actions';
+import { selectCaloriesFilter, selectTake, selectPriceFilter, selectSortByOrder, selectTrainTypeFilter, selectTrainingsList, selectRatingFilter } from '../../store/training/training.selectors';
 
 type TrainingsListComponentProps = {
   classApply: TrainingItemClassApplyType;
-  trainingsList: TrainingType[] | TrainingOrderedType[]
 }
 
-export default function TrainingsListComponent({classApply, trainingsList}: TrainingsListComponentProps): JSX.Element {
-
-  const isOrdered = isTrainingOrderedType(trainingsList) ? true : false;
+export default function TrainingsListComponent({classApply}: TrainingsListComponentProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const take = useAppSelector(selectTake);
+  const priceFilter = useAppSelector(selectPriceFilter);
+  const caloriesFilter = useAppSelector(selectCaloriesFilter);
+  const ratingFilter = useAppSelector(selectRatingFilter);
+  const trainTypeFilter = useAppSelector(selectTrainTypeFilter);
+  const sortByOrder = useAppSelector(selectSortByOrder);
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(loadTrainingsAction({
+        take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder}));
+    }
+    return () => {
+      isMounted = false;
+    }
+  }, [dispatch, take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder]);
+  const trainingsList = useAppSelector(selectTrainingsList);
+  console.log(trainingsList);
   return (
     <ul className={`${classApply}__list`}>
-      {isTrainingType(trainingsList) && trainingsList.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
+      {trainingsList.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
         <li key={id} className={`${classApply}__item`}>
           <TrainingItemComponent {...{price, name, trainType, calories, description, rating, backgroundImage}} />
         </li>
       )}
-      {isTrainingOrderedType(trainingsList) && trainingsList.map(({training: {id, price, name, trainType, calories, description, rating, backgroundImage}, trainingsCount, trainingsSum}) =>
+      {/* {isTrainingOrderedType(trainingsList) && trainingsList.map(({training: {id, price, name, trainType, calories, description, rating, backgroundImage}, trainingsCount, trainingsSum}) =>
         <li key={id} className={`${classApply}__item`}>
           <TrainingItemComponent {...{price, name, trainType, calories, description, rating, backgroundImage, isOrdered, trainingsCount, trainingsSum}} />
         </li>
-      )}
+      )} */}
     </ul>
   )
 }

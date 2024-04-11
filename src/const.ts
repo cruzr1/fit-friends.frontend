@@ -1,5 +1,3 @@
-import { loadUsersReadyTrainAction } from './store/user/user.actions';
-
 export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
 
 export const REFRESH_TOKEN_KEY = '==ZGRmZGZkZkBkZmtsamRmLmNvbQ';
@@ -29,6 +27,8 @@ export const MAIN_ITEMS_PER_PAGE = 4;
 export const NULL_VALUE = 0;
 
 export const STEP = 1;
+
+export const DEFAULT_PAGE_NUMBER = 1;
 
 export const errorStyle = {color: 'red'};
 
@@ -217,6 +217,7 @@ export const ErrorMessage = {
   FailedLoadChoiseTrainings: 'Failed to load choise trainings',
   FailedLoadSpecialOffers: 'Failed to load special offers',
   FailedLoadUserReadyTrain: 'Failed to load users ready to train',
+  FailedLoadTrainingsCatalogue: 'Failed to load trainings catalogue',
 } as const;
 
 export const UserValidationParams = {
@@ -248,8 +249,44 @@ export const POPULAR_TRAININGS_COUNT = 8;
 
 export const CHOISE_TRAININGS_COUNT = 9;
 
+export const TRAININGS_CATALOG_COUNT = 6;
+
 export const USERS_READY_TRAIN = 8;
 
 export const POPULAR_TRAININGS_VISIBLE_COUNT = 4;
 
 export const POPULAR_TRAININGS_SORT_FIELD = 'rating';
+
+export const TRAININGS_CATALOG_SORT_FIELD = 'price';
+
+export const SortOrder = {
+  Asc: 'asc',
+  Desc: 'desc',
+} as const;
+
+export const sliderStyle = {
+  color: 'black',
+  width: 312,
+  '& .MuiSlider-rail': {
+    height: '1px',
+  },
+  '& .MuiSlider-thumb': {
+    height: '16px',
+    width: '16px',
+  },
+  '& .MuiSlider-track': {
+    height: '1px',
+  },
+}
+
+export const MAXIMUM_PRICE_VALUE = 20000;
+
+export const MAXIMUM_CALORIES_VALUE = 5000;
+
+export const MAXIMUM_RATING_VALUE = 5;
+
+export const ShowValue = {
+  On: 'on',
+  Off: 'off',
+  Auto: 'auto',
+} as const;

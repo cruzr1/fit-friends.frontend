@@ -87,3 +87,14 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
     currentPage: number;
     totalItems: number;
   }
+
+  export type SortOrderType = 'desc' | 'asc';
+
+  export type QueryTrainingsType = {
+    take: number;
+    priceFilter: number[];
+    caloriesFilter: number[];
+    ratingFilter: number[];
+    trainTypeFilter: TrainType[];
+    sortByOrder: SortOrderType;
+  }
