@@ -5,7 +5,7 @@ import LayoutComponent from '../layout/layout.component';
 import AnonymRoute from '../anonym-route/anonym-route';
 import PrivateRoute from '../private-route/private-route';
 import PrivateRouteRole from '../private-route-role/private-route-role';
-import {CreateTrainingPage, SignPage, QuestionnairePage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListPage, MainPage, MyPurchasesPage, UserCardPage, UsersCataloguePage, TrainingCardPage, TrainingCataloguePage, IntroPage} from '../../pages/index'
+import {CreateTrainingPage, SignPage, QuestionnairePage, PersonalAccountCoachPage, PersonalAccountUserPage, MyTrainingsPage, MyOrdersPage, FriendsListPage, MainPage, MyPurchasesPage, UserCardPage, UsersCataloguePage, TrainingCardPage, TrainingCataloguePage, IntroPage, ErrorPage} from '../../pages/index'
 
 
 export const userRole: string = UserRole.User;
@@ -131,6 +131,12 @@ return (
             <PrivateRouteRole role={UserRole.User}>
               <MyPurchasesPage />
             </PrivateRouteRole>
+          }
+        />
+        <Route
+          path={AppRoute.Error}
+          element={
+            <ErrorPage />
           }
         />
       </Route>

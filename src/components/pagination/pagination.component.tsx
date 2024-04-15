@@ -12,7 +12,6 @@ export default function PaginationComponent({classApply}: PaginationComponentPro
   const dispatch = useAppDispatch();
   const totalItems = useAppSelector(selectTotalItems);
   const take = useAppSelector(selectTake);
-  console.log(take, totalItems, take===totalItems);
   return (
     <div className={`show-more ${classApply}__show-more`}>
       {take < totalItems &&

@@ -32,7 +32,7 @@ export const DEFAULT_PAGE_NUMBER = 1;
 
 export const errorStyle = {color: 'red'};
 
-export const DEFAULT_PATH = 'markup/img/content';
+export const DEFAULT_PATH = '/img/content';
 
 export const RequestStatus = {
   Idle: 'idle',
@@ -55,9 +55,10 @@ export const AppRoute = {
   MyFriends: '/friends-list',
   Main: '/main',
   TrainingCatalogue: '/training-catalog',
-  TrainingCard: '/training-card',
+  TrainingCard: '/training-card/:trainingId',
   UserCatalogue: '/users-catalog',
-  UserCard: '/user-card',
+  UserCard: '/user-card/:userId',
+  Error: '*',
 } as const;
 
 export const APIPath = {
@@ -66,7 +67,8 @@ export const APIPath = {
     Login: 'users/login',
     Verify: 'users/check',
     Update: 'users/update',
-    Index: 'users'
+    Index: 'users',
+    Old: 'users/old'
   },
   Trainings: {
     Index: 'trainings'
@@ -84,6 +86,9 @@ export const Action = {
   LoadSpecialOffers: 'loadSpecialOffers',
   LoadPopularTrainings: 'loadPopularTrainings',
   LoadChoiseTrainings: 'loadChoiseTrainings',
+  LoadTrainings: 'loadTrainings',
+  LoadTraining: 'loadTraining',
+  LoadTrainer: 'loadTrainer',
   LoadUsersReadyTrain: 'loadUsersReadyTrain',
 } as const;
 
@@ -218,6 +223,7 @@ export const ErrorMessage = {
   FailedLoadSpecialOffers: 'Failed to load special offers',
   FailedLoadUserReadyTrain: 'Failed to load users ready to train',
   FailedLoadTrainingsCatalogue: 'Failed to load trainings catalogue',
+  FailedUpdateTraing: 'Failed to update training',
 } as const;
 
 export const UserValidationParams = {

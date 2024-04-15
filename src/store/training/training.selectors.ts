@@ -4,7 +4,6 @@ import { NameSpace } from '../../const';
 export const selectSpecialOffers = (state: StateType) => state[NameSpace.Training].specialOffers;
 export const selectPopularTrainings = (state: StateType) => state[NameSpace.Training].popularTrainings;
 export const selectChoiseTrainings = (state: StateType) => state[NameSpace.Training].choiseTrainings;
-export const selectTrainingLoadingStatus = (state: StateType) => state[NameSpace.Training].loadingStatus;
 export const selectTrainingsList = (state: StateType) => state[NameSpace.Training].trainingsList;
 export const selectTake = (state: StateType) => state[NameSpace.Training].take;
 export const selectPriceFilter = (state: StateType) => state[NameSpace.Training].priceFilter;
@@ -13,4 +12,7 @@ export const selectRatingFilter = (state: StateType) => state[NameSpace.Training
 export const selectTrainTypeFilter = (state: StateType) => state[NameSpace.Training].trainTypeFilter;
 export const selectSortByOrder = (state: StateType) => state[NameSpace.Training].sortByOrder;
 export const selectTotalItems = (state: StateType) => state[NameSpace.Training].totalItems;
+export const selectTraining = (state: StateType) => state[NameSpace.Training].training;
+export const selectTrainer = (state: StateType) => state[NameSpace.Training].trainer;
+
 

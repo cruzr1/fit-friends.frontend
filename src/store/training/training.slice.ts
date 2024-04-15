@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DEFAULT_PAGE_NUMBER, NameSpace, RequestStatus, TRAININGS_CATALOG_COUNT, TrainType } from '../../const'
-import { RequestStatusType, SortOrderType, TrainingType } from '../../types';
+import { RequestStatusType, SortOrderType, TrainingType, UserType } from '../../types';
+import { loadTrainerAction, loadTrainingAction } from './training.actions';
 
 export type TrainingStateType = {
   trainingsList: TrainingType[];
   specialOffers: TrainingType[];
   popularTrainings: TrainingType[];
   choiseTrainings: TrainingType[];
-  loadingStatus: RequestStatusType;
   take: number;
   priceFilter: number[];
   caloriesFilter: number[];
@@ -15,8 +15,8 @@ export type TrainingStateType = {
   trainTypeFilter: TrainType[];
   sortByOrder: SortOrderType;
   totalItems: number;
-
-
+  training: TrainingType | null;
+  trainer: UserType | null;
 }
 
 export const trainingState: TrainingStateType = {
@@ -24,7 +24,6 @@ export const trainingState: TrainingStateType = {
   specialOffers: [],
   popularTrainings: [],
   choiseTrainings: [],
-  loadingStatus: RequestStatus.Idle,
   take: TRAININGS_CATALOG_COUNT,
   priceFilter: [0, 0],
   caloriesFilter: [0, 0],
@@ -32,6 +31,8 @@ export const trainingState: TrainingStateType = {
   trainTypeFilter: [],
   sortByOrder: 'desc',
   totalItems: 0,
+  training: null,
+  trainer: null,
 }
 
 export const training = createSlice({
@@ -71,6 +72,12 @@ export const training = createSlice({
     setTotalItems: (state, {payload}: PayloadAction<number>) => {
       state.totalItems = payload;
     },
+    setTraining: (state, {payload}: PayloadAction<TrainingType>) => {
+      state.training = payload;
+    },
+    setTrainer: (state, {payload}: PayloadAction<UserType>) => {
+      state.trainer = payload;
+    },
   }
 });
 
@@ -86,4 +93,6 @@ export const {
    setSortByOrder,
    setTrainTypeFilter,
    setTotalItems,
+   setTraining,
+   setTrainer,
 } = training.actions;

@@ -8,6 +8,7 @@ export type UserStateType = {
   authStatus: AuthStatusType;
   user: UserType | null;
   usersRadyTrain: UserType[];
+  
 }
 
 export const userState: UserStateType = {

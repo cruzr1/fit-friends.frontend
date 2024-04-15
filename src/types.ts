@@ -15,7 +15,7 @@ export type RequestStatusType = typeof RequestStatus[keyof typeof RequestStatus]
 export type BackButtonClassApplyType = typeof BackButtonClassApply[keyof typeof BackButtonClassApply];
 
 export type TrainingType  = {
-  id?: string;
+  id: string;
   name: string;
   backgroundImage: string;
   level: string;
@@ -30,6 +30,8 @@ export type TrainingType  = {
   trainerId: string;
   isSpecial: boolean;
 }
+
+export type UpdateTrainingType = Partial<TrainingType>;
 
 export type TrainingItemClassApplyType = typeof TrainingItemClassApply[keyof typeof TrainingItemClassApply];
 

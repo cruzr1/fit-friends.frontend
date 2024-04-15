@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 import { TrainType, AppRoute } from '../../const';
 
 type ThumbnailTrainingPreviewComponentProps = {
@@ -17,7 +17,7 @@ export default function ThumbnailTrainingPreviewComponent({id, trainType}: Thumb
       <div className="thumbnail-preview__inner">
         <h3 className="thumbnail-preview__title">{trainType}</h3>
         <div className="thumbnail-preview__button-wrapper">
-          <Link className="btn btn--small thumbnail-preview__button" to={`${AppRoute.TrainingCard}/${id}`}>Подробнее</Link>
+          <Link className="btn btn--small thumbnail-preview__button" to={generatePath(AppRoute.TrainingCard, {trainingId: id || ''})}>Подробнее</Link>
         </div>
       </div>
     </div>

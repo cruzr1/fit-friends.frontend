@@ -10,8 +10,8 @@ export default function ReviewsListComponent(): JSX.Element {
       <BackButtonComponent classApply={BackButtonClassApply.ReviewsList} />
       <h2 className="reviews-side-bar__title">Отзывы</h2>
       <ul className="reviews-side-bar__list">
-        {reviews.map(({name, comment}) =>
-            <li className="reviews-side-bar__item">
+        {reviews.map(({id, name, comment}) =>
+            <li key={id} className="reviews-side-bar__item">
               <ReviewItemComponent {...{name, comment}} />
             </li>
         )}

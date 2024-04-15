@@ -15,5 +15,6 @@ export { default as TrainingCataloguePage } from './training-catalog/training-ca
 export { default as TrainingDiaryPage } from './training-diary/training-diary.page';
 export { default as UserCardPage } from './user-card/user-card.page';
 export { default as UsersCataloguePage } from './users-catalog/users-catalog.page';
+export { default as ErrorPage } from './error/error.page';
 
 

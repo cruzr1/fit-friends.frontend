@@ -28,12 +28,11 @@ export default function TrainingsListComponent({classApply}: TrainingsListCompon
     }
   }, [dispatch, take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder]);
   const trainingsList = useAppSelector(selectTrainingsList);
-  console.log(trainingsList);
   return (
     <ul className={`${classApply}__list`}>
-      {trainingsList.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
+      {trainingsList && trainingsList.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
         <li key={id} className={`${classApply}__item`}>
-          <TrainingItemComponent {...{price, name, trainType, calories, description, rating, backgroundImage}} />
+          <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}} />
         </li>
       )}
       {/* {isTrainingOrderedType(trainingsList) && trainingsList.map(({training: {id, price, name, trainType, calories, description, rating, backgroundImage}, trainingsCount, trainingsSum}) =>

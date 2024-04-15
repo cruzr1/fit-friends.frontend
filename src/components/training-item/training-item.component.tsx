@@ -1,7 +1,10 @@
+import { AppRoute } from '../../const';
 import { adaptPrice, adaptImage } from '../../helpers';
+import { Link, generatePath } from 'react-router-dom';
 
 
 export type TrainingItemComponentProps = {
+  id: string;
   price: number;
   name: string;
   trainType: string;
@@ -15,7 +18,7 @@ export type TrainingItemComponentProps = {
 
 }
 
-export default function TrainingItemComponent({price, name, trainType, calories, description, rating, backgroundImage, isOrdered, trainingsCount, trainingsSum}: TrainingItemComponentProps): JSX.Element {
+export default function TrainingItemComponent({id, price, name, trainType, calories, description, rating, backgroundImage, isOrdered, trainingsCount, trainingsSum}: TrainingItemComponentProps): JSX.Element {
   return (
       <div className="thumbnail-training">
         <div className="thumbnail-training__inner">
@@ -48,16 +51,16 @@ export default function TrainingItemComponent({price, name, trainType, calories,
           <div className="thumbnail-training__button-wrapper">
             {!isOrdered &&
               <>
-                <a className="btn btn--small thumbnail-training__button-catalog" href="#">Подробнее</a>
+                <Link className="btn btn--small thumbnail-training__button-catalog" to={generatePath(AppRoute.TrainingCard, {trainingId: id || ''})}>Подробнее</Link>
                 <a className="btn btn--small btn--outlined thumbnail-training__button-catalog" href="#">Отзывы</a>
               </>
             }
            {isOrdered &&
-              <a className="btn-flat btn-flat--underlined thumbnail-training__button-orders" href="#">
+              <Link className="btn-flat btn-flat--underlined thumbnail-training__button-orders" to={generatePath(AppRoute.TrainingCard, {trainingId: id || ''})}>
                 <svg width="18" height="18" aria-hidden="true">
                   <use xlinkHref="#icon-info"></use>
                 </svg><span>Подробнее</span>
-              </a>
+              </Link>
 
             }
           </div>

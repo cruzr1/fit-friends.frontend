@@ -25,5 +25,5 @@ yarn-error.log*
 *.sublime*
 .vscode
 
-publics
+public
 markup

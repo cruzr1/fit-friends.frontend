@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType } from '../../types';
+import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType } from '../../types';
 import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_COUNT, TRAININGS_CATALOG_SORT_FIELD } from '../../const';
 import { clearErrorAction } from '../error/error.actions';
-import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems } from './training.slice';
+import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer } from './training.slice';
 
 export const loadSpecialOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -62,13 +62,6 @@ export const loadChoiseTrainingsAction = createAsyncThunk<void, UserFeaturesType
   async ({duration, trainType, level,caloriesDaily}, {dispatch, extra: axiosApi}) => {
 
     try {
-      console.log({
-        take: CHOISE_TRAININGS_COUNT,
-        caloriesFilter: [NULL_VALUE, caloriesDaily],
-        durationFilter: [duration],
-        trainTypeFilter: trainType,
-        level: level
-      })
       const { data : { entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Index,{
         params: {
           take: CHOISE_TRAININGS_COUNT,
@@ -92,7 +85,7 @@ export const loadTrainingsAction = createAsyncThunk<void, QueryTrainingsType, {
   }
 >
 (
-  `${NameSpace.Training}/${Action.LoadChoiseTrainings}`,
+  `${NameSpace.Training}/${Action.LoadTrainings}`,
   async ({take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder}, {dispatch, extra: axiosApi}) => {
     try {
       const { data : { totalItems, entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Index,{
@@ -108,6 +101,62 @@ export const loadTrainingsAction = createAsyncThunk<void, QueryTrainingsType, {
       });
       dispatch(setTrainingsList(entities));
       dispatch(setTotalItems(totalItems));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadTrainingsCatalogue}: ${message}`));
+    }
+  }
+)
+
+export const loadTrainingAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.LoadTraining}`,
+  async (trainingId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<TrainingType>(`${APIPath.Trainings.Index}/${trainingId}`);
+      dispatch(loadTrainerAction(data.trainerId))
+      dispatch(setTraining(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadTrainingsCatalogue}: ${message}`));
+    }
+  }
+)
+
+export const updateTrainingAction = createAsyncThunk<void, UpdateTrainingType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.Update}`,
+  async (updateTraining, {dispatch, extra: axiosApi}) => {
+    try {
+      const {id, ...trainingData} = updateTraining;
+      const { data } = await axiosApi.patch<TrainingType>(`${APIPath.Trainings.Index}/${updateTraining.id}`, trainingData);
+      dispatch(setTraining(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUpdateTraing}: ${message}`));
+    }
+  }
+)
+
+export const loadTrainerAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.LoadTrainer}`,
+  async (trainerId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<UserType>(`${APIPath.Users.Old}/${trainerId}`);
+      dispatch(setTrainer(data));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadTrainingsCatalogue}: ${message}`));
     }
