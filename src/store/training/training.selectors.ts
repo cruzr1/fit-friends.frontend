@@ -14,5 +14,6 @@ export const selectSortByOrder = (state: StateType) => state[NameSpace.Training]
 export const selectTotalItems = (state: StateType) => state[NameSpace.Training].totalItems;
 export const selectTraining = (state: StateType) => state[NameSpace.Training].training;
 export const selectTrainer = (state: StateType) => state[NameSpace.Training].trainer;
+export const selectReviews = (state: StateType) => state[NameSpace.Training].reviews;
 
 

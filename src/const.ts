@@ -1,3 +1,5 @@
+import { loadAvailableTrainingsCountAction } from './store/user/user.actions';
+
 export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
 
 export const REFRESH_TOKEN_KEY = '==ZGRmZGZkZkBkZmtsamRmLmNvbQ';
@@ -11,6 +13,8 @@ export const TIMEOUT_SHOW_ERROR = 5000;
 export const PASSWORD_REGEX = /^.{6,12}$/;
 
 export const NAME_REGEX = /^.{1,15}$/;
+
+export const  COMMENT_REGEX = /^.{100,1024}$/;
 
 export const BIRTHDAY_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -29,6 +33,8 @@ export const NULL_VALUE = 0;
 export const STEP = 1;
 
 export const DEFAULT_PAGE_NUMBER = 1;
+
+export const DEFAULT_ORDER_COUNT = 5;
 
 export const errorStyle = {color: 'red'};
 
@@ -72,7 +78,17 @@ export const APIPath = {
   },
   Trainings: {
     Index: 'trainings'
-  }
+  },
+  Reviews: {
+    Index: 'reviews',
+  },
+  Orders: {
+    Index: 'orders',
+  },
+  Accounts: {
+    Index: 'accounts',
+    Use: 'accounts/use',
+  },
 } as const;
 
 export const Action = {
@@ -90,6 +106,11 @@ export const Action = {
   LoadTraining: 'loadTraining',
   LoadTrainer: 'loadTrainer',
   LoadUsersReadyTrain: 'loadUsersReadyTrain',
+  LoadReviews: 'loadReviews',
+  PostReview: 'postReview',
+  OrderTrainings: 'orderTrainings',
+  LoadAvailableTrainingsCount: 'loadAvailableTrainingsCount',
+  UseActiveTrainings: 'useActiveTrainings',
 } as const;
 
 export const AuthStatus = {
@@ -205,11 +226,10 @@ export const BackButtonClassApply = {
 } as const;
 
 export const NameSpace = {
-  AuthStatus: 'auth',
   User: 'user',
   Error: 'error',
   Route: 'route',
-  Training: 'training'
+  Training: 'training',
 } as const;
 
 export const ErrorMessage = {
@@ -224,7 +244,11 @@ export const ErrorMessage = {
   FailedLoadUserReadyTrain: 'Failed to load users ready to train',
   FailedLoadTrainingsCatalogue: 'Failed to load trainings catalogue',
   FailedUpdateTraing: 'Failed to update training',
-} as const;
+  FailedLoadReviews: 'Failed to load reviews',
+  FailedLoadAvailableTrainings: 'Failed to load available trainings',
+  FailedOrderTrainings: 'Failed to order trainings',
+  FailedUseActiveTrainings: 'Failed to use active trainings',
+ } as const;
 
 export const UserValidationParams = {
   Image: {
@@ -296,3 +320,19 @@ export const ShowValue = {
   Off: 'off',
   Auto: 'auto',
 } as const;
+
+export const INITIAL_RATING = 5;
+
+export const INITIAL_COMMENT = '';
+
+export const RATING_LIST = [1, 2, 3, 4, 5];
+
+export enum Payment {
+  Visa = 'Visa',
+  Mir = 'Mir',
+  Umoney = 'Umoney',
+}
+
+export enum OrderPayment {
+  Subscription = 'Subscription',
+}

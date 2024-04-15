@@ -1,4 +1,4 @@
-import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location } from './const';
+import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location, Payment, OrderPayment } from './const';
 import { store } from "./store/store";
 
 export type StateType = ReturnType<typeof store.getState>;
@@ -99,4 +99,43 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
     ratingFilter: number[];
     trainTypeFilter: TrainType[];
     sortByOrder: SortOrderType;
+  }
+
+  export type ReviewType = {
+    id: string;
+    authorId: string;
+    name: string;
+    avatar: string;
+    trainingId: string;
+    rating: number;
+    comment: string;
+    createdAt: string;
+  }
+
+  export type PostReviewType = Pick<ReviewType, 'comment' | 'rating' | 'trainingId'>
+
+  export type CreateOrderType = {
+    orderType: OrderPayment;
+    trainingId: string;
+    trainingsCount: number;
+    payment: Payment;
+  }
+
+  export type OrderType = {
+    id?: string;
+    userId: string;
+    orderType: OrderPayment;
+    trainingId: string;
+    trainingsCount: number;
+    trainingPrice: number;
+    trainingSum: number;
+    payment: Payment;
+  }
+
+  export type AccountType = {
+    id?: string;
+    userId: string;
+    trainingId: string;
+    trainingsActive: number;
+    trainingsInactive: number;
   }

@@ -15,7 +15,7 @@ export default function ErrorPage (): JSX.Element {
         <button
           className="button button__error button--small button--black-border"
           onClick={() => navigate(AppRoute.Index)}
-        >Продолжить покупки</button>
+        >Продолжить работу</button>
       </section>
     </div>
   )

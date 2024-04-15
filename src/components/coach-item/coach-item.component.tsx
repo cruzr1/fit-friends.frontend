@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { adaptImage } from '../../helpers';
-import { DEFAULT_PATH } from '../../const';
 
 type CoachItemComponentProps = {
   certificate: string;
@@ -17,7 +15,7 @@ export default function CoachItemComponent({certificate, handleDeleteButtonClick
       <div className={`certificate-card ${isEdit ? 'certificate-card--edit' : 'certificate-card--save'}`}>
         <div className="certificate-card__image">
           <picture>
-            <source type="image/webp" srcSet={`${DEFAULT_PATH}/certificates-and-diplomas/${adaptImage(certificate)}.webp, ${DEFAULT_PATH}/certificates-and-diplomas/${adaptImage(certificate)}@2x.webp 2x"`} /><img src={`${DEFAULT_PATH}/certificates-and-diplomas/${adaptImage(certificate)}.jpg"`} srcSet={`${DEFAULT_PATH}/certificates-and-diplomas/${adaptImage(certificate)}@2x.jpg 2x"`} width="294" height="360" alt={certificate} />
+            <source type="image/webp" srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.webp, /img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.webp 2x`} /><img src={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.jpg`} srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.jpg 2x`} width="294" height="360" alt={certificate} />
           </picture>
         </div>
         <div className="certificate-card__buttons">

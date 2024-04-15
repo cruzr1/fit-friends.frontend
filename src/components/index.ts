@@ -31,3 +31,4 @@ export { default as LookForCompanyComponent } from './look-for-company/look-for-
 export { default as SpecialForYouComponent } from './special-for-you/special-for-you.component';
 export { default as ThumbnailTrainingPreviewComponent } from './thumbnail-training-preview/thumbnail-training-prevew.component';
 export { default as RangeSliderComponent } from './range-slider/range-slider.component';
+export { default as PopupReviewComponent } from './popup-review/popup-review.component';

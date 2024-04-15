@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../store/user/user.selectors';
 import { UpdateUserType, UserType } from '../../types';
-import { Location, TrainType, TrainTypeCaption, LocationCaption, Gender, GenderCaption, Level, LevelCaption, DEFAULT_PATH } from '../../const';
+import { Location, TrainType, TrainTypeCaption, LocationCaption, Gender, GenderCaption, Level, LevelCaption } from '../../const';
 import { updateUserAction } from '../../store/user/user.actions';
 import { adaptImage } from '../../helpers';
 
@@ -61,7 +61,7 @@ export default function UserInfoComponent(): JSX.Element {
       <div className="user-info__header">
         <div className="input-load-avatar">
           <label>
-            <input className="visually-hidden" type="file" name={avatar} accept="image/png, image/jpeg" /><span className="input-load-avatar__avatar"><img src={`${DEFAULT_PATH}/avatars/users/${adaptImage(avatar)}.png"`} srcSet={`${DEFAULT_PATH}/avatars/users/${adaptImage(avatar)}@2x.png 2x"`} width="98" height="98" alt="user photo" /></span>
+            <input className="visually-hidden" type="file" name={avatar} accept="image/png, image/jpeg" /><span className="input-load-avatar__avatar"><img src={`img/content/avatars/users/${adaptImage(avatar)}.png`} srcSet={`img/content/avatars/users/${adaptImage(avatar)}@2x.png 2x`} width="98" height="98" alt="user photo" /></span>
           </label>
         </div>
       </div>

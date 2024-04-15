@@ -1,5 +1,5 @@
 import { ChangeEvent, useRef, useState, FormEvent } from 'react';
-import { Duration, QuestionDurationCaption, Level, LevelCaption, TrainType, TrainTypeCaption, UserRole, DEFAULT_PATH, errorStyle } from '../../const';
+import { Duration, QuestionDurationCaption, Level, LevelCaption, TrainType, TrainTypeCaption, UserRole, errorStyle } from '../../const';
 import { isCaloriesValueValid, isDescriptionValid, isCertificateValid } from '../../helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../store/user/user.selectors';
@@ -39,7 +39,7 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
     if (!newCertificate) {
       return;
     }
-    setCertificateURL(`${DEFAULT_PATH}/${newCertificate.name}`);
+    setCertificateURL(`img/content/certificates-and-diplomas/${newCertificate.name}`);
   }
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

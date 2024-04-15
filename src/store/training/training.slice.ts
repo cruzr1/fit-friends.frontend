@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DEFAULT_PAGE_NUMBER, NameSpace, RequestStatus, TRAININGS_CATALOG_COUNT, TrainType } from '../../const'
-import { RequestStatusType, SortOrderType, TrainingType, UserType } from '../../types';
+import { RequestStatusType, ReviewType, SortOrderType, TrainingType, UserType } from '../../types';
 import { loadTrainerAction, loadTrainingAction } from './training.actions';
 
 export type TrainingStateType = {
@@ -17,6 +17,7 @@ export type TrainingStateType = {
   totalItems: number;
   training: TrainingType | null;
   trainer: UserType | null;
+  reviews: ReviewType[];
 }
 
 export const trainingState: TrainingStateType = {
@@ -33,6 +34,7 @@ export const trainingState: TrainingStateType = {
   totalItems: 0,
   training: null,
   trainer: null,
+  reviews: [],
 }
 
 export const training = createSlice({
@@ -78,6 +80,12 @@ export const training = createSlice({
     setTrainer: (state, {payload}: PayloadAction<UserType>) => {
       state.trainer = payload;
     },
+    setReviews: (state, {payload}: PayloadAction<ReviewType[]>) => {
+      state.reviews = payload;
+    },
+    addReview: (state, {payload}: PayloadAction<ReviewType>) => {
+      state.reviews = [payload, ...state.reviews];
+    },
   }
 });
 
@@ -95,4 +103,6 @@ export const {
    setTotalItems,
    setTraining,
    setTrainer,
+   setReviews,
+   addReview,
 } = training.actions;

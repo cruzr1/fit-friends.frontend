@@ -14,7 +14,7 @@ export default function MyTrainingsPage(): JSX.Element {
           <TrainingFilterComponent isMyTrainingsPage />
           <div className="inner-page__content">
             <div className="my-trainings">
-              <TrainingsListComponent classApply={classApply} trainingsList={trainings} />
+              <TrainingsListComponent classApply={classApply} />
               <PaginationComponent classApply={classApply} />
             </div>
           </div>

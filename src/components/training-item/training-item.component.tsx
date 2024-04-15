@@ -24,7 +24,7 @@ export default function TrainingItemComponent({id, price, name, trainType, calor
         <div className="thumbnail-training__inner">
           <div className="thumbnail-training__image">
             <picture>
-              <source type="image/webp" srcSet={`markup/img/content/thumbnails/${adaptImage(backgroundImage)}.webp, markup/img/content/thumbnails/${adaptImage(backgroundImage)}@2x.webp 2x"`} /><img src={`markup/img/content/thumbnails/${adaptImage(backgroundImage)}.jpg" srcSet="markup/img/content/thumbnails/${adaptImage(backgroundImage)}@2x.jpg 2x`} width="330" height="190" alt="" />
+              <source type="image/webp" srcSet={`/img/content/thumbnails/${adaptImage(backgroundImage)}.webp, "/img/content/thumbnails/${adaptImage(backgroundImage)}@2x.webp 2x`} /><img src={`/img/content/thumbnails/${adaptImage(backgroundImage)}.jpg srcSet="/img/content/thumbnails/${adaptImage(backgroundImage)}@2x.jpg 2x`} width="330" height="190" alt="" />
             </picture>
           </div>
           <p className="thumbnail-training__price">{adaptPrice(price)}

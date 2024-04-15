@@ -1,22 +1,53 @@
+import { useEffect, useState } from 'react';
 import { BackButtonComponent, ReviewItemComponent } from '..';
 import { BackButtonClassApply, UserRole } from '../../const';
-import reviews from '../../mocks/mock-reviews.json'
-import { userRole } from '../app/app.component';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { TrainingType } from '../../types';
+import { loadReviewsAction } from '../../store/training/training.actions';
+import { selectReviews } from '../../store/training/training.selectors';
+import { selectUser } from '../../store/user/user.selectors';
 
-export default function ReviewsListComponent(): JSX.Element {
-  const isCoach = userRole === UserRole.Trainer;
+type ReviewsListComponentProps = {
+  trainingId: string;
+  isTrainer: boolean;
+  handleReviewButtonClick: (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+export default function ReviewsListComponent({trainingId, isTrainer, handleReviewButtonClick}: ReviewsListComponentProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(loadReviewsAction(trainingId));
+    }
+    return () => {
+      isMounted = false;
+    }
+  }, [dispatch]);
+  const reviews = useAppSelector(selectReviews);
+  const user = useAppSelector(selectUser);
+  const forbiddenReview = reviews.some((review) => review.authorId === user?.id);
   return (
     <aside className="reviews-side-bar">
       <BackButtonComponent classApply={BackButtonClassApply.ReviewsList} />
       <h2 className="reviews-side-bar__title">Отзывы</h2>
       <ul className="reviews-side-bar__list">
-        {reviews.map(({id, name, comment}) =>
+        {reviews.length === 0 &&
+          <div>Список отзывов пуст</div>
+        }
+        {reviews.length > 0 && reviews.map(({id, avatar, name, comment}) =>
             <li key={id} className="reviews-side-bar__item">
-              <ReviewItemComponent {...{name, comment}} />
+              <ReviewItemComponent {...{name, avatar, comment}} />
             </li>
         )}
       </ul>
-      <button className="btn btn--medium reviews-side-bar__button" type="button" disabled={isCoach}>Оставить отзыв</button>
+      <button
+       className="btn btn--medium reviews-side-bar__button"
+       type="button"
+       onClick={(evt) => handleReviewButtonClick(evt)}
+       disabled={isTrainer || forbiddenReview}
+      >Оставить отзыв</button>
     </aside>
+
   )
 }

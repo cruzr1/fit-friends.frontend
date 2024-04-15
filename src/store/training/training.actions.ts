@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType } from '../../types';
+import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType, CreateOrderType } from '../../types';
 import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_COUNT, TRAININGS_CATALOG_SORT_FIELD } from '../../const';
 import { clearErrorAction } from '../error/error.actions';
-import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer } from './training.slice';
+import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer, setReviews, addReview } from './training.slice';
 
 export const loadSpecialOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -162,3 +162,42 @@ export const loadTrainerAction = createAsyncThunk<void, string, {
     }
   }
 )
+
+export const loadReviewsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.LoadReviews}`,
+  async (trainingId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data: { entities } } = await axiosApi.get<EntitiesWithPaginationType<ReviewType>>(`${APIPath.Reviews.Index}/${trainingId}`);
+      dispatch(setReviews(entities));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadReviews}: ${message}`));
+    }
+  }
+)
+
+export const postReviewAction = createAsyncThunk<void, PostReviewType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.PostReview}`,
+  async ({trainingId, ...review}, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.post<ReviewType>(`${APIPath.Reviews.Index}/${trainingId}`, review);
+      dispatch(addReview(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadReviews}: ${message}`));
+    }
+  }
+)
+
+
+

@@ -1,6 +1,6 @@
 import { useRef, ChangeEvent, useState, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
-import { DEFAULT_PATH, Gender, Location, LocationCaption, UserRole, NULL_VALUE, errorStyle } from '../../const';
+import { Gender, Location, LocationCaption, UserRole, NULL_VALUE, errorStyle } from '../../const';
 import { isBirthDateValid, isEmailValid, isNameValid, isPasswordValid, isAvatarValid } from '../../helpers';
 import { signinUserAction } from '../../store/user/user.actions';
 
@@ -31,7 +31,7 @@ export default function PopupSignupComponent(): JSX.Element {
     if (!newAvatar) {
       return;
     }
-    setAvatarURL(`${DEFAULT_PATH}/${newAvatar.name}`);
+    setAvatarURL(`/img/content/${newAvatar.name}`);
   }
   const handleAvatarClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.preventDefault();

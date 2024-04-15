@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateAuthStatus, setUser, setUsersReadyTrain } from './user.slice';
+import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount } from './user.slice';
 import { setRefreshToken, setToken} from '../../services/token';
 import { clearErrorAction } from '../error/error.actions';
 import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole, USERS_READY_TRAIN } from '../../const';
-import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType } from '../../types';
+import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType } from '../../types';
 import { redirectToRoute } from '../action';
 
 export const loadUsersReadyTrainAction = createAsyncThunk<void, undefined, {
@@ -113,3 +113,60 @@ export const updateUserAction = createAsyncThunk<void, UpdateUserType, {
     }
   }
 );
+
+export const orderTrainingsAction = createAsyncThunk<void, CreateOrderType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.OrderTrainings}`,
+  async (order, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.post<OrderType>(`${APIPath.Orders.Index}`, order);
+      console.log('ordered: ', data.trainingsCount);
+      dispatch(loadAvailableTrainingsCountAction(data.trainingId));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedOrderTrainings}: ${message}`));
+    }
+  }
+)
+
+export const loadAvailableTrainingsCountAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadAvailableTrainingsCount}`,
+  async (trainingId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<AccountType>(`${APIPath.Accounts.Index}/${trainingId}`);
+      console.log('load active: ', data.trainingsActive);
+      dispatch(setTrainingsCount(data.trainingsActive || 0));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadAvailableTrainings}: ${message}`));
+    }
+  }
+)
+
+export const useActiveTrainingsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.UseActiveTrainings}`,
+  async (trainingId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.patch<AccountType>(`${APIPath.Accounts.Use}`, {trainingId, trainingsCount: 1});
+      console.log('updateAccount: ', data.trainingsActive);
+      dispatch(setTrainingsCount(data.trainingsActive || 0));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUseActiveTrainings}: ${message}`));
+    }
+  }
+)
