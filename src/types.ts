@@ -1,4 +1,4 @@
-import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location, Payment, OrderPayment } from './const';
+import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location, Payment, OrderPayment, UserRole } from './const';
 import { store } from "./store/store";
 
 export type StateType = ReturnType<typeof store.getState>;
@@ -40,11 +40,6 @@ export type TrainingOrderedType = {
   trainingsCount: number;
   trainingsSum: number;
 };
-
-export enum UserRole {
-  Trainer = 'Trainer',
-  User = 'User',
-}
 
 export type UserType = {
   id?: string;
@@ -99,6 +94,14 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
     ratingFilter: number[];
     trainTypeFilter: TrainType[];
     sortByOrder: SortOrderType;
+  }
+
+  export type QueryUsersType = {
+    take: number;
+    location: Location[];
+    trainType: TrainType[];
+    level: Level;
+    role: UserRole;
   }
 
   export type ReviewType = {

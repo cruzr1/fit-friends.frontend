@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType, CreateOrderType } from '../../types';
-import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_COUNT, TRAININGS_CATALOG_SORT_FIELD } from '../../const';
+import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType } from '../../types';
+import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_SORT_FIELD, CATALOG_COUNT } from '../../const';
 import { clearErrorAction } from '../error/error.actions';
-import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer, setReviews, addReview } from './training.slice';
+import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer, setReviews, addReview, setTake } from './training.slice';
 
 export const loadSpecialOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -60,7 +60,6 @@ export const loadChoiseTrainingsAction = createAsyncThunk<void, UserFeaturesType
 (
   `${NameSpace.Training}/${Action.LoadChoiseTrainings}`,
   async ({duration, trainType, level,caloriesDaily}, {dispatch, extra: axiosApi}) => {
-
     try {
       const { data : { entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Index,{
         params: {
@@ -101,6 +100,9 @@ export const loadTrainingsAction = createAsyncThunk<void, QueryTrainingsType, {
       });
       dispatch(setTrainingsList(entities));
       dispatch(setTotalItems(totalItems));
+      if (totalItems <= take) {
+        dispatch(setTake(CATALOG_COUNT));
+      }
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadTrainingsCatalogue}: ${message}`));
     }

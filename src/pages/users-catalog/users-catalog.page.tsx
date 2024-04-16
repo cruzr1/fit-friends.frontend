@@ -13,8 +13,7 @@ export default function UsersCataloguePage(): JSX.Element {
           <UserFilterComponent />
           <div className="inner-page__content">
             <div className="users-catalog">
-              <UsersListComponent />
-              <PaginationComponent classApply={classApply} />
+              <UsersListComponent classApply={classApply} />
             </div>
           </div>
         </div>

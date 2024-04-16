@@ -13,7 +13,6 @@ export default function TrainingsCataloguePage(): JSX.Element {
           <TrainingFilterComponent />
           <div className="training-catalog">
             <TrainingsListComponent classApply={classApply} />
-            <PaginationComponent classApply={classApply} />
           </div>
         </div>
       </div>

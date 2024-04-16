@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DEFAULT_PAGE_NUMBER, NameSpace, RequestStatus, TRAININGS_CATALOG_COUNT, TrainType } from '../../const'
-import { RequestStatusType, ReviewType, SortOrderType, TrainingType, UserType } from '../../types';
-import { loadTrainerAction, loadTrainingAction } from './training.actions';
+import { NameSpace, CATALOG_COUNT, TrainType } from '../../const'
+import { ReviewType, SortOrderType, TrainingType, UserType } from '../../types';
 
 export type TrainingStateType = {
   trainingsList: TrainingType[];
@@ -25,7 +24,7 @@ export const trainingState: TrainingStateType = {
   specialOffers: [],
   popularTrainings: [],
   choiseTrainings: [],
-  take: TRAININGS_CATALOG_COUNT,
+  take: CATALOG_COUNT,
   priceFilter: [0, 0],
   caloriesFilter: [0, 0],
   ratingFilter: [0, 0],

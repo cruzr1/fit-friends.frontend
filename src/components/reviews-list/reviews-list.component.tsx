@@ -35,9 +35,9 @@ export default function ReviewsListComponent({trainingId, isTrainer, handleRevie
         {reviews.length === 0 &&
           <div>Список отзывов пуст</div>
         }
-        {reviews.length > 0 && reviews.map(({id, avatar, name, comment}) =>
+        {reviews.length > 0 && reviews.map(({id, avatar, name, comment, rating}) =>
             <li key={id} className="reviews-side-bar__item">
-              <ReviewItemComponent {...{name, avatar, comment}} />
+              <ReviewItemComponent {...{name, avatar, comment, rating}} />
             </li>
         )}
       </ul>

@@ -15,7 +15,7 @@ export const adaptValue = (value: number) => `${value}\xa0₽`;
 
 export const adaptType = (type: Payment) => type.toLowerCase().replace('umoney', 'iomoney');
 
-export const adaptImage = (image: string) => image.slice(0, image.indexOf('.'));
+export const adaptImage = (image: string | undefined) => image?.slice(0, image?.indexOf('.'));
 
 export const adaptPathname = (pathname: string): TrainingItemClassApplyType => pathname.slice(1) as TrainingItemClassApplyType;
 

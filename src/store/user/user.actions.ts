@@ -1,11 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount } from './user.slice';
+import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount, setUsersList, setUsersTotalItems, setUsersTake } from './user.slice';
 import { setRefreshToken, setToken} from '../../services/token';
 import { clearErrorAction } from '../error/error.actions';
-import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole, USERS_READY_TRAIN } from '../../const';
-import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType } from '../../types';
+import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole, USERS_READY_TRAIN, CATALOG_COUNT } from '../../const';
+import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType, QueryUsersType } from '../../types';
 import { redirectToRoute } from '../action';
+import { selectUsersList } from './user.selectors';
 
 export const loadUsersReadyTrainAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -125,7 +126,6 @@ export const orderTrainingsAction = createAsyncThunk<void, CreateOrderType, {
   async (order, {dispatch, extra: axiosApi}) => {
     try {
       const { data } = await axiosApi.post<OrderType>(`${APIPath.Orders.Index}`, order);
-      console.log('ordered: ', data.trainingsCount);
       dispatch(loadAvailableTrainingsCountAction(data.trainingId));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedOrderTrainings}: ${message}`));
@@ -144,7 +144,6 @@ export const loadAvailableTrainingsCountAction = createAsyncThunk<void, string, 
   async (trainingId, {dispatch, extra: axiosApi}) => {
     try {
       const { data } = await axiosApi.get<AccountType>(`${APIPath.Accounts.Index}/${trainingId}`);
-      console.log('load active: ', data.trainingsActive);
       dispatch(setTrainingsCount(data.trainingsActive || 0));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadAvailableTrainings}: ${message}`));
@@ -163,10 +162,35 @@ export const useActiveTrainingsAction = createAsyncThunk<void, string, {
   async (trainingId, {dispatch, extra: axiosApi}) => {
     try {
       const { data } = await axiosApi.patch<AccountType>(`${APIPath.Accounts.Use}`, {trainingId, trainingsCount: 1});
-      console.log('updateAccount: ', data.trainingsActive);
       dispatch(setTrainingsCount(data.trainingsActive || 0));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedUseActiveTrainings}: ${message}`));
+    }
+  }
+)
+
+export const loadUsersListAction = createAsyncThunk<void, QueryUsersType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadUsersList}`,
+  async (query, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data: { entities, totalItems } } = await axiosApi.get<EntitiesWithPaginationType<UserType>>(`${APIPath.Users.Index}`, {
+        params: {
+          ...query
+        }
+      });
+      dispatch(setUsersList(entities));
+      dispatch(setUsersTotalItems(totalItems));
+      if (totalItems <= query.take) {
+        dispatch(setUsersTake(CATALOG_COUNT));
+      }
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUsersList}: ${message}`));
     }
   }
 )

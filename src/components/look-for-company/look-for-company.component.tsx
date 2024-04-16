@@ -75,9 +75,9 @@ export default function LookForCompanyComponent(): JSX.Element {
           </div>
           {usersReadyVisible.length > 0 &&
           <ul className="look-for-company__list">
-            {usersReadyVisible.map(({id, location, name, trainType = []}) =>
+            {usersReadyVisible.map(({id, location, name, trainType = [], role, avatar}) =>
               <li key={id} className="look-for-company__item">
-                <UserItemComponent {...{location, name, trainType}} />
+                <UserItemComponent {...{location, name, trainType, role, avatar}} />
               </li>
             )}
           </ul>}

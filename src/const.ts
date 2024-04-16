@@ -111,6 +111,7 @@ export const Action = {
   OrderTrainings: 'orderTrainings',
   LoadAvailableTrainingsCount: 'loadAvailableTrainingsCount',
   UseActiveTrainings: 'useActiveTrainings',
+  LoadUsersList: 'loadUsersList',
 } as const;
 
 export const AuthStatus = {
@@ -211,6 +212,7 @@ export const TrainingItemClassApply = {
   [AppRoute.MyOrders]: 'my-orders',
   [AppRoute.MyPurchases]: 'my-purchases',
   [AppRoute.TrainingCatalogue]: 'training-catalog',
+  [AppRoute.UserCatalogue]: 'users-catalog',
 } as const;
 
 export const BackButtonClassApply = {
@@ -248,6 +250,7 @@ export const ErrorMessage = {
   FailedLoadAvailableTrainings: 'Failed to load available trainings',
   FailedOrderTrainings: 'Failed to order trainings',
   FailedUseActiveTrainings: 'Failed to use active trainings',
+  FailedLoadUsersList: 'Failed to load users list',
  } as const;
 
 export const UserValidationParams = {
@@ -279,7 +282,7 @@ export const POPULAR_TRAININGS_COUNT = 8;
 
 export const CHOISE_TRAININGS_COUNT = 9;
 
-export const TRAININGS_CATALOG_COUNT = 6;
+export const CATALOG_COUNT = 6;
 
 export const USERS_READY_TRAIN = 8;
 

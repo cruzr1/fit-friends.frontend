@@ -4,9 +4,10 @@ type ReviewItemComponentProps = {
   name: string;
   comment: string;
   avatar: string;
+  rating: number;
 }
 
-export default function ReviewItemComponent({name, avatar, comment}: ReviewItemComponentProps): JSX.Element {
+export default function ReviewItemComponent({name, avatar, comment, rating}: ReviewItemComponentProps): JSX.Element {
   return (
     <div className="review">
       <div className="review__user-info">
@@ -18,7 +19,7 @@ export default function ReviewItemComponent({name, avatar, comment}: ReviewItemC
         <div className="review__rating">
           <svg width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-star"></use>
-          </svg><span>5</span>
+          </svg><span>{rating}</span>
         </div>
       </div>
       <p className="review__comment">{comment}</p>

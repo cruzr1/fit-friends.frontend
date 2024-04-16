@@ -1,17 +1,20 @@
-import { TrainType } from '../../const';
+import { TrainType, UserRole } from '../../const';
+import { adaptImage } from '../../helpers';
 
 type UserItemProps = {
   location: string;
   name: string;
-  trainType: TrainType[]
+  trainType: TrainType[];
+  role: UserRole;
+  avatar: string;
 }
 
-export default function UserItemComponent({name, location, trainType}: UserItemProps): JSX.Element {
+export default function UserItemComponent({name, location, trainType, role, avatar}: UserItemProps): JSX.Element {
   return (
-    <div className="thumbnail-user thumbnail-user--role-user">
+    <div className={`thumbnail-user thumbnail-user--role-${role === UserRole.User ? 'user': 'coach'}`}>
       <div className="thumbnail-user__image">
         <picture>
-          <source type="image/webp" srcSet="markup/img/content/thumbnails/user-01.webp, markup/img/content/thumbnails/user-01@2x.webp 2x" /><img src="markup/img/content/thumbnails/user-01.jpg" srcSet="markup/img/content/thumbnails/user-01@2x.jpg 2x" width="82" height="82" alt="" />
+          <source type="image/webp" srcSet={`markup/img/content/thumbnails/${adaptImage(avatar)}.webp, markup/img/content/thumbnails/${adaptImage(avatar)}@2x.webp 2x`} /><img src={`"markup/img/content/thumbnails/${adaptImage(avatar)}.jpg" srcSet="markup/img/content/thumbnails/${adaptImage(avatar)}@2x.jpg 2x"`} width="82" height="82" alt="" />
         </picture>
       </div>
       <div className="thumbnail-user__header">

@@ -18,7 +18,7 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
   const trainingsCount = useAppSelector(selectTrainingsCount);
   useEffect(() => {
     let isMounted = true;
-    if (isMounted) {
+    if (isMounted && !isTrainer) {
       dispatch(loadAvailableTrainingsCountAction(training.id));
     }
     return () => {
@@ -32,13 +32,10 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
   const [isSpecial, setIsSpecial] = useState<boolean>(training.isSpecial);
   const [video, setVideo] = useState<File | undefined>(undefined);
   const [videoURL, setVideoURL] = useState<string | undefined>(training.videoURL);
-  console.log('video: ', videoURL);
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const [isTrainingActive, setIsTrainingActive] = useState<boolean>(false);
-  console.log('playing: ', isVideoPlaying);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  console.log(trainingsCount);
   const handleSaveButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     setIsEdit(false);
