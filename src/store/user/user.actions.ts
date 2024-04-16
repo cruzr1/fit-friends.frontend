@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount, setUsersList, setUsersTotalItems, setUsersTake } from './user.slice';
+import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount, setUsersList, setUsersTotalItems, setUsersTake, setUserItem } from './user.slice';
 import { setRefreshToken, setToken} from '../../services/token';
 import { clearErrorAction } from '../error/error.actions';
 import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole, USERS_READY_TRAIN, CATALOG_COUNT } from '../../const';
-import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType, QueryUsersType } from '../../types';
+import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType, QueryUsersType, ApplicationType, TrainingType } from '../../types';
 import { redirectToRoute } from '../action';
-import { selectUsersList } from './user.selectors';
+import { setTrainingsList } from '../training/training.slice';
 
 export const loadUsersReadyTrainAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -194,3 +194,93 @@ export const loadUsersListAction = createAsyncThunk<void, QueryUsersType, {
     }
   }
 )
+
+export const loadUserItemAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadUserItem}`,
+  async (userId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<UserType>(`${APIPath.Users.Old}/${userId}`);
+      dispatch(setUserItem(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserItem}: ${message}`));
+    }
+  }
+)
+
+export const addToFriendsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.AddToFriends}`,
+  async (userId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<UserType>(`${APIPath.Users.Friends}/${userId}`);
+      dispatch(setUser(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedAddToFriend}: ${message}`));
+    }
+  }
+)
+
+export const applyPersonalTrainingAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.ApplyPersonalTraining}`,
+  async (userId, {dispatch, extra: axiosApi}) => {
+    try {
+      await axiosApi.post<ApplicationType>(`${APIPath.Applications.Index}/${userId}`);
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedApplyPersonalTraining}: ${message}`));
+    }
+  }
+)
+
+export const subscribeNotificationsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.SubscribeNotifications}`,
+  async (userId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<UserType>(`${APIPath.Users.Subscribe}/${userId}`);
+      dispatch(setUser(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedSubscribeNotifications}: ${message}`));
+    }
+  }
+)
+
+export const loadUserItemTrainingsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadUserItemTrainings}`,
+  async (userItemId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data: { entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(`${APIPath.Trainings.Trainer}/${userItemId}`);
+      dispatch(setTrainingsList(entities));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserItemTrainings}: ${message}`));
+    }
+  }
+)
+

@@ -12,3 +12,4 @@ export const selectRoleFilter = (state: StateType) => state[NameSpace.User].role
 export const selectUsersList = (state: StateType) => state[NameSpace.User].usersList;
 export const selectUsersTake = (state: StateType) => state[NameSpace.User].usersTake;
 export const selectUsersTotalItems = (state: StateType) => state[NameSpace.User].usersTotalItems;
+export const selectUserItem = (state: StateType) => state[NameSpace.User].userItem;

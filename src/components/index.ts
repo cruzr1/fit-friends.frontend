@@ -32,3 +32,6 @@ export { default as SpecialForYouComponent } from './special-for-you/special-for
 export { default as ThumbnailTrainingPreviewComponent } from './thumbnail-training-preview/thumbnail-training-prevew.component';
 export { default as RangeSliderComponent } from './range-slider/range-slider.component';
 export { default as PopupReviewComponent } from './popup-review/popup-review.component';
+export { default as PopupCertificatesComponent } from './popup-certifcates/popup-certificates.component';
+export { default as PopupMapComponent } from './popup-map/popup-map.component';
+export { default as MapComponent } from './map/map.component';

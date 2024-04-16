@@ -7,6 +7,7 @@ import { removeToken } from '../../services/token';
 export type UserStateType = {
   authStatus: AuthStatusType;
   user: UserType | null;
+  userItem: UserType | null;
   usersReadyTrain: UserType[];
   trainingsCount: number;
   locationFilter: Location[];
@@ -21,6 +22,7 @@ export type UserStateType = {
 export const userState: UserStateType = {
   authStatus: AuthStatus.Unknown,
   user: null,
+  userItem: null,
   usersReadyTrain: [],
   trainingsCount: 0,
   locationFilter:[],
@@ -41,6 +43,9 @@ export const user = createSlice({
     },
     setUser: (state, {payload}: PayloadAction<UserType | null>) => {
       state.user = payload;
+    },
+    setUserItem: (state, {payload}: PayloadAction<UserType | null>) => {
+      state.userItem = payload;
     },
     setUsersReadyTrain: (state, {payload}: PayloadAction<UserType[]>) => {
       state.usersReadyTrain = payload;
@@ -100,4 +105,5 @@ export const {
    setUsersList,
    setUsersTake,
    setUsersTotalItems,
+   setUserItem,
 } = user.actions;

@@ -48,7 +48,7 @@ export default function UsersListComponent({classApply}: UsersListComponentProps
       <ul className="users-catalog__list">
         {users && users.map(({id, name, location, trainType = [], role, avatar}) =>
           <li key={id} className="users-catalog__item">
-            <UserItemComponent {...{name, location, trainType, role, avatar}} />
+            <UserItemComponent {...{id, name, location, trainType, role, avatar}} />
           </li>
         )}
       </ul>

@@ -1,4 +1,4 @@
-import { loadAvailableTrainingsCountAction } from './store/user/user.actions';
+import { addToFriendsAction, loadAvailableTrainingsCountAction, subscribeNotificationsAction } from './store/user/user.actions';
 
 export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
 
@@ -27,6 +27,8 @@ export const CERTIFICATE_REGEX = /(.pdf$)/;
 export const ITEMS_PER_PAGE = 3;
 
 export const MAIN_ITEMS_PER_PAGE = 4;
+
+export const POPUP_CERTIFICATES_ITEMS_PER_PAGE = 1;
 
 export const NULL_VALUE = 0;
 
@@ -74,16 +76,22 @@ export const APIPath = {
     Verify: 'users/check',
     Update: 'users/update',
     Index: 'users',
-    Old: 'users/old'
+    Old: 'users/old',
+    Friends: 'users/friends',
+    Subscribe: 'users/subscribe',
   },
   Trainings: {
-    Index: 'trainings'
+    Index: 'trainings',
+    Trainer: 'trainings/trainer',
   },
   Reviews: {
     Index: 'reviews',
   },
   Orders: {
     Index: 'orders',
+  },
+  Applications: {
+    Index: 'applications',
   },
   Accounts: {
     Index: 'accounts',
@@ -112,6 +120,11 @@ export const Action = {
   LoadAvailableTrainingsCount: 'loadAvailableTrainingsCount',
   UseActiveTrainings: 'useActiveTrainings',
   LoadUsersList: 'loadUsersList',
+  LoadUserItem: 'loadUserItem',
+  AddToFriends: 'addToFriends',
+  ApplyPersonalTraining: 'applyPersonalTraining',
+  SubscribeNotifications: 'subscribeNotifications',
+  LoadUserItemTrainings: 'loadUserItemTrainings',
 } as const;
 
 export const AuthStatus = {
@@ -251,6 +264,11 @@ export const ErrorMessage = {
   FailedOrderTrainings: 'Failed to order trainings',
   FailedUseActiveTrainings: 'Failed to use active trainings',
   FailedLoadUsersList: 'Failed to load users list',
+  FailedLoadUserItem: 'Failed to load user item',
+  FailedAddToFriend: 'Failed to add user to friends',
+  FailedApplyPersonalTraining: 'Failed to apply for personal training',
+  FailedSubscribeNotifications: 'Failed to subscribe new notifications',
+  FailedLoadUserItemTrainings: 'Failed to load user item trainings',
  } as const;
 
 export const UserValidationParams = {
@@ -339,3 +357,48 @@ export enum Payment {
 export enum OrderPayment {
   Subscription = 'Subscription',
 }
+
+export enum ApplicationStatus {
+  Reviewing = 'Reviewing',
+  Rejected = 'Rejected',
+  Accepted = 'Accepted',
+}
+
+export const LocationsCoordinates = {
+  [Location.Petrogradskaya]: {
+    latitude: 59.966413,
+    longitude: 30.311495
+  },
+  [Location.Pionerskaya]: {
+    latitude: 60.002531,
+    longitude: 30.296640
+  },
+  [Location.Sportivnaya]: {
+    latitude: 59.950198,
+    longitude: 30.288325
+  },
+  [Location.Udelnaya]: {
+    latitude: 60.016696,
+    longitude: 30.315602
+  },
+  [Location.Zvezdnaya]: {
+    latitude: 59.833296,
+    longitude: 30.349430
+  },
+} as const;
+
+export const LOCATION_ZOOM = 16;
+
+export const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+
+export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+export const IconParams = {
+  iconUrl: '/img/sprite/icon-pin-user.svg',
+  iconSize: [27, 39] as [number, number],
+  iconAnchor: [13.5, 39] as [number, number]
+} as const;
+
+export const MapStyle = {
+  height: '623px'
+};

@@ -68,7 +68,7 @@ export default function SpecialForYouComponent(): JSX.Element {
           </div>
           {choiseTrainingsVisible.length > 0 &&
             <ul className="special-for-you__list">
-              {choiseTrainingsVisible.map(({id = '', trainType}) =>
+              {choiseTrainingsVisible.map(({id, trainType}) =>
                 <li key ={id} className="special-for-you__item">
                   <ThumbnailTrainingPreviewComponent {...{id, trainType}} />
                 </li>

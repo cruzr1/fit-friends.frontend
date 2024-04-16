@@ -78,7 +78,7 @@ export default function PopularTrainingsComponent(): JSX.Element {
             <ul className="popular-trainings__list">
               {popularTrainingsVisible.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
                 <li key={id} className="popular-trainings__item">
-                  <TrainingItemComponent {...{price, name, trainType, calories, description, rating, backgroundImage}}/>
+                  <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}}/>
                 </li>
               )}
             </ul>

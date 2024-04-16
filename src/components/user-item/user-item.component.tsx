@@ -1,4 +1,5 @@
-import { TrainType, UserRole } from '../../const';
+import { Link, generatePath } from 'react-router-dom';
+import { AppRoute, TrainType, TrainTypeCaption, UserRole } from '../../const';
 import { adaptImage } from '../../helpers';
 
 type UserItemProps = {
@@ -7,9 +8,10 @@ type UserItemProps = {
   trainType: TrainType[];
   role: UserRole;
   avatar: string;
+  id: string
 }
 
-export default function UserItemComponent({name, location, trainType, role, avatar}: UserItemProps): JSX.Element {
+export default function UserItemComponent({id, name, location, trainType, role, avatar}: UserItemProps): JSX.Element {
   return (
     <div className={`thumbnail-user thumbnail-user--role-${role === UserRole.User ? 'user': 'coach'}`}>
       <div className="thumbnail-user__image">
@@ -29,11 +31,11 @@ export default function UserItemComponent({name, location, trainType, role, avat
       <ul className="thumbnail-user__hashtags-list">
         {trainType.map((type) =>
           <li key={type} className="thumbnail-user__hashtags-item">
-            <div className="hashtag thumbnail-user__hashtag"><span>#{type}</span></div>
+            <div className="hashtag thumbnail-user__hashtag"><span>#{TrainTypeCaption[type]}</span></div>
           </li>
         )}
       </ul>
-      <a className="btn btn--medium thumbnail-user__button" href="#">Подробнее</a>
+      <Link className="btn btn--medium thumbnail-user__button" to={generatePath(AppRoute.UserCard, {userId: id || ''})}>Подробнее</Link>
     </div>
   )
 }
