@@ -27,7 +27,6 @@ export default function TrainingCardPage(): JSX.Element {
   }
   useEffect(() => {
     let isMounted = true;
-    console.log(document.body.offsetWidth - window.innerWidth);
     dispatch(loadTrainingAction(trainingId));
     return () => {
       isMounted = false;

@@ -111,6 +111,8 @@ export const APIPath = {
   },
   Applications: {
     Index: 'applications',
+    List: 'applications/index',
+    Author: 'applications/author',
   },
   Accounts: {
     Index: 'accounts',
@@ -139,11 +141,15 @@ export const Action = {
   LoadAvailableTrainingsCount: 'loadAvailableTrainingsCount',
   UseActiveTrainings: 'useActiveTrainings',
   LoadUsersList: 'loadUsersList',
+  LoadUserFriends: 'loadUserFriends',
   LoadUserItem: 'loadUserItem',
   AddToFriends: 'addToFriends',
   ApplyPersonalTraining: 'applyPersonalTraining',
   SubscribeNotifications: 'subscribeNotifications',
   LoadUserItemTrainings: 'loadUserItemTrainings',
+  LoadUserApplications: 'loadUserApplications',
+  LoadAuthorApplications: 'loadAuthorApplications',
+  UpdateApplication: 'updateApplication',
 } as const;
 
 export const AuthStatus = {
@@ -283,11 +289,15 @@ export const ErrorMessage = {
   FailedOrderTrainings: 'Failed to order trainings',
   FailedUseActiveTrainings: 'Failed to use active trainings',
   FailedLoadUsersList: 'Failed to load users list',
+  FailedLoadUserFriends: 'Failed to load user friends',
   FailedLoadUserItem: 'Failed to load user item',
   FailedAddToFriend: 'Failed to add user to friends',
   FailedApplyPersonalTraining: 'Failed to apply for personal training',
   FailedSubscribeNotifications: 'Failed to subscribe new notifications',
   FailedLoadUserItemTrainings: 'Failed to load user item trainings',
+  FailedLoadUserApplications: 'Failed to load user applications',
+  FailedLoadAuthorApplications: 'Failed to load author applications',
+  FailedUpdateApplication: 'Failed to update application',
  } as const;
 
 export const UserValidationParams = {
@@ -421,3 +431,4 @@ export const IconParams = {
 export const MapStyle = {
   height: '623px'
 };
+

@@ -70,6 +70,13 @@ export type ApplicationType = {
   authorId: string;
   userId: string;
   status: ApplicationStatus;
+  updatedAt: Date;
+}
+
+export type UpdateApplicationParams ={
+  applicationStatus: ApplicationStatus,
+  applicationId: string,
+  userId: string;
 }
 
 export type UserFeaturesType = Pick<UserType, 'caloriesDaily' | 'duration' | 'level' | 'trainType'>

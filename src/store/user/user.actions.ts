@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount, setUsersList, setUsersTotalItems, setUsersTake, setUserItem } from './user.slice';
+import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount, setUsersList, setUsersTotalItems, setUsersTake, setUserItem, setUserFriends, setApplicationsList } from './user.slice';
 import { setRefreshToken, setToken} from '../../services/token';
 import { clearErrorAction } from '../error/error.actions';
-import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole, USERS_READY_TRAIN, CATALOG_COUNT } from '../../const';
-import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType, QueryUsersType, ApplicationType, TrainingType } from '../../types';
+import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole, USERS_READY_TRAIN, CATALOG_COUNT, ApplicationStatus } from '../../const';
+import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType, QueryUsersType, ApplicationType, TrainingType, UpdateApplicationParams } from '../../types';
 import { redirectToRoute } from '../action';
 import { setTrainingsList } from '../training/training.slice';
 
@@ -195,6 +195,27 @@ export const loadUsersListAction = createAsyncThunk<void, QueryUsersType, {
   }
 )
 
+export const loadUserFriends = createAsyncThunk<void, number, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadUserFriends}`,
+  async (take, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data: { entities, totalItems } } = await axiosApi.get<EntitiesWithPaginationType<UserType>>(`${APIPath.Users.Friends}`, {
+        params: {take}
+      });
+      dispatch(setUserFriends(entities));
+      dispatch(setUsersTotalItems(totalItems));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserFriends}: ${message}`));
+    }
+  }
+)
+
 export const loadUserItemAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
   state: StateType;
@@ -280,6 +301,63 @@ export const loadUserItemTrainingsAction = createAsyncThunk<void, string, {
       dispatch(setTrainingsList(entities));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserItemTrainings}: ${message}`));
+    }
+  }
+)
+
+export const loadUserApplications = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadUserApplications}`,
+  async (userId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<ApplicationType[]>(`${APIPath.Applications.List}/${userId}`);
+      dispatch(setApplicationsList(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserApplications}: ${message}`));
+    }
+  }
+)
+
+export const loadAuthorApplications = createAsyncThunk<void, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadAuthorApplications}`,
+  async (userId, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<ApplicationType[]>(`${APIPath.Applications.Author}/${userId}`);
+      console.log(data);
+      dispatch(setApplicationsList(data));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadAuthorApplications}: ${message}`));
+    }
+  }
+)
+
+export const updateApplicationAction = createAsyncThunk<void, UpdateApplicationParams, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.UpdateApplication}`,
+  async ({applicationStatus, applicationId, userId}, {dispatch, extra: axiosApi}) => {
+    try {
+      await axiosApi.patch<ApplicationType[]>(`${APIPath.Applications.Index}/${applicationId}`, {
+        status: applicationStatus,
+      });
+      dispatch(loadUserApplications(userId));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUpdateApplication}: ${message}`));
     }
   }
 )

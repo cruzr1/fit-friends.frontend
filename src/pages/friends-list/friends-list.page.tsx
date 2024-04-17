@@ -1,12 +1,7 @@
-import { useLocation } from 'react-router-dom';
-import { BackButtonComponent, FriendsListComponent, PaginationComponent } from '../../components';
-import { adaptPathname } from '../../helpers';
+import { BackButtonComponent, FriendsListComponent } from '../../components';
 import { BackButtonClassApply } from '../../const';
 
-
 export default function FriendsListPage():JSX.Element {
-  const {pathname} = useLocation();
-  const classApply=adaptPathname(pathname);
   return (
     <section className="friends-list">
       <div className="container">
@@ -16,7 +11,6 @@ export default function FriendsListPage():JSX.Element {
             <h1 className="friends-list__title">Мои друзья</h1>
           </div>
           <FriendsListComponent />
-          <PaginationComponent classApply={classApply} />
         </div>
       </div>
     </section>

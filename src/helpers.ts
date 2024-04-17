@@ -1,5 +1,5 @@
-import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX, CERTIFICATE_REGEX, COMMENT_REGEX, UserValidationParams, Payment, BodyStyle } from './const';
-import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOrderedType } from './types';
+import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX, CERTIFICATE_REGEX, COMMENT_REGEX, UserValidationParams, Payment, BodyStyle, ApplicationStatus, NULL_VALUE } from './const';
+import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOrderedType, ApplicationType } from './types';
 
 export const isStatusPending = (status: RequestStatusType) => status === RequestStatus.Pending;
 
@@ -8,6 +8,14 @@ export const isStatusFulfilled = (status: RequestStatusType) => status === Reque
 export const isStatusRejected = (status: RequestStatusType) => status === RequestStatus.Rejected;
 
 export const adaptPrice = (price: number) => price > 0 ? `${price}\xa0₽` : 'Бесплатно';
+
+export const findReviewingApplication = (userId: string, applications: ApplicationType[]) => applications
+  .filter((application) => application.status === ApplicationStatus.Reviewing)
+  .find((application) => application.authorId === userId);
+
+export const findLatestApplication = (userId: string, applications: ApplicationType[]) => applications
+  .filter((application) => application.userId === userId)
+  .sort((applicationA, applicationB) => applicationA.updatedAt < applicationB.updatedAt ? 1 : -1)[NULL_VALUE];
 
 export const adaptOldPrice = (price: number) => Math.round(price);
 

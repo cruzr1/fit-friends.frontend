@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatus, CATALOG_COUNT, Level, Location, NameSpace, RequestStatus, TrainType, UserRole } from '../../const';
-import { AuthStatusType, UserType } from '../../types';
+import { ApplicationType, AuthStatusType, UserType } from '../../types';
 import { logoutUser } from '../action';
 import { removeToken } from '../../services/token';
 
@@ -9,6 +9,7 @@ export type UserStateType = {
   user: UserType | null;
   userItem: UserType | null;
   usersReadyTrain: UserType[];
+  userFriends: UserType[];
   trainingsCount: number;
   locationFilter: Location[];
   trainTypeFilter: TrainType[];
@@ -17,6 +18,7 @@ export type UserStateType = {
   usersList: UserType[];
   usersTake: number;
   usersTotalItems: number;
+  applicationsList: ApplicationType[]
 }
 
 export const userState: UserStateType = {
@@ -24,6 +26,7 @@ export const userState: UserStateType = {
   user: null,
   userItem: null,
   usersReadyTrain: [],
+  userFriends: [],
   trainingsCount: 0,
   locationFilter:[],
   trainTypeFilter:[],
@@ -32,6 +35,7 @@ export const userState: UserStateType = {
   usersList: [],
   usersTake: CATALOG_COUNT,
   usersTotalItems: 0,
+  applicationsList: []
 };
 
 export const user = createSlice({
@@ -49,6 +53,9 @@ export const user = createSlice({
     },
     setUsersReadyTrain: (state, {payload}: PayloadAction<UserType[]>) => {
       state.usersReadyTrain = payload;
+    },
+    setUserFriends: (state, {payload}: PayloadAction<UserType[]>) => {
+      state.userFriends = payload;
     },
     setUsersList: (state, {payload}: PayloadAction<UserType[]>) => {
       state.usersList = payload;
@@ -82,6 +89,9 @@ export const user = createSlice({
     setUsersTotalItems: (state, {payload}: PayloadAction<number>) => {
       state.usersTotalItems = payload;
     },
+    setApplicationsList: (state, {payload}: PayloadAction<ApplicationType[]>) => {
+      state.applicationsList = payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -106,4 +116,6 @@ export const {
    setUsersTake,
    setUsersTotalItems,
    setUserItem,
+   setUserFriends,
+   setApplicationsList,
 } = user.actions;
