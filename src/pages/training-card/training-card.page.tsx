@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { PopupReviewComponent, ReviewsListComponent, TrainingCardComponent } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../store/user/user.selectors';
-import { TrainingType, UserType } from '../../types';
+import { TrainingType } from '../../types';
 import { UserRole } from '../../const';
 import { selectTrainer, selectTraining } from '../../store/training/training.selectors';
 import { loadTrainingAction } from '../../store/training/training.actions';
@@ -15,28 +15,8 @@ export default function TrainingCardPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const isTrainer = user?.role === UserRole.Trainer;
-  useEffect(() => {
-    let isMounted = true;
-    if (isMounted) {
-      dispatch(loadTrainingAction(trainingId));
-    }
-    return () => {
-      isMounted = false;
-    }
-  }, [dispatch]);
-  const training = useAppSelector(selectTraining) as TrainingType;
-  const loadTrainer = useAppSelector(selectTrainer);
-  const trainer = isTrainer ? user : loadTrainer;
   const [showReview, setShowReview] = useState<boolean>(false);
   const [showBuy, setShowBuy] = useState<boolean>(false);
-  const handleReviewButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    evt.preventDefault();
-    setShowReview(true);
-  }
-  const handleBuyButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    evt.preventDefault();
-    setShowBuy(true);
-  };
   const handlePopupClose = () => {
     if (showReview) {
       setShowReview(false);
@@ -45,6 +25,27 @@ export default function TrainingCardPage(): JSX.Element {
       setShowBuy(false);
     }
   }
+  useEffect(() => {
+    let isMounted = true;
+    console.log(document.body.offsetWidth - window.innerWidth);
+    dispatch(loadTrainingAction(trainingId));
+    return () => {
+      isMounted = false;
+    }
+  }, [dispatch]);
+  const training = useAppSelector(selectTraining) as TrainingType;
+  const loadTrainer = useAppSelector(selectTrainer);
+  const trainer = isTrainer ? user : loadTrainer;
+  const handleReviewButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault();
+    setShowReview(true);
+  }
+  const handleBuyButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault();
+    setShowBuy(true);
+  };
+
+
   return (
     <>
       <section className="inner-page">

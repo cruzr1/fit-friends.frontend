@@ -29,8 +29,12 @@ export default function UserCardPage(): JSX.Element {
   const [isShownMap, setIsShownMap] = useState<boolean>(false);
   const [hasApplied, setHasApplied] = useState<boolean>(false);
   const handlePopupClose = () => {
-    setIsShownCertificate(false);
-    setIsShownMap(false);
+    if (isShownCertificate) {
+      setIsShownCertificate(false);
+    }
+    if (isShownMap) {
+      setIsShownMap(false);
+    }
   }
   const handleShowCertificatesButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
@@ -134,7 +138,7 @@ export default function UserCardPage(): JSX.Element {
         <PopupCertificatesComponent certificates={certificates} handleCloseButtonClick={handlePopupClose} />
       }
       {isShownMap &&
-        <PopupMapComponent handlePopupClose={handlePopupClose} location={location} />
+        <PopupMapComponent handlePopupClose={handlePopupClose} location={location} name={name} />
       }
     </>
   )

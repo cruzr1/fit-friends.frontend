@@ -1,8 +1,8 @@
-import { Component, useState } from 'react';
-import { INITIAL_RATING, INITIAL_COMMENT, RATING_LIST, errorStyle } from '../../const';
+import { Component, useEffect, useRef, useState } from 'react';
+import { INITIAL_RATING, INITIAL_COMMENT, RATING_LIST, errorStyle, KEY_ESCAPE } from '../../const';
 import { useAppDispatch } from '../../hooks/hooks';
 import { postReviewAction } from '../../store/training/training.actions';
-import { isCommentValid } from '../../helpers';
+import { blockPage, isCommentValid, unblockPage } from '../../helpers';
 
 type PopupReviewComponentProps = {
   trainingId: string;
@@ -14,6 +14,20 @@ export default function PopupReviewComponent({trainingId, handlePopupClose}: Pop
   const [rating, setRating] = useState<number>(INITIAL_RATING)
   const [comment, setComment] = useState<string>(INITIAL_COMMENT)
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  useEffect(() => {
+    let isMounted = true;
+    blockPage()
+    const handleKeyDown = (evt: KeyboardEvent) => {
+      if (evt.key === KEY_ESCAPE) {
+        handlePopupClose()
+      }
+    }
+    document.addEventListener('keydown', (evt) => handleKeyDown(evt));
+    return () => {
+      isMounted = false;
+      unblockPage()
+    }
+  }, [])
   const handleSubmitButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     setIsSubmit(true);

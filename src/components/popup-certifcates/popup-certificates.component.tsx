@@ -1,13 +1,27 @@
-import { useState } from 'react';
-import { NULL_VALUE, POPUP_CERTIFICATES_ITEMS_PER_PAGE, STEP } from '../../const';
-import { adaptImage } from '../../helpers';
+import { useEffect, useState } from 'react';
+import { KEY_ESCAPE, NULL_VALUE, POPUP_CERTIFICATES_ITEMS_PER_PAGE, STEP } from '../../const';
+import { adaptImage, blockPage, unblockPage } from '../../helpers';
 
 type PopupCertificatesComponentProps = {
-  handleCloseButtonClick: (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleCloseButtonClick: () => void;
   certificates: string;
 }
 
 export default function PopupCertificatesComponent({certificates, handleCloseButtonClick}: PopupCertificatesComponentProps): JSX.Element {
+  useEffect(() => {
+    let isMounted = true;
+    blockPage()
+    const handleKeyDown = (evt: KeyboardEvent) => {
+      if (evt.key === KEY_ESCAPE) {
+        handleCloseButtonClick()
+      }
+    }
+    document.addEventListener('keydown', (evt) => handleKeyDown(evt));
+    return () => {
+      isMounted = false;
+      unblockPage()
+    }
+  }, [])
   const [first, setFirst] = useState<number>(NULL_VALUE);
   const certificatesVisible = [...certificates].slice(first, first + POPUP_CERTIFICATES_ITEMS_PER_PAGE);
   const handleNextButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -32,7 +46,7 @@ export default function PopupCertificatesComponent({certificates, handleCloseBut
               className="btn-icon btn-icon--outlined btn-icon--big"
               type="button"
               aria-label="close"
-              onClick={(evt) => handleCloseButtonClick(evt)}
+              onClick={() => handleCloseButtonClick()}
             >
               <svg width="20" height="20" aria-hidden="true">
                 <use xlinkHref="#icon-cross"></use>

@@ -1,4 +1,4 @@
-import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX, CERTIFICATE_REGEX, COMMENT_REGEX, UserValidationParams, Payment } from './const';
+import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX, CERTIFICATE_REGEX, COMMENT_REGEX, UserValidationParams, Payment, BodyStyle } from './const';
 import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOrderedType } from './types';
 
 export const isStatusPending = (status: RequestStatusType) => status === RequestStatus.Pending;
@@ -41,3 +41,18 @@ export const isDescriptionValid = (description: string) => description.length > 
 
 export const isCertificateValid = (certificateURL: string) => CERTIFICATE_REGEX.test(certificateURL);
 
+export const blockPage = () => {
+  document.body.style.overflow = BodyStyle.Blocked.Overflow;
+  document.body.style.position = BodyStyle.Blocked.Position;
+  document.body.style.overflowX = BodyStyle.Blocked.OverflowX;
+  document.body.style.paddingLeft = BodyStyle.Blocked.PaddingLeft;
+  document.body.style.paddingRight = BodyStyle.Blocked.PaddingRight;
+}
+
+export const unblockPage = () => {
+  document.body.style.overflow = BodyStyle.Unblocked.Overflow;
+  document.body.style.position = BodyStyle.Unblocked.Position;
+  document.body.style.overflowX = BodyStyle.Unblocked.OverflowX;
+  document.body.style.paddingLeft = BodyStyle.Unblocked.PaddingLeft;
+  document.body.style.paddingRight = BodyStyle.Unblocked.PaddingRight;
+}

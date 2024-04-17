@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { adaptImage, adaptPrice, adaptType, adaptValue } from '../../helpers';
+import { useEffect, useRef, useState } from 'react';
+import { adaptImage, adaptPrice, adaptType, adaptValue, blockPage, unblockPage } from '../../helpers';
 import { TrainingType } from '../../types';
-import { DEFAULT_ORDER_COUNT, OrderPayment, Payment } from '../../const';
+import { DEFAULT_ORDER_COUNT, KEY_ESCAPE, OrderPayment, Payment } from '../../const';
 import { useAppDispatch } from '../../hooks/hooks';
 import { orderTrainingsAction } from '../../store/user/user.actions';
 
@@ -15,6 +15,20 @@ export default function PopupBuyComponent({training, handlePopupClose}: PopupBuy
   const {backgroundImage, price, id} = training;
   const [count, setCount] = useState<number>(DEFAULT_ORDER_COUNT);
   const [payment, setPayment] = useState<Payment>(Payment.Visa);
+  useEffect(() => {
+    let isMounted = true;
+    blockPage()
+    const handleKeyDown = (evt: KeyboardEvent) => {
+      if (evt.key === KEY_ESCAPE) {
+        handlePopupClose()
+      }
+    }
+    document.addEventListener('keydown', (evt) => handleKeyDown(evt));
+    return () => {
+      isMounted = false;
+      unblockPage()
+    }
+  }, [])
   const handleBuyClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     dispatch(orderTrainingsAction({
@@ -26,7 +40,8 @@ export default function PopupBuyComponent({training, handlePopupClose}: PopupBuy
     handlePopupClose();
   }
   return (
-    <div className="popup-form popup-form--buy">
+    <div
+      className="popup-form popup-form--buy">
       <section className="popup">
         <div className="popup__wrapper">
           <div className="popup-head">
