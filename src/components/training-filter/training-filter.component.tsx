@@ -1,8 +1,8 @@
 import { BackButtonComponent, RangeSliderComponent } from '..';
-import { BackButtonClassApply, DurationCaption, TrainTypeCaption, TrainType, SortOrder, NULL_VALUE, MAXIMUM_PRICE_VALUE, MAXIMUM_CALORIES_VALUE, MAXIMUM_RATING_VALUE, ShowValue } from '../../const';
+import { BackButtonClassApply, TrainTypeCaption, TrainType, SortOrder, NULL_VALUE, MAXIMUM_PRICE_VALUE, MAXIMUM_CALORIES_VALUE, MAXIMUM_RATING_VALUE, ShowValue, Duration, QuestionDurationCaption } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { selectCaloriesFilter, selectPriceFilter, selectRatingFilter, selectSortByOrder, selectTrainTypeFilter } from '../../store/training/training.selectors';
-import { setCaloriesFilter, setPriceFilter, setRatingFilter, setSortByOrder, setTrainTypeFilter } from '../../store/training/training.slice';
+import { selectCaloriesFilter, selectDurationFilter, selectPriceFilter, selectRatingFilter, selectSortByOrder, selectTrainTypeFilter } from '../../store/training/training.selectors';
+import { setCaloriesFilter, setDurationFilter, setPriceFilter, setRatingFilter, setSortByOrder, setTrainTypeFilter } from '../../store/training/training.slice';
 import { ChangeEvent } from 'react';
 
 export type TrainingFilterComponentProps = {
@@ -18,6 +18,7 @@ export default function TrainingFilterComponent({isMyTrainingsPage}: TrainingFil
   const [ratingMin, ratingMax] = useAppSelector(selectRatingFilter);
   const trainTypeFilter = useAppSelector(selectTrainTypeFilter);
   const sortByOrder = useAppSelector(selectSortByOrder);
+  const durationFilter = useAppSelector(selectDurationFilter);
   const handleTrainTypeFilterChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (trainTypeFilter.includes(evt.target.value as TrainType)) {
       dispatch(setTrainTypeFilter(trainTypeFilter.filter((type) => type !== evt.target.value)))
@@ -116,18 +117,20 @@ export default function TrainingFilterComponent({isMyTrainingsPage}: TrainingFil
             <div className="my-training-form__block my-training-form__block--duration">
               <h4 className="my-training-form__block-title">Длительность</h4>
               <ul className="my-training-form__check-list">
-                {Object.values(DurationCaption).map((duration) =>
+                {Object.values(Duration).map((duration) =>
                   <li key={duration} className="my-training-form__check-list-item">
                   <div className="custom-toggle custom-toggle--checkbox">
                     <label>
                       <input
                         type="checkbox"
-                        value="duration-1"
+                        value={duration}
                         name="duration"
+                        checked={duration === durationFilter}
+                        onChange={(evt) => dispatch(setDurationFilter(evt.target.value as Duration))}
                       /><span className="custom-toggle__icon">
                         <svg width="9" height="6" aria-hidden="true">
                           <use xlinkHref="#arrow-check"></use>
-                        </svg></span><span className="custom-toggle__label">{duration}</span>
+                        </svg></span><span className="custom-toggle__label">{QuestionDurationCaption[duration]}</span>
                     </label>
                   </div>
                 </li>

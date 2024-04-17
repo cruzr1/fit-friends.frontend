@@ -85,7 +85,7 @@ export const loadTrainingsAction = createAsyncThunk<void, QueryTrainingsType, {
 >
 (
   `${NameSpace.Training}/${Action.LoadTrainings}`,
-  async ({take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder}, {dispatch, extra: axiosApi}) => {
+  async ({take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder, durationFilter}, {dispatch, extra: axiosApi}) => {
     try {
       const { data : { totalItems, entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Index,{
         params: {
@@ -95,7 +95,8 @@ export const loadTrainingsAction = createAsyncThunk<void, QueryTrainingsType, {
           ratingFilter,
           trainTypeFilter,
           sortByOrder,
-          sortByField: TRAININGS_CATALOG_SORT_FIELD
+          sortByField: TRAININGS_CATALOG_SORT_FIELD,
+          durationFilter: [durationFilter],
         }
       });
       dispatch(setTrainingsList(entities));

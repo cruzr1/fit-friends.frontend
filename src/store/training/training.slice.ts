@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace, CATALOG_COUNT, TrainType } from '../../const'
+import { NameSpace, CATALOG_COUNT, TrainType, Duration } from '../../const'
 import { ReviewType, SortOrderType, TrainingType, UserType } from '../../types';
 
 export type TrainingStateType = {
@@ -11,6 +11,7 @@ export type TrainingStateType = {
   priceFilter: number[];
   caloriesFilter: number[];
   ratingFilter: number[];
+  durationFilter: Duration;
   trainTypeFilter: TrainType[];
   sortByOrder: SortOrderType;
   totalItems: number;
@@ -24,6 +25,7 @@ export const trainingState: TrainingStateType = {
   specialOffers: [],
   popularTrainings: [],
   choiseTrainings: [],
+  durationFilter: Duration.From10to30min,
   take: CATALOG_COUNT,
   priceFilter: [0, 0],
   caloriesFilter: [0, 0],
@@ -54,6 +56,9 @@ export const training = createSlice({
     },
     setTake: (state, {payload}: PayloadAction<number>) => {
       state.take = payload;
+    },
+    setDurationFilter: (state, {payload}: PayloadAction<Duration>) => {
+      state.durationFilter = payload;
     },
     setPriceFilter: (state, {payload}: PayloadAction<number[]>) => {
       state.priceFilter = payload;
@@ -104,4 +109,5 @@ export const {
    setTrainer,
    setReviews,
    addReview,
+   setDurationFilter,
 } = training.actions;

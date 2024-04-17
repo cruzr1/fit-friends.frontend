@@ -207,13 +207,6 @@ export enum Duration {
   From80to100min = '80-100min',
 }
 
-export enum DurationCaption {
-  From10to30min = '10 мин - 30 мин',
-  From30to50min = '30 мин - 50 мин',
-  From50to80min = '50 мин - 80 мин',
-  From80to100min = '80 мин - 100 мин',
-}
-
 export enum QuestionDurationCaption {
   '10-30min' = '10 мин - 30 мин',
   '30-50min' = '30 мин - 50 мин',

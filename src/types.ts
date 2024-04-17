@@ -108,6 +108,8 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
     ratingFilter: number[];
     trainTypeFilter: TrainType[];
     sortByOrder: SortOrderType;
+    durationFilter?: Duration;
+    sortByField?: string;
   }
 
   export type QueryUsersType = {
