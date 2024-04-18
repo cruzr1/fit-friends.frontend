@@ -18,7 +18,6 @@ export default function TrainingsListComponent({classApply, shouldIncludeDuratio
   const dispatch = useAppDispatch();
   const take = useAppSelector(selectTake);
   const totalItems = useAppSelector(selectTotalItems);
-  console.log(take, totalItems);
   const priceFilter = useAppSelector(selectPriceFilter);
   const caloriesFilter = useAppSelector(selectCaloriesFilter);
   const ratingFilter = useAppSelector(selectRatingFilter);
@@ -47,7 +46,6 @@ export default function TrainingsListComponent({classApply, shouldIncludeDuratio
   }, [dispatch, take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder, durationFilter]);
   const trainingsList = useAppSelector(selectTrainingsList);
   const trainingsOrderedList = useAppSelector(selectTrainingsOrderedList);
-  console.log(trainingsOrderedList);
   const handleShowMore = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     dispatch(setTake(Math.min(take + MY_ORDERS_TRAININGS_COUNT, totalItems)))

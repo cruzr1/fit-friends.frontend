@@ -20,7 +20,7 @@ export const findLatestApplication = (userId: string, applications: ApplicationT
 
 export const adaptOldPrice = (price: number) => Math.round(price);
 
-export const adaptSortOrder = (sortByOrder: SortOrderType) => sortByOrder === SortOrder.Asc ? 1 : -1;
+export const adaptSortOrder = (sortByOrder: SortOrderType) => sortByOrder === SortOrder.Asc ? -1 : 1;
 
 export const adaptValue = (value: number) => `${value}\xa0₽`;
 
@@ -46,7 +46,7 @@ export const isBirthDateValid = (birthDate: string): boolean => BIRTHDAY_REGEX.t
 
 export const isAvatarValid = (avatarURL: string): boolean => AVATAR_REGEX.test(avatarURL);
 
-export const isCaloriesValueValid = (value: number) => value <= UserValidationParams.Calories.Value.Maximum && value > UserValidationParams.Calories.Value.Minimum;
+export const isCaloriesValueValid = (value: number) => value <= UserValidationParams.Calories.Value.Maximum && value >= UserValidationParams.Calories.Value.Minimum;
 
 export const isDescriptionValid = (description: string) => description.length > UserValidationParams.Description.Length.Minimum && description.length < UserValidationParams.Description.Length.Maximum;
 

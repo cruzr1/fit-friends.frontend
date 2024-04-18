@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AppRoute, UserRole } from '../../const';
 import { useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../store/user/user.selectors';
@@ -14,18 +14,18 @@ export default function HeaderComponent (): JSX.Element {
           </svg></Link>
         <nav className="main-nav">
           <ul className="main-nav__list">
-            <li className="main-nav__item"><Link className="main-nav__link is-active" to={isCoach ? AppRoute.PersonalAccountCoach : AppRoute.Main} aria-label="На главную">
+            <li className="main-nav__item"><NavLink className={({isActive}) => ['main-nav__link', isActive ? 'is-active' : ''].join(' ')} to={isCoach ? AppRoute.PersonalAccountCoach : AppRoute.Main} aria-label="На главную">
                 <svg width="18" height="18" aria-hidden="true">
                   <use xlinkHref="#icon-home"></use>
-                </svg></Link></li>
-            <li className="main-nav__item"><Link className="main-nav__link" to={isCoach ? AppRoute.PersonalAccountCoach : AppRoute.PersonalAccountUser} aria-label="Личный кабинет">
+                </svg></NavLink></li>
+            <li className="main-nav__item"><NavLink className={({isActive}) => ['main-nav__link', isActive ? 'is-active' : ''].join(' ')} to={isCoach ? AppRoute.PersonalAccountCoach : AppRoute.PersonalAccountUser} aria-label="Личный кабинет">
                 <svg width="16" height="18" aria-hidden="true">
                   <use xlinkHref="#icon-user"></use>
-                </svg></Link></li>
-            <li className="main-nav__item"><Link className="main-nav__link" to={AppRoute.MyFriends} aria-label="Друзья">
+                </svg></NavLink></li>
+            <li className="main-nav__item"><NavLink className={({isActive}) => ['main-nav__link', isActive ? 'is-active' : ''].join(' ')} to={AppRoute.MyFriends} aria-label="Друзья">
                 <svg width="22" height="16" aria-hidden="true">
                   <use xlinkHref="#icon-friends"></use>
-                </svg></Link></li>
+                </svg></NavLink></li>
             <li className="main-nav__item main-nav__item--notifications"><a className="main-nav__link" href="#" aria-label="Уведомления">
                 <svg width="14" height="18" aria-hidden="true">
                   <use xlinkHref="#icon-notification"></use>

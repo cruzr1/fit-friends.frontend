@@ -1,9 +1,10 @@
-import { ChangeEvent, useRef, useState, FormEvent } from 'react';
-import { Duration, QuestionDurationCaption, Level, LevelCaption, TrainType, TrainTypeCaption, UserRole, errorStyle } from '../../const';
-import { isCaloriesValueValid, isDescriptionValid, isCertificateValid } from '../../helpers';
+import { ChangeEvent, useState, FormEvent } from 'react';
+import { Duration, QuestionDurationCaption, Level, LevelCaption, TrainType, TrainTypeCaption, UserRole, errorStyle, AppRoute } from '../../const';
+import { isCaloriesValueValid, isDescriptionValid, isCertificateValid, isStatusFulfilled } from '../../helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { selectUser } from '../../store/user/user.selectors';
+import { selectUser, selectUserUpdateStatus } from '../../store/user/user.selectors';
 import { updateUserAction } from '../../store/user/user.actions';
+import { Navigate } from 'react-router-dom';
 
 export default function PopupQuestionnaireComponent(): JSX.Element {
   const isCoach = useAppSelector(selectUser)?.role === UserRole.Trainer;
@@ -12,21 +13,23 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
   const [trainType, setTrainType] = useState<TrainType[]>([]);
   const [level, setLevel] = useState<Level>(Level.Newby);
   const [duration, setDuration] = useState<Duration>(Duration.From10to30min);
-  const [caloriesTarget, setCaloriesTarget] = useState<number | string>('');
-  const [caloriesDaily, setCaloriesDaily] = useState<number | string>('');
+  const [caloriesTarget, setCaloriesTarget] = useState<number>(0);
+  const [caloriesDaily, setCaloriesDaily] = useState<number>(0);
   const [achievements, setAchievements] = useState<string>('');
   const [isReadyTrain, setIsReadyTrain] = useState<boolean>(true);
   const [certificateURL, setCertificateURL] = useState<string>('');
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const userUpdateStatus = useAppSelector(selectUserUpdateStatus);
   const isFormValid = (
-    isCaloriesValueValid(+caloriesDaily)
-    && isCaloriesValueValid(+caloriesDaily)
+    isCaloriesValueValid(caloriesDaily)
+    && isCaloriesValueValid(caloriesTarget)
     && !isCoach
   ) || (
     isCoach
     && isDescriptionValid(achievements)
     && isCertificateValid(certificateURL)
   );
+  console.log(isCertificateValid(certificateURL));
   const handleTrainTypeChange = ({target: {value: checkedType}}: React.ChangeEvent<HTMLInputElement>) => {
     if (trainType.includes(checkedType as TrainType)) {
       setTrainType(trainType.filter((type) => type !== checkedType))
@@ -47,6 +50,7 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
     if (!isFormValid) {
       return;
     }
+    console.log('here');
     const updateUser ={
       isCoach,
       trainType,
@@ -59,6 +63,9 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
       achievements,
     };
     dispatch(updateUserAction(updateUser));
+  }
+  if (isStatusFulfilled(userUpdateStatus)) {
+    return <Navigate to={isCoach ? AppRoute.PersonalAccountCoach : AppRoute.Main}></Navigate>;
   }
   return (
     <div className={`popup-form popup-form--questionnaire-${classApply}`}>
@@ -124,26 +131,26 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
                   </div>
                   {!isCoach &&
                     <>
-                      <div className="questionnaire-user__calories-lose"><span className="questionnaire-user__legend">Сколько калорий хотите сбросить</span>{(+caloriesTarget > 5000 || +caloriesTarget < 1000) && isSubmit && <p style={errorStyle}>Значение 1000 до 5000</p>}
+                      <div className="questionnaire-user__calories-lose"><span className="questionnaire-user__legend">Сколько калорий хотите сбросить</span>{(caloriesTarget > 5000 || caloriesTarget < 1000) && isSubmit && <p style={errorStyle}>Значение 1000 до 5000</p>}
                       <div className="custom-input custom-input--with-text-right questionnaire-user__input">
                         <label><span className="custom-input__wrapper">
                             <input
-                              type="number"
+                              type="text"
                               name="calories-lose"
                               value={caloriesTarget}
-                              onInput={(evt) => setCaloriesTarget(parseInt((evt.target as HTMLInputElement).value, 10) || '')}
+                              onInput={(evt) => setCaloriesTarget(+(evt.target as HTMLInputElement).value)}
                             /><span className="custom-input__text">ккал</span></span>
                         </label>
                       </div>
                       </div>
-                      <div className="questionnaire-user__calories-waste"><span className="questionnaire-user__legend">Сколько калорий тратить в день</span>{(+caloriesDaily > 5000 || +caloriesDaily < 1000) && isSubmit && <p style={errorStyle}>Значение 1000 до 5000</p>}
+                      <div className="questionnaire-user__calories-waste"><span className="questionnaire-user__legend">Сколько калорий тратить в день</span>{(caloriesDaily > 5000 || caloriesDaily < 1000) && isSubmit && <p style={errorStyle}>Значение 1000 до 5000</p>}
                         <div className="custom-input custom-input--with-text-right questionnaire-user__input">
                           <label><span className="custom-input__wrapper">
                               <input
-                                type="number"
+                                type="text"
                                 name="calories-waste"
                                 value={caloriesDaily}
-                                onInput={(evt) => setCaloriesDaily(parseInt((evt.target as HTMLInputElement).value, 10) || '')}
+                                onInput={(evt) => setCaloriesDaily(+(evt.target as HTMLInputElement).value)}
                               /><span className="custom-input__text"> ккал</span></span>
 
                           </label>

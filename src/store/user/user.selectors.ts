@@ -16,3 +16,4 @@ export const selectUsersTotalItems = (state: StateType) => state[NameSpace.User]
 export const selectUserItem = (state: StateType) => state[NameSpace.User].userItem;
 export const selectUserFriends = (state: StateType) => state[NameSpace.User].userFriends;
 export const selectApplicationsList = (state: StateType) => state[NameSpace.User].applicationsList;
+export const selectUserUpdateStatus = (state: StateType) => state[NameSpace.User].updateUserStatus;

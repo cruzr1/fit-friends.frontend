@@ -30,7 +30,7 @@ export default function SpecialOffersComponent(): JSX.Element {
                   <li className="special-offers__item is-active">
                     <aside className="promo-slider">
                       <div className="promo-slider__overlay"></div>
-                      <div className="promo-slider__image"><img src={`markup/img/content/${adaptImage(offerVisible.backgroundImage)}.png`} srcSet={`markup/img/content/${adaptImage(offerVisible.backgroundImage)}@2x.png 2x`} width="1040" height="469" alt="promo-photo" />
+                      <div className="promo-slider__image"><img src={`/img/content/${adaptImage(offerVisible.backgroundImage)}.png`} srcSet={`/img/content/${adaptImage(offerVisible.backgroundImage)}@2x.png 2x`} width="1040" height="469" alt="promo-photo" />
                       </div>
                       <div className="promo-slider__header">
                         <h3 className="promo-slider__title">{offerVisible.name}</h3>

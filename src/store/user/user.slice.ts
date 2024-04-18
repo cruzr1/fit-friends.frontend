@@ -1,8 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatus, CATALOG_COUNT, Level, Location, NameSpace, RequestStatus, TrainType, UserRole } from '../../const';
-import { ApplicationType, AuthStatusType, UserType } from '../../types';
+import { ApplicationType, AuthStatusType, RequestStatusType, UserType } from '../../types';
 import { logoutUser } from '../action';
 import { removeToken } from '../../services/token';
+import { updateUserAction } from './user.actions';
 
 export type UserStateType = {
   authStatus: AuthStatusType;
@@ -18,7 +19,8 @@ export type UserStateType = {
   usersList: UserType[];
   usersTake: number;
   usersTotalItems: number;
-  applicationsList: ApplicationType[]
+  applicationsList: ApplicationType[];
+  updateUserStatus: RequestStatusType;
 }
 
 export const userState: UserStateType = {
@@ -35,7 +37,8 @@ export const userState: UserStateType = {
   usersList: [],
   usersTake: CATALOG_COUNT,
   usersTotalItems: 0,
-  applicationsList: []
+  applicationsList: [],
+  updateUserStatus: RequestStatus.Idle,
 };
 
 export const user = createSlice({
@@ -99,6 +102,9 @@ export const user = createSlice({
         removeToken();
         updateAuthStatus(AuthStatus.NoAuth);
         setUser(null);
+      })
+      .addCase(updateUserAction.fulfilled, (state) => {
+        state.updateUserStatus = RequestStatus.Fulfilled;
       })
   },
 });

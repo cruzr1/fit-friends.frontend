@@ -37,7 +37,6 @@ export default function FriendsListComponent({}): JSX.Element {
   }, [dispatch, take]);
   const friends = useAppSelector(selectUserFriends);
   const applications = useAppSelector(selectApplicationsList);
-  console.log(applications);
   const findApplication = (friendId: string) => isCoach ? findReviewingApplication(friendId, applications) : findLatestApplication(friendId, applications);
   const totalItems = useAppSelector(selectUsersTotalItems);
   const handleShowMore = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

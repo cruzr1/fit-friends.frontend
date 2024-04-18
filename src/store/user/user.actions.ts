@@ -107,8 +107,6 @@ export const updateUserAction = createAsyncThunk<void, UpdateUserType, {
     try {
       const {data} = await axiosApi.patch<UserType>(APIPath.Users.Update, updateUser);
       dispatch(setUser(data));
-      const newRoute = data.role === UserRole.Trainer ? AppRoute.PersonalAccountCoach : AppRoute.Main;
-      dispatch(redirectToRoute(newRoute));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedUserUpdate}: ${message}`));
     }
@@ -334,7 +332,6 @@ export const loadAuthorApplications = createAsyncThunk<void, string, {
   async (userId, {dispatch, extra: axiosApi}) => {
     try {
       const { data } = await axiosApi.get<ApplicationType[]>(`${APIPath.Applications.Author}/${userId}`);
-      console.log(data);
       dispatch(setApplicationsList(data));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadAuthorApplications}: ${message}`));
