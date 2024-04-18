@@ -1,5 +1,6 @@
-import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX, CERTIFICATE_REGEX, COMMENT_REGEX, UserValidationParams, Payment, BodyStyle, ApplicationStatus, NULL_VALUE } from './const';
-import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOrderedType, ApplicationType } from './types';
+import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX, CERTIFICATE_REGEX, COMMENT_REGEX, UserValidationParams, Payment, BodyStyle, ApplicationStatus, NULL_VALUE, SortOrder } from './const';
+import { setSortByOrder } from './store/training/training.slice';
+import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOrderedType, ApplicationType, SortOrderType } from './types';
 
 export const isStatusPending = (status: RequestStatusType) => status === RequestStatus.Pending;
 
@@ -18,6 +19,8 @@ export const findLatestApplication = (userId: string, applications: ApplicationT
   .sort((applicationA, applicationB) => applicationA.updatedAt < applicationB.updatedAt ? 1 : -1)[NULL_VALUE];
 
 export const adaptOldPrice = (price: number) => Math.round(price);
+
+export const adaptSortOrder = (sortByOrder: SortOrderType) => sortByOrder === SortOrder.Asc ? 1 : -1;
 
 export const adaptValue = (value: number) => `${value}\xa0₽`;
 

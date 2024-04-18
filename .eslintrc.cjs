@@ -7,6 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     "htmlacademy/react-typescript",
+    "react-app",
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

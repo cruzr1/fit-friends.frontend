@@ -1,6 +1,5 @@
 import { BackButtonComponent, TrainingItemComponent, UserCardContentComponent, PopupCertificatesComponent, PopupMapComponent } from '../../components';
 import { BackButtonClassApply, UserRole } from '../../const';
-import trainings from '../../mocks/mock-trainings.json'
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser, selectUserItem } from '../../store/user/user.selectors';

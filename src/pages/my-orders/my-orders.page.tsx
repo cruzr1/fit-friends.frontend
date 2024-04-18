@@ -1,12 +1,24 @@
 import { useLocation } from 'react-router-dom';
-import { BackButtonComponent, PaginationComponent, SortOrdersComponent, TrainingsListComponent } from '../../components'
+import { BackButtonComponent, SortOrdersComponent, TrainingsListComponent } from '../../components'
 import { adaptPathname } from '../../helpers';
-import trainingsOrdered from '../../mocks/mock-ordered-trainings.json'
-import { BackButtonClassApply } from '../../const';
+import { BackButtonClassApply, MY_ORDERS_TRAININGS_COUNT } from '../../const';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../hooks/hooks';
+import { setTake } from '../../store/training/training.slice';
 
 export default function MyOrdersPage(): JSX.Element {
   const {pathname} = useLocation();
   const classApply = adaptPathname(pathname);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(setTake(MY_ORDERS_TRAININGS_COUNT));
+    }
+    return () => {
+      isMounted = false;
+    }
+  }, [dispatch ]);
   return (
     <section className="my-orders">
       <div className="container">
@@ -16,8 +28,7 @@ export default function MyOrdersPage(): JSX.Element {
             <h1 className="my-orders__title">Мои заказы</h1>
             <SortOrdersComponent />
           </div>
-          <TrainingsListComponent classApply={classApply} trainingsList={trainingsOrdered} />
-          <PaginationComponent  classApply={classApply} />
+          <TrainingsListComponent classApply={classApply}  isOrdered />
         </div>
       </div>
     </section>

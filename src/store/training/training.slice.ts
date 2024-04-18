@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace, CATALOG_COUNT, TrainType, Duration } from '../../const'
-import { ReviewType, SortOrderType, TrainingType, UserType } from '../../types';
+import { NameSpace, CATALOG_COUNT, TrainType, Duration, MY_ORDERS_TRAININGS_COUNT, OrdersSortByFields } from '../../const'
+import { OrdersSortByFieldType, ReviewType, SortOrderType, TrainingOrderedType, TrainingType, UserType } from '../../types';
 
 export type TrainingStateType = {
   trainingsList: TrainingType[];
+  trainingsOrderedList: TrainingOrderedType[];
   specialOffers: TrainingType[];
   popularTrainings: TrainingType[];
   choiseTrainings: TrainingType[];
@@ -14,6 +15,7 @@ export type TrainingStateType = {
   durationFilter: Duration;
   trainTypeFilter: TrainType[];
   sortByOrder: SortOrderType;
+  sortByField: OrdersSortByFieldType;
   totalItems: number;
   training: TrainingType | null;
   trainer: UserType | null;
@@ -22,16 +24,18 @@ export type TrainingStateType = {
 
 export const trainingState: TrainingStateType = {
   trainingsList: [],
+  trainingsOrderedList: [],
   specialOffers: [],
   popularTrainings: [],
   choiseTrainings: [],
   durationFilter: Duration.From10to30min,
-  take: CATALOG_COUNT,
+  take: 0,
   priceFilter: [0, 0],
   caloriesFilter: [0, 0],
   ratingFilter: [0, 0],
   trainTypeFilter: [],
   sortByOrder: 'desc',
+  sortByField: OrdersSortByFields.Count,
   totalItems: 0,
   training: null,
   trainer: null,
@@ -54,6 +58,9 @@ export const training = createSlice({
     setTrainingsList: (state, {payload}: PayloadAction<TrainingType[]>) => {
       state.trainingsList = payload;
     },
+    setTrainingsOrderedList: (state, {payload}: PayloadAction<TrainingOrderedType[]>) => {
+      state.trainingsOrderedList = payload;
+    },
     setTake: (state, {payload}: PayloadAction<number>) => {
       state.take = payload;
     },
@@ -74,6 +81,9 @@ export const training = createSlice({
     },
     setSortByOrder: (state, {payload}: PayloadAction<SortOrderType>) => {
       state.sortByOrder = payload;
+    },
+    setSortByField: (state, {payload}: PayloadAction<OrdersSortByFieldType>) => {
+      state.sortByField = payload;
     },
     setTotalItems: (state, {payload}: PayloadAction<number>) => {
       state.totalItems = payload;
@@ -110,4 +120,6 @@ export const {
    setReviews,
    addReview,
    setDurationFilter,
+   setTrainingsOrderedList,
+   setSortByField,
 } = training.actions;

@@ -1,9 +1,10 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType } from '../../types';
-import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_SORT_FIELD, CATALOG_COUNT } from '../../const';
+import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType, TrainingOrderedType, QueryTrainingsOrderedType } from '../../types';
+import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_SORT_FIELD, CATALOG_COUNT, MY_ORDERS_TRAININGS_COUNT } from '../../const';
 import { clearErrorAction } from '../error/error.actions';
-import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer, setReviews, addReview, setTake } from './training.slice';
+import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer, setReviews, addReview, setTake, setTrainingsOrderedList } from './training.slice';
+import { adaptSortOrder } from '../../helpers';
 
 export const loadSpecialOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -101,11 +102,36 @@ export const loadTrainingsAction = createAsyncThunk<void, QueryTrainingsType, {
       });
       dispatch(setTrainingsList(entities));
       dispatch(setTotalItems(totalItems));
-      if (totalItems <= take) {
+      if (entities.length < take) {
         dispatch(setTake(CATALOG_COUNT));
       }
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadTrainingsCatalogue}: ${message}`));
+    }
+  }
+)
+
+export const loadTrainingsOrderedAction = createAsyncThunk<void, QueryTrainingsOrderedType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.LoadOrderedTrainings}`,
+  async ({take, sortByField, sortByOrder}, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data: { entities, totalItems} } = await axiosApi.get<EntitiesWithPaginationType<TrainingOrderedType>>(APIPath.Trainings.Orders, {
+        params: {
+          take,
+          sortByField,
+          sortByOrder: adaptSortOrder(sortByOrder),
+        }
+      });
+      dispatch(setTrainingsOrderedList(entities));
+      dispatch(setTotalItems(totalItems));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadOrderedTrainings}: ${message}`));
     }
   }
 )

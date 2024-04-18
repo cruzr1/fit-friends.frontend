@@ -1,4 +1,4 @@
-import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location, Payment, OrderPayment, UserRole, ApplicationStatus } from './const';
+import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location, Payment, OrderPayment, UserRole, ApplicationStatus, OrdersSortByFields, SortOrder } from './const';
 import { store } from "./store/store";
 
 export type StateType = ReturnType<typeof store.getState>;
@@ -94,12 +94,12 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
 
   export type EntitiesWithPaginationType<T> = {
     entities: T[];
-    totalPages: number;
-    currentPage: number;
+    totalPages?: number;
+    currentPage?: number;
     totalItems: number;
   }
 
-  export type SortOrderType = 'desc' | 'asc';
+  export type SortOrderType = typeof SortOrder[keyof typeof SortOrder];
 
   export type QueryTrainingsType = {
     take: number;
@@ -111,6 +111,15 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
     durationFilter?: Duration;
     sortByField?: string;
   }
+
+  export type OrdersSortByFieldType = typeof OrdersSortByFields[keyof typeof OrdersSortByFields];
+
+  export type QueryTrainingsOrderedType = {
+    take: number;
+    sortByOrder: SortOrderType;
+    sortByField: OrdersSortByFieldType;
+  }
+
 
   export type QueryUsersType = {
     take: number;

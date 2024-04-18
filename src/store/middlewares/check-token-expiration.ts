@@ -4,7 +4,6 @@ import { getToken } from '../../services/token';
 import { jwtDecode } from 'jwt-decode';
 
 type Reducer = ReturnType<typeof rootReducer>;
-
 export const checkTokenExpiration: Middleware<unknown, Reducer> =
   () =>
     (next) =>

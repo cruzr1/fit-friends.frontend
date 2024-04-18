@@ -1,4 +1,5 @@
 import { addToFriendsAction, loadAvailableTrainingsCountAction, subscribeNotificationsAction } from './store/user/user.actions';
+import { AppRouteType } from './types';
 
 export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
 
@@ -101,6 +102,7 @@ export const APIPath = {
   },
   Trainings: {
     Index: 'trainings',
+    Orders: 'trainings/myOrders',
     Trainer: 'trainings/trainer',
   },
   Reviews: {
@@ -150,6 +152,7 @@ export const Action = {
   LoadUserApplications: 'loadUserApplications',
   LoadAuthorApplications: 'loadAuthorApplications',
   UpdateApplication: 'updateApplication',
+  LoadOrderedTrainings: 'loadOrderedTrainings',
 } as const;
 
 export const AuthStatus = {
@@ -291,6 +294,7 @@ export const ErrorMessage = {
   FailedLoadUserApplications: 'Failed to load user applications',
   FailedLoadAuthorApplications: 'Failed to load author applications',
   FailedUpdateApplication: 'Failed to update application',
+  FailedLoadOrderedTrainings: 'Failed to load ordered trainings',
  } as const;
 
 export const UserValidationParams = {
@@ -322,7 +326,11 @@ export const POPULAR_TRAININGS_COUNT = 8;
 
 export const CHOISE_TRAININGS_COUNT = 9;
 
+export const MY_ORDERS_TRAININGS_COUNT = 4;
+
 export const CATALOG_COUNT = 6;
+
+export const PAGES_WITH_HEADER: AppRouteType[] = [AppRoute.Signin, AppRoute.Signup, AppRoute.Quest]
 
 export const USERS_READY_TRAIN = 8;
 
@@ -351,6 +359,11 @@ export const sliderStyle = {
     height: '1px',
   },
 }
+
+export const OrdersSortByFields = {
+  Count: 'trainingsOrderedCount',
+  Sum: 'trainingsOrderedSum',
+} as const;
 
 export const MAXIMUM_PRICE_VALUE = 20000;
 
