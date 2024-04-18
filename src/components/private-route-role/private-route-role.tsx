@@ -16,7 +16,7 @@ export default function PrivateRouteRole ({children, role}: PrivateRouteProps): 
       {authStatus === AuthStatus.Unknown && <LoadingPage />}
       {authStatus === AuthStatus.NoAuth && <Navigate to={AppRoute.Signin} />}
       {user && authStatus === AuthStatus.Auth && role === user.role && children}
-      {user && authStatus === AuthStatus.Auth && role !== user.role && user.role === UserRole.Trainer && <Navigate to={AppRoute.PersonalAccountCoach} />}
+      {user && authStatus === AuthStatus.Auth && role !== user.role && user.role === UserRole.Trainer && <Navigate to={AppRoute.PersonalAccount} />}
       {user && authStatus === AuthStatus.Auth && role !== user.role && user.role === UserRole.User && <Navigate to={AppRoute.Main} />}
     </>
   );

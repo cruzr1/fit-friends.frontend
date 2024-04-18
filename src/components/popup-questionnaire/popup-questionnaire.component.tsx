@@ -1,5 +1,5 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
-import { Duration, QuestionDurationCaption, Level, LevelCaption, TrainType, TrainTypeCaption, UserRole, errorStyle, AppRoute } from '../../const';
+import { Duration, QuestionDurationCaption, Level, LevelCaption, TrainType, TrainTypeCaption, UserRole, errorStyle, AppRoute, NUMBER_REGEX } from '../../const';
 import { isCaloriesValueValid, isDescriptionValid, isCertificateValid, isStatusFulfilled } from '../../helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser, selectUserUpdateStatus } from '../../store/user/user.selectors';
@@ -65,7 +65,7 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
     dispatch(updateUserAction(updateUser));
   }
   if (isStatusFulfilled(userUpdateStatus)) {
-    return <Navigate to={isCoach ? AppRoute.PersonalAccountCoach : AppRoute.Main}></Navigate>;
+    return <Navigate to={isCoach ? AppRoute.PersonalAccount : AppRoute.Main}></Navigate>;
   }
   return (
     <div className={`popup-form popup-form--questionnaire-${classApply}`}>
@@ -138,7 +138,7 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
                               type="text"
                               name="calories-lose"
                               value={caloriesTarget}
-                              onInput={(evt) => setCaloriesTarget(+(evt.target as HTMLInputElement).value)}
+                              onChange={(evt) => setCaloriesTarget(+(evt.target as HTMLInputElement).value.replace(NUMBER_REGEX, ''))}
                             /><span className="custom-input__text">ккал</span></span>
                         </label>
                       </div>
@@ -150,7 +150,7 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
                                 type="text"
                                 name="calories-waste"
                                 value={caloriesDaily}
-                                onInput={(evt) => setCaloriesDaily(+(evt.target as HTMLInputElement).value)}
+                                onChange={(evt) => setCaloriesDaily(+(evt.target as HTMLInputElement).value.replace(NUMBER_REGEX, ''))}
                               /><span className="custom-input__text"> ккал</span></span>
 
                           </label>

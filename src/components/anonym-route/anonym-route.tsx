@@ -13,7 +13,7 @@ export default function AnonymRoute ({children}: PrivateRouteProps): JSX.Element
   return (
     <>
       {authStatus === AuthStatus.Unknown && <LoadingPage />}
-      {authStatus === AuthStatus.Auth && userRole === UserRole.Trainer && <Navigate to={AppRoute.PersonalAccountCoach} />}
+      {authStatus === AuthStatus.Auth && userRole === UserRole.Trainer && <Navigate to={AppRoute.PersonalAccount} />}
       {authStatus === AuthStatus.Auth && userRole === UserRole.User && <Navigate to={AppRoute.Main} />}
       {authStatus === AuthStatus.Signed && <Navigate to={AppRoute.Quest} />}
       {authStatus === AuthStatus.NoAuth && children}

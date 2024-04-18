@@ -5,7 +5,6 @@ import { selectUser } from '../../store/user/user.selectors';
 
 export default function HeaderComponent (): JSX.Element {
   const user = useAppSelector(selectUser);
-  const isCoach = user?.role === UserRole.Trainer ? true : false;
   return (
     <header className="header">
       <div className="container"><Link className="header__logo" to={AppRoute.Index} aria-label="Переход на главную">
@@ -14,11 +13,11 @@ export default function HeaderComponent (): JSX.Element {
           </svg></Link>
         <nav className="main-nav">
           <ul className="main-nav__list">
-            <li className="main-nav__item"><NavLink className={({isActive}) => ['main-nav__link', isActive ? 'is-active' : ''].join(' ')} to={isCoach ? AppRoute.PersonalAccountCoach : AppRoute.Main} aria-label="На главную">
+            <li className="main-nav__item"><NavLink className={({isActive}) => ['main-nav__link', isActive ? 'is-active' : ''].join(' ')} to={AppRoute.Main} aria-label="На главную">
                 <svg width="18" height="18" aria-hidden="true">
                   <use xlinkHref="#icon-home"></use>
                 </svg></NavLink></li>
-            <li className="main-nav__item"><NavLink className={({isActive}) => ['main-nav__link', isActive ? 'is-active' : ''].join(' ')} to={isCoach ? AppRoute.PersonalAccountCoach : AppRoute.PersonalAccountUser} aria-label="Личный кабинет">
+            <li className="main-nav__item"><NavLink className={({isActive}) => ['main-nav__link', isActive ? 'is-active' : ''].join(' ')} to={AppRoute.PersonalAccount} aria-label="Личный кабинет">
                 <svg width="16" height="18" aria-hidden="true">
                   <use xlinkHref="#icon-user"></use>
                 </svg></NavLink></li>

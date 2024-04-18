@@ -17,9 +17,13 @@ export const NAME_REGEX = /^.{1,15}$/;
 
 export const  COMMENT_REGEX = /^.{100,1024}$/;
 
+export const  DESCRIPTION_REGEX = /^.{10,140}$/;
+
 export const KEY_ESCAPE = 'Escape';
 
 export const BIRTHDAY_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
+export const NUMBER_REGEX = /[^0-9]/;
 
 export const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -74,8 +78,7 @@ export const AppRoute = {
   Signin: '/signin',
   Signup: '/signup',
   Quest: '/quest',
-  PersonalAccountCoach: '/personal-account-coach',
-  PersonalAccountUser: '/personal-account-user',
+  PersonalAccount: '/personal-account',
   CreateTraining: '/create-training',
   MyTrainings: '/my-trainings',
   MyOrders: '/my-orders',
