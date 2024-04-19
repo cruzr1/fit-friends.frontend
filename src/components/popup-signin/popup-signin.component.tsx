@@ -3,6 +3,7 @@ import { isPasswordValid, isEmailValid } from '../../helpers';
 import { NULL_VALUE, errorStyle } from '../../const';
 import { useAppDispatch } from '../../hooks/hooks';
 import { loginUserAction } from '../../store/user/user.actions';
+import { Helmet } from 'react-helmet-async';
 
 export default function PopupSigninComponent(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -20,6 +21,9 @@ export default function PopupSigninComponent(): JSX.Element {
   };
   return (
     <div className="popup-form popup-form--sign-in">
+      <Helmet>
+        <title>Вход — Fit friends</title>
+      </Helmet>
       <div className="popup-form__wrapper">
         <div className="popup-form__content">
           <div className="popup-form__title-wrapper">

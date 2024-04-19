@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadTrainingsAction, loadTrainingsOrderedAction, loadTrainingsPurchasedAction } from '../../store/training/training.actions';
 import { selectCaloriesFilter, selectTake, selectPriceFilter, selectSortByOrder, selectTrainTypeFilter, selectTrainingsList, selectRatingFilter, selectTotalItems, selectDurationFilter, selectTrainingsOrderedList, selectSortByField } from '../../store/training/training.selectors';
 import { MY_ORDERS_TRAININGS_COUNT } from '../../const';
-import { setTake, training } from '../../store/training/training.slice';
+import { setTake } from '../../store/training/training.slice';
 
 
 type TrainingsListComponentProps = {

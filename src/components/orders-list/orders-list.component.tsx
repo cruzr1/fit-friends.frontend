@@ -9,8 +9,10 @@ type OrdersListComponentProps = {
 export default function OrdersListComponent({classApply}: OrdersListComponentProps): JSX.Element {
   return (
     <ul className={`${classApply}__list`}>
-      {trainings.map(({price, name, trainType, calories, description, rating, backgroundImage}) =>
-        <TrainingItemComponent {...{price, name, trainType, calories, description, rating, backgroundImage}} />
+      {trainings.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
+        <li key={id} className={`${classApply}__item`}>
+          <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}} />
+        </li>
       )}
     </ul>
   )

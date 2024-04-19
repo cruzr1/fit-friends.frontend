@@ -8,9 +8,9 @@ type SignProps = {
 export default function SignPage({isSignin}: SignProps):JSX.Element {
   return (
     <>
-    <BackgroundLogoComponent />
-    {isSignin && <PopupSigninComponent />}
-    {!isSignin && <PopupSignupComponent />}
+      <BackgroundLogoComponent />
+      {isSignin && <PopupSigninComponent />}
+      {!isSignin && <PopupSignupComponent />}
     </>
   )
 }

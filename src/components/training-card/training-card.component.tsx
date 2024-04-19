@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { TrainingType, UserType } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { updateTrainingAction } from '../../store/training/training.actions';

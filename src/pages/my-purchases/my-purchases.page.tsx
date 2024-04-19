@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { setIsActiveTrainings, setTake } from '../../store/training/training.slice';
 import { selectIsActiveTrainings } from '../../store/training/training.selectors';
+import { Helmet } from 'react-helmet-async';
 
 export default function MyPurchasesPage(): JSX.Element {
   const {pathname} = useLocation();
@@ -23,6 +24,9 @@ export default function MyPurchasesPage(): JSX.Element {
   const isActiveTrainings = useAppSelector(selectIsActiveTrainings);
   return (
     <section className="my-purchases">
+      <Helmet>
+        <title>Мои покупки — Fit friends</title>
+      </Helmet>
       <div className="container">
         <div className="my-purchases__wrapper">
           <BackButtonComponent classApply={BackButtonClassApply.MyPurchases} />

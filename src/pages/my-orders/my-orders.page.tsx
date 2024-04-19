@@ -5,6 +5,7 @@ import { BackButtonClassApply, MY_ORDERS_TRAININGS_COUNT } from '../../const';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
 import { setTake } from '../../store/training/training.slice';
+import { Helmet } from 'react-helmet-async';
 
 export default function MyOrdersPage(): JSX.Element {
   const {pathname} = useLocation();
@@ -21,6 +22,9 @@ export default function MyOrdersPage(): JSX.Element {
   }, [dispatch ]);
   return (
     <section className="my-orders">
+      <Helmet>
+        <title>Мои заказы — Fit friends</title>
+      </Helmet>
       <div className="container">
         <div className="my-orders__wrapper">
           <BackButtonComponent classApply={BackButtonClassApply.MyOrders} />

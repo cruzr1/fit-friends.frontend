@@ -1,10 +1,11 @@
 import { useLocation } from 'react-router-dom';
-import { PaginationComponent, TrainingFilterComponent, TrainingsListComponent } from '../../components';
+import { TrainingFilterComponent, TrainingsListComponent } from '../../components';
 import { adaptPathname } from '../../helpers';
 import { useAppDispatch } from '../../hooks/hooks';
 import { useEffect } from 'react';
 import { CATALOG_COUNT } from '../../const';
 import { setTake } from '../../store/training/training.slice';
+import { Helmet } from 'react-helmet-async';
 
 export default function MyTrainingsPage(): JSX.Element {
   const {pathname} = useLocation();
@@ -21,6 +22,9 @@ export default function MyTrainingsPage(): JSX.Element {
   }, [dispatch ]);
   return (
     <section className="inner-page">
+      <Helmet>
+        <title>Мои тренировки — Fit friends</title>
+      </Helmet>
       <div className="container">
         <div className="inner-page__wrapper">
           <h1 className="visually-hidden">Мои тренировки</h1>

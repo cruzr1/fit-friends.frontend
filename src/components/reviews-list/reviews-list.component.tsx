@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BackButtonComponent, ReviewItemComponent } from '..';
 import { BackButtonClassApply } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';

@@ -8,7 +8,7 @@ export default function LoadingPage(): JSX.Element {
   return (
     <div className="spinner-container " >
       <Helmet>
-        <title>Загрузка страницы — Guitar-shop</title>
+        <title>Загрузка страницы — Fit friends</title>
       </Helmet>
       <div className="spinner"></div>
       <div className="text">Пожалуйста подождите . {isDataLoading ? 'Идет загрузка данных...' : 'Идет авторизация...'}</div>

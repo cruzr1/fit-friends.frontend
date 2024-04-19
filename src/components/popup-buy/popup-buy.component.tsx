@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { adaptImage, adaptPrice, adaptType, adaptValue, blockPage, unblockPage } from '../../helpers';
 import { TrainingType } from '../../types';
 import { DEFAULT_ORDER_COUNT, KEY_ESCAPE, OrderPayment, Payment } from '../../const';

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import PopupCertificatesComponent from '../popup-certifcates/popup-certificates.component';
 import { TrainType, TrainTypeCaption } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { addToFriendsAction } from '../../store/user/user.actions';

@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { useEffect } from 'react';
 import { setTake } from '../../store/training/training.slice';
 import { CATALOG_COUNT } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 export default function TrainingsCataloguePage(): JSX.Element {
   const {pathname} = useLocation();
@@ -21,6 +22,9 @@ export default function TrainingsCataloguePage(): JSX.Element {
   }, [dispatch ]);
   return (
     <section className="inner-page">
+      <Helmet>
+        <title>Каталог тренировок — Fit friends</title>
+      </Helmet>
       <div className="container">
         <div className="inner-page__wrapper">
           <h1 className="visually-hidden">Каталог тренировок</h1>

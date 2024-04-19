@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { NULL_VALUE, NUMBER_REGEX, QuestionDurationCaption, TrainType, TrainTypeCaption, Duration, LevelCaption, Level, Gender, TrainingFormGenderCaption, errorStyle, SAMPLE_TRAINING_IMAGE, AppRoute } from '../../const';
-import { isCaloriesValueValid, isDescriptionValid, isNameValid, isStatusFulfilled } from '../../helpers';
+import { isCaloriesValueValid, isDescriptionValid, isNameValid } from '../../helpers';
 import { useAppDispatch } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { postTrainingAction } from '../../store/training/training.actions';
+import { Helmet } from 'react-helmet-async';
 
 
 export default function CreateTrainingPage (): JSX.Element {
@@ -71,11 +72,11 @@ export default function CreateTrainingPage (): JSX.Element {
       navigate(AppRoute.PersonalAccount);
     }
   }
-  // if (isStatusFulfilled(postTrainingStatus)) {
-  //   return <Navigate to={AppRoute.PersonalAccount} />;
-  // }
   return (
     <div className="popup-form popup-form--create-training">
+      <Helmet>
+        <title>Создание тренировки — Fit friends</title>
+      </Helmet>
       <div className="popup-form__wrapper">
         <div className="popup-form__content">
           <div className="popup-form__title-wrapper">

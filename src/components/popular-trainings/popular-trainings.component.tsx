@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { AppRoute, NULL_VALUE, POPULAR_TRAININGS_VISIBLE_COUNT, MAIN_ITEMS_PER_PAGE, STEP } from '../../const';
+import { AppRoute, NULL_VALUE, MAIN_ITEMS_PER_PAGE, STEP } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadPopularTrainingsAction } from '../../store/training/training.actions';
 import { selectPopularTrainings } from '../../store/training/training.selectors';

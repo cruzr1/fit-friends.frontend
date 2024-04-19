@@ -1,9 +1,13 @@
+import { Helmet } from 'react-helmet-async';
 import { BackButtonComponent, FriendsListComponent } from '../../components';
 import { BackButtonClassApply } from '../../const';
 
 export default function FriendsListPage():JSX.Element {
   return (
     <section className="friends-list">
+      <Helmet>
+        <title>Список друзей — Fit friends</title>
+      </Helmet>
       <div className="container">
         <div className="friends-list__wrapper">
           <BackButtonComponent classApply={BackButtonClassApply.FriendsList} />

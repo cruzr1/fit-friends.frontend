@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { applyPersonalTrainingAction, loadUserItemAction, loadUserItemTrainingsAction, subscribeNotificationsAction } from '../../store/user/user.actions';
 import LoadingPage from '../loading/loading.page';
 import { selectTrainingsList } from '../../store/training/training.selectors';
+import { Helmet } from 'react-helmet-async';
 
 export default function UserCardPage(): JSX.Element {
   const userId= useParams().userId as string;
@@ -62,6 +63,9 @@ export default function UserCardPage(): JSX.Element {
   return (
     <>
       <div className="inner-page inner-page--no-sidebar">
+      <Helmet>
+        <title>Карточка пользователя — Fit friends</title>
+      </Helmet>
         <div className="container">
           <div className="inner-page__wrapper">
             <BackButtonComponent classApply={BackButtonClassApply.UserCard} />

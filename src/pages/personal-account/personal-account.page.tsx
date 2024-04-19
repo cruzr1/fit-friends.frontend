@@ -7,6 +7,7 @@ import { adaptImage, isCaloriesValueValid, isDescriptionValid } from '../../help
 import { selectUser } from '../../store/user/user.selectors'
 import { useState } from 'react'
 import { CoachCertificatesComponent } from '../../components';
+import { Helmet } from 'react-helmet-async';
 
 export default function PersonalAccountPage(): JSX.Element {
   const user = useAppSelector(selectUser);
@@ -79,6 +80,9 @@ export default function PersonalAccountPage(): JSX.Element {
   }
   return (
     <section className="inner-page">
+      <Helmet>
+        <title>Личный кабинет — Fit friends</title>
+      </Helmet>
       <div className="container">
         <div className="inner-page__wrapper">
           <h1 className="visually-hidden">Личный кабинет</h1>
