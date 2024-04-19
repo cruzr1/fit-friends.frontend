@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace, CATALOG_COUNT, TrainType, Duration, MY_ORDERS_TRAININGS_COUNT, OrdersSortByFields } from '../../const'
-import { OrdersSortByFieldType, ReviewType, SortOrderType, TrainingOrderedType, TrainingType, UserType } from '../../types';
+import { NameSpace, CATALOG_COUNT, TrainType, Duration, MY_ORDERS_TRAININGS_COUNT, OrdersSortByFields, RequestStatus } from '../../const'
+import { OrdersSortByFieldType, RequestStatusType, ReviewType, SortOrderType, TrainingOrderedType, TrainingType, UserType } from '../../types';
+import { postTrainingAction } from './training.actions';
 
 export type TrainingStateType = {
   trainingsList: TrainingType[];
@@ -20,6 +21,7 @@ export type TrainingStateType = {
   training: TrainingType | null;
   trainer: UserType | null;
   reviews: ReviewType[];
+  postTrainingStatus: RequestStatusType;
 }
 
 export const trainingState: TrainingStateType = {
@@ -40,6 +42,7 @@ export const trainingState: TrainingStateType = {
   training: null,
   trainer: null,
   reviews: [],
+  postTrainingStatus: RequestStatus.Idle,
 }
 
 export const training = createSlice({
@@ -100,7 +103,13 @@ export const training = createSlice({
     addReview: (state, {payload}: PayloadAction<ReviewType>) => {
       state.reviews = [payload, ...state.reviews];
     },
-  }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(postTrainingAction.fulfilled, (state) => {
+        state.postTrainingStatus = RequestStatus.Fulfilled;
+      })
+  },
 });
 
 export const {

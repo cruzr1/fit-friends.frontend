@@ -31,6 +31,21 @@ export type TrainingType  = {
   isSpecial: boolean;
 }
 
+export type CreateTrainingType = Pick<
+  TrainingType,
+  'name' |
+  'backgroundImage' |
+  'level' |
+  'trainType' |
+  'duration' |
+  'price' |
+  'calories' |
+  'description' |
+  'gender' |
+  'videoURL' |
+  'isSpecial'
+>;
+
 export type UpdateTrainingType = Partial<TrainingType>;
 
 export type TrainingItemClassApplyType = typeof TrainingItemClassApply[keyof typeof TrainingItemClassApply];
@@ -85,7 +100,18 @@ export type UpdateUserType = Partial<UserType>;
 
 export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
 
-  export type SigninType = UserType & Record<'password', string>;
+  export type SigninType = Pick<
+    UserType,
+      'name' |
+      'email' |
+      'avatar' |
+      'gender' |
+      'birthDate' |
+      'role' |
+      'description' |
+      'location' |
+      'backgroundImage'
+    > & Record<'password', string>;
 
   export type LoggedUserType = UserType & {
     accessToken: string;

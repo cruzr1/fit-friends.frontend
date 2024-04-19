@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType, TrainingOrderedType, QueryTrainingsOrderedType } from '../../types';
-import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_SORT_FIELD, CATALOG_COUNT, MY_ORDERS_TRAININGS_COUNT } from '../../const';
+import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType, TrainingOrderedType, QueryTrainingsOrderedType, CreateTrainingType } from '../../types';
+import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_SORT_FIELD, CATALOG_COUNT } from '../../const';
 import { clearErrorAction } from '../error/error.actions';
 import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer, setReviews, addReview, setTake, setTrainingsOrderedList } from './training.slice';
 import { adaptSortOrder } from '../../helpers';
@@ -151,6 +151,23 @@ export const loadTrainingAction = createAsyncThunk<void, string, {
       dispatch(setTraining(data));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadTrainingsCatalogue}: ${message}`));
+    }
+  }
+)
+
+export const postTrainingAction = createAsyncThunk<void, CreateTrainingType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.Create}`,
+  async (training, {dispatch, extra: axiosApi}) => {
+    try {
+      await axiosApi.post<TrainingType>(APIPath.Trainings.Index, training);
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedCreateTraining}: ${message}`));
     }
   }
 )

@@ -29,7 +29,6 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
     && isDescriptionValid(achievements)
     && isCertificateValid(certificateURL)
   );
-  console.log(isCertificateValid(certificateURL));
   const handleTrainTypeChange = ({target: {value: checkedType}}: React.ChangeEvent<HTMLInputElement>) => {
     if (trainType.includes(checkedType as TrainType)) {
       setTrainType(trainType.filter((type) => type !== checkedType))
@@ -42,7 +41,7 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
     if (!newCertificate) {
       return;
     }
-    setCertificateURL(`img/content/certificates-and-diplomas/${newCertificate.name}`);
+    setCertificateURL(newCertificate.name);
   }
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -50,7 +49,6 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
     if (!isFormValid) {
       return;
     }
-    console.log('here');
     const updateUser ={
       isCoach,
       trainType,

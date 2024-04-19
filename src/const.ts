@@ -62,9 +62,13 @@ export const DEFAULT_PAGE_NUMBER = 1;
 
 export const DEFAULT_ORDER_COUNT = 5;
 
-export const errorStyle = {color: 'red'};
+export const errorStyle = {
+  color: 'red',
+};
 
 export const DEFAULT_PATH = '/img/content';
+
+export const SAMPLE_TRAINING_IMAGE = 'training-1.jpg';
 
 export const RequestStatus = {
   Idle: 'idle',
@@ -244,6 +248,12 @@ export enum GenderCaption {
   Any = 'Любой',
 }
 
+export enum TrainingFormGenderCaption {
+  Male = 'Мужчинам',
+  Female = 'Женщинам',
+  Any = 'Всем',
+}
+
 export const TrainingItemClassApply = {
   [AppRoute.MyTrainings]: 'my-trainings',
   [AppRoute.MyOrders]: 'my-orders',
@@ -298,6 +308,7 @@ export const ErrorMessage = {
   FailedLoadAuthorApplications: 'Failed to load author applications',
   FailedUpdateApplication: 'Failed to update application',
   FailedLoadOrderedTrainings: 'Failed to load ordered trainings',
+  FailedCreateTraining: 'Failed to create training',
  } as const;
 
 export const UserValidationParams = {

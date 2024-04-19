@@ -61,15 +61,15 @@ export default function PersonalAccountPage(): JSX.Element {
   }
   const handleLocationItemChange = (target: HTMLUListElement ) => {
     setUserLocation(target.id as Location);
-    setLocationOpen(false)
+    setLocationOpen(false);
   }
   const handleGenderItemChange = (target: HTMLUListElement ) => {
     setUserGender(target.id as Gender);
-    setGenderOpen(false)
+    setGenderOpen(false);
   }
   const handleLevelItemChange = (target: HTMLUListElement ) => {
     setUserLevel(target.id as Level);
-    setLevelOpen(false)
+    setLevelOpen(false);
   }
   const handleTrainTypeChange = (type: TrainType) => {
     const newTrainType = userTrainType.includes(type)
@@ -246,7 +246,7 @@ export default function PersonalAccountPage(): JSX.Element {
                           disabled={isDisabled}
                           onChange={(evt) => setUserCaloriesDaily(+(evt.target as HTMLInputElement).value.replace(NUMBER_REGEX, ''))}
                           />
-                        {(userCaloriesDaily > UserValidationParams.Calories.Value.Maximum || userCaloriesDaily < UserValidationParams.Calories.Value.Minimum) && <p style={errorStyle}>Значение 1000 до 5000</p>}
+                        {!isCaloriesValueValid(userCaloriesDaily) && <p style={errorStyle}>Значение 1000 до 5000</p>}
                       </label>
                     </div>
 
@@ -260,7 +260,7 @@ export default function PersonalAccountPage(): JSX.Element {
                           disabled={isDisabled}
                           onChange={(evt) => setUserCaloriesTarget(+(evt.target as HTMLInputElement).value.replace(NUMBER_REGEX, ''))}
                         />
-                        {(userCaloriesTarget > UserValidationParams.Calories.Value.Maximum || userCaloriesTarget < UserValidationParams.Calories.Value.Minimum) && <p style={errorStyle}>Значение 1000 до 5000</p>}
+                        {!isCaloriesValueValid(userCaloriesTarget) && <p style={errorStyle}>Значение 1000 до 5000</p>}
                       </label>
                     </div>
                   </div>

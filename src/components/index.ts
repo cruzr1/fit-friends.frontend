@@ -3,7 +3,6 @@ export { default as PopupQuestionnaireComponent } from './popup-questionnaire/po
 export { default as PopupSigninComponent } from './popup-signin/popup-signin.component';
 export { default as PopupSignupComponent } from './popup-signup/popup-signup.component';
 export { default as CoachItemComponent } from './coach-item/coach-item.component';
-export { default as PopupCreateTrainingComponent } from './popup-create-training/popup-create-training.component';
 export { default as TrainingFilterComponent } from './training-filter/training-filter.component';
 export { default as TrainingItemComponent } from './training-item/training-item.component';
 export { default as PaginationComponent } from './pagination/pagination.component';

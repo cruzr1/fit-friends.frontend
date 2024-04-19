@@ -20,4 +20,5 @@ export const selectTrainer = (state: StateType) => state[NameSpace.Training].tra
 export const selectReviews = (state: StateType) => state[NameSpace.Training].reviews;
 export const selectTrainingItem = (trainingId: string) => createSelector(selectTrainingsList, (trainingsList) => trainingsList.find((training) => training.id === trainingId));
 export const selectDurationFilter= (state: StateType) => state[NameSpace.Training].durationFilter;
+export const selectPostTrainingStatus= (state: StateType) => state[NameSpace.Training].postTrainingStatus;
 
