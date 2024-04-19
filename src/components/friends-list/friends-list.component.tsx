@@ -7,7 +7,7 @@ import { selectUser } from '../../store/user/user.selectors';
 import { useLocation } from 'react-router-dom';
 import { adaptPathname, findLatestApplication, findReviewingApplication } from '../../helpers';
 import { useEffect } from 'react';
-import { loadAuthorApplications, loadUserApplications, loadUserFriends } from '../../store/user/user.actions';
+import { loadAuthorApplicationsAction, loadUserApplicationsAction, loadUserFriendsAction } from '../../store/user/user.actions';
 import { setUsersTake } from '../../store/user/user.slice';
 import { LoadingPage } from '../../pages';
 
@@ -24,11 +24,11 @@ export default function FriendsListComponent({}): JSX.Element {
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
-      dispatch(loadUserFriends(take));
+      dispatch(loadUserFriendsAction(take));
       if (isCoach) {
-        dispatch(loadUserApplications(user.id))
+        dispatch(loadUserApplicationsAction(user.id))
       } else {
-        dispatch(loadAuthorApplications(user.id))
+        dispatch(loadAuthorApplicationsAction(user.id))
       }
     }
     return () => {

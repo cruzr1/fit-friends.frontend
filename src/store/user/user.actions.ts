@@ -193,7 +193,7 @@ export const loadUsersListAction = createAsyncThunk<void, QueryUsersType, {
   }
 )
 
-export const loadUserFriends = createAsyncThunk<void, number, {
+export const loadUserFriendsAction = createAsyncThunk<void, number, {
   dispatch: AppDispatchType;
   state: StateType;
   extra: AxiosInstance;
@@ -303,7 +303,7 @@ export const loadUserItemTrainingsAction = createAsyncThunk<void, string, {
   }
 )
 
-export const loadUserApplications = createAsyncThunk<void, string, {
+export const loadUserApplicationsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
   state: StateType;
   extra: AxiosInstance;
@@ -321,7 +321,7 @@ export const loadUserApplications = createAsyncThunk<void, string, {
   }
 )
 
-export const loadAuthorApplications = createAsyncThunk<void, string, {
+export const loadAuthorApplicationsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
   state: StateType;
   extra: AxiosInstance;
@@ -352,7 +352,7 @@ export const updateApplicationAction = createAsyncThunk<void, UpdateApplicationP
       await axiosApi.patch<ApplicationType[]>(`${APIPath.Applications.Index}/${applicationId}`, {
         status: applicationStatus,
       });
-      dispatch(loadUserApplications(userId));
+      dispatch(loadUserApplicationsAction(userId));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedUpdateApplication}: ${message}`));
     }
@@ -377,4 +377,3 @@ export const loadNotificationsAction = createAsyncThunk<void, undefined, {
     }
   }
 )
-
