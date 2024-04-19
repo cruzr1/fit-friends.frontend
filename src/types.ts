@@ -138,6 +138,11 @@ export type LoginType = Pick<UserType, 'email'> & Record<'password', string>;
     sortByField?: string;
   }
 
+  export type QueryTrainingsPurchasedType = {
+    take: number;
+    isActiveTrainings?: boolean;
+  }
+
   export type OrdersSortByFieldType = typeof OrdersSortByFields[keyof typeof OrdersSortByFields];
 
   export type QueryTrainingsOrderedType = {

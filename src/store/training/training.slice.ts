@@ -21,6 +21,7 @@ export type TrainingStateType = {
   training: TrainingType | null;
   trainer: UserType | null;
   reviews: ReviewType[];
+  isActiveTrainings: boolean;
   postTrainingStatus: RequestStatusType;
 }
 
@@ -42,6 +43,7 @@ export const trainingState: TrainingStateType = {
   training: null,
   trainer: null,
   reviews: [],
+  isActiveTrainings: false,
   postTrainingStatus: RequestStatus.Idle,
 }
 
@@ -91,6 +93,9 @@ export const training = createSlice({
     setTotalItems: (state, {payload}: PayloadAction<number>) => {
       state.totalItems = payload;
     },
+    setIsActiveTrainings: (state, {payload}: PayloadAction<boolean>) => {
+      state.isActiveTrainings = payload;
+    },
     setTraining: (state, {payload}: PayloadAction<TrainingType>) => {
       state.training = payload;
     },
@@ -131,4 +136,5 @@ export const {
    setDurationFilter,
    setTrainingsOrderedList,
    setSortByField,
+   setIsActiveTrainings,
 } = training.actions;

@@ -2,19 +2,21 @@ import { useEffect } from 'react';
 import { PaginationComponent, TrainingItemComponent } from '../../components';
 import { QueryTrainingsType, TrainingItemClassApplyType } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { loadTrainingsAction, loadTrainingsOrderedAction } from '../../store/training/training.actions';
+import { loadTrainingsAction, loadTrainingsOrderedAction, loadTrainingsPurchasedAction } from '../../store/training/training.actions';
 import { selectCaloriesFilter, selectTake, selectPriceFilter, selectSortByOrder, selectTrainTypeFilter, selectTrainingsList, selectRatingFilter, selectTotalItems, selectDurationFilter, selectTrainingsOrderedList, selectSortByField } from '../../store/training/training.selectors';
 import { MY_ORDERS_TRAININGS_COUNT } from '../../const';
-import { setTake } from '../../store/training/training.slice';
+import { setTake, training } from '../../store/training/training.slice';
 
 
 type TrainingsListComponentProps = {
   classApply: TrainingItemClassApplyType;
   shouldIncludeDuration?: boolean;
-  isOrdered?: boolean
+  isOrdered?: boolean;
+  isPurchased?: boolean;
+  isActiveTrainings?: boolean;
 }
 
-export default function TrainingsListComponent({classApply, shouldIncludeDuration, isOrdered}: TrainingsListComponentProps): JSX.Element {
+export default function TrainingsListComponent({classApply, shouldIncludeDuration, isOrdered, isPurchased, isActiveTrainings}: TrainingsListComponentProps): JSX.Element {
   const dispatch = useAppDispatch();
   const take = useAppSelector(selectTake);
   const totalItems = useAppSelector(selectTotalItems);
@@ -34,7 +36,9 @@ export default function TrainingsListComponent({classApply, shouldIncludeDuratio
       if( shouldIncludeDuration) {
         query.durationFilter = durationFilter;
       }
-      if (isOrdered) {
+      if (isPurchased) {
+        dispatch(loadTrainingsPurchasedAction({take, isActiveTrainings}))
+      } else if (isOrdered) {
         dispatch(loadTrainingsOrderedAction({take, sortByField, sortByOrder}));
       } else {
         dispatch(loadTrainingsAction(query));
@@ -43,7 +47,7 @@ export default function TrainingsListComponent({classApply, shouldIncludeDuratio
     return () => {
       isMounted = false;
     }
-  }, [dispatch, take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder, durationFilter]);
+  }, [dispatch, take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder, durationFilter, isActiveTrainings]);
   const trainingsList = useAppSelector(selectTrainingsList);
   const trainingsOrderedList = useAppSelector(selectTrainingsOrderedList);
   const handleShowMore = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

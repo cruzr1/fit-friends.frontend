@@ -31,7 +31,6 @@ export default function CreateTrainingPage (): JSX.Element {
     gender &&
     isDescriptionValid(description) &&
     videoURL;
-  console.log(isFormValid);
   const handleTrainTypeItemChange = (target: HTMLUListElement) => {
     setTrainType(target.id as TrainType);
     setTrainTypeOpen(false);

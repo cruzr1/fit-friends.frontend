@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType, TrainingOrderedType, QueryTrainingsOrderedType, CreateTrainingType } from '../../types';
+import { AppDispatchType, StateType, TrainingType, EntitiesWithPaginationType, UserFeaturesType, QueryTrainingsType, UserType, UpdateTrainingType, ReviewType, PostReviewType, TrainingOrderedType, QueryTrainingsOrderedType, CreateTrainingType, QueryTrainingsPurchasedType } from '../../types';
 import { NameSpace, Action, APIPath, ErrorMessage, SPECIAL_OFFERS_COUNT, POPULAR_TRAININGS_COUNT, POPULAR_TRAININGS_SORT_FIELD, CHOISE_TRAININGS_COUNT, NULL_VALUE, TRAININGS_CATALOG_SORT_FIELD, CATALOG_COUNT } from '../../const';
 import { clearErrorAction } from '../error/error.actions';
 import { setChoiseTrainings, setPopularTrainings, setSpecialOffers, setTrainingsList, setTotalItems, setTraining, setTrainer, setReviews, addReview, setTake, setTrainingsOrderedList } from './training.slice';
@@ -107,6 +107,33 @@ export const loadTrainingsAction = createAsyncThunk<void, QueryTrainingsType, {
       }
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedLoadTrainingsCatalogue}: ${message}`));
+    }
+  }
+)
+
+export const loadTrainingsPurchasedAction = createAsyncThunk<void, QueryTrainingsPurchasedType, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.Training}/${Action.LoadPurchasedTrainings}`,
+  async ({take, isActiveTrainings}, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data : { totalItems, entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Purchases,{
+        params: {
+          take,
+          isActiveTrainings,
+        }
+      });
+      dispatch(setTrainingsList(entities));
+      dispatch(setTotalItems(totalItems));
+      if (entities.length < take) {
+        dispatch(setTake(CATALOG_COUNT));
+      }
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadPurchasedTrainings}: ${message}`));
     }
   }
 )

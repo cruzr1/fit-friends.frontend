@@ -110,6 +110,7 @@ export const APIPath = {
   Trainings: {
     Index: 'trainings',
     Orders: 'trainings/myOrders',
+    Purchases: 'trainings/myPurchsases',
     Trainer: 'trainings/trainer',
   },
   Reviews: {
@@ -160,6 +161,7 @@ export const Action = {
   LoadAuthorApplications: 'loadAuthorApplications',
   UpdateApplication: 'updateApplication',
   LoadOrderedTrainings: 'loadOrderedTrainings',
+  LoadPurchasedTrainings: 'loadPurchasedTrainings',
 } as const;
 
 export const AuthStatus = {
@@ -309,6 +311,7 @@ export const ErrorMessage = {
   FailedUpdateApplication: 'Failed to update application',
   FailedLoadOrderedTrainings: 'Failed to load ordered trainings',
   FailedCreateTraining: 'Failed to create training',
+  FailedLoadPurchasedTrainings: 'Failed to load purchased training',
  } as const;
 
 export const UserValidationParams = {
