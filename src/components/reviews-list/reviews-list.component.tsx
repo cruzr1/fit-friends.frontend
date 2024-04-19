@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BackButtonComponent, ReviewItemComponent } from '..';
-import { BackButtonClassApply, UserRole } from '../../const';
+import { BackButtonClassApply } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import { TrainingType } from '../../types';
 import { loadReviewsAction } from '../../store/training/training.actions';
 import { selectReviews } from '../../store/training/training.selectors';
 import { selectUser } from '../../store/user/user.selectors';

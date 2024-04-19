@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthStatus, CATALOG_COUNT, Level, Location, NameSpace, RequestStatus, TrainType, UserRole } from '../../const';
-import { ApplicationType, AuthStatusType, RequestStatusType, UserType } from '../../types';
+import { ApplicationType, AuthStatusType, ClientNotificationType, RequestStatusType, UserType } from '../../types';
 import { logoutUser } from '../action';
 import { removeToken } from '../../services/token';
 import { updateUserAction } from './user.actions';
@@ -19,6 +19,7 @@ export type UserStateType = {
   usersList: UserType[];
   usersTake: number;
   usersTotalItems: number;
+  notifications: ClientNotificationType[];
   applicationsList: ApplicationType[];
   updateUserStatus: RequestStatusType;
 }
@@ -35,6 +36,7 @@ export const userState: UserStateType = {
   levelFilter: Level.Amateur,
   roleFilter: UserRole.Trainer,
   usersList: [],
+  notifications: [],
   usersTake: CATALOG_COUNT,
   usersTotalItems: 0,
   applicationsList: [],
@@ -62,6 +64,9 @@ export const user = createSlice({
     },
     setUsersList: (state, {payload}: PayloadAction<UserType[]>) => {
       state.usersList = payload;
+    },
+    setNotifications: (state, {payload}: PayloadAction<ClientNotificationType[]>) => {
+      state.notifications = payload;
     },
     setTrainingsCount: (state, {payload}: PayloadAction<number>) => {
       state.trainingsCount = payload;
@@ -124,4 +129,5 @@ export const {
    setUserItem,
    setUserFriends,
    setApplicationsList,
+   setNotifications,
 } = user.actions;

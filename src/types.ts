@@ -14,6 +14,34 @@ export type RequestStatusType = typeof RequestStatus[keyof typeof RequestStatus]
 
 export type BackButtonClassApplyType = typeof BackButtonClassApply[keyof typeof BackButtonClassApply];
 
+export enum NotifyStatus {
+  Created = 'Created',
+  Sent = 'Sent',
+}
+
+export type NotificationPayloadType = {
+  to: string;
+  subject: string;
+  template: string;
+  context: Record<string, string>;
+};
+
+export type ServerNotificationType = {
+  id: string;
+  notifyDate?: Date;
+  userId: string;
+  description: string;
+  notifyStatus: NotifyStatus;
+  payload: NotificationPayloadType;
+  createdAt: Date;
+}
+
+export type ClientNotificationType = {
+  description: string;
+  name: string;
+  createdAt: string;
+}
+
 export type TrainingType  = {
   id: string;
   name: string;

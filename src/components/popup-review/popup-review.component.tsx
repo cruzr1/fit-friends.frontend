@@ -1,4 +1,4 @@
-import { Component, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { INITIAL_RATING, INITIAL_COMMENT, RATING_LIST, errorStyle, KEY_ESCAPE } from '../../const';
 import { useAppDispatch } from '../../hooks/hooks';
 import { postReviewAction } from '../../store/training/training.actions';

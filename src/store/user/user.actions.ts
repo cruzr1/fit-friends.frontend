@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount, setUsersList, setUsersTotalItems, setUsersTake, setUserItem, setUserFriends, setApplicationsList } from './user.slice';
+import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount, setUsersList, setUsersTotalItems, setUsersTake, setUserItem, setUserFriends, setApplicationsList, setNotifications } from './user.slice';
 import { setRefreshToken, setToken} from '../../services/token';
 import { clearErrorAction } from '../error/error.actions';
-import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, AppRoute, UserRole, USERS_READY_TRAIN, CATALOG_COUNT, ApplicationStatus } from '../../const';
-import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType, QueryUsersType, ApplicationType, TrainingType, UpdateApplicationParams } from '../../types';
-import { redirectToRoute } from '../action';
+import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, UserRole, USERS_READY_TRAIN, CATALOG_COUNT } from '../../const';
+import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType, QueryUsersType, ApplicationType, TrainingType, UpdateApplicationParams, ServerNotificationType } from '../../types';
 import { setTrainingsList } from '../training/training.slice';
+import { adaptNotifications } from '../../adapters/adapt-to-client';
 
 export const loadUsersReadyTrainAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -355,6 +355,25 @@ export const updateApplicationAction = createAsyncThunk<void, UpdateApplicationP
       dispatch(loadUserApplications(userId));
     } catch (message) {
       dispatch(clearErrorAction(`${ErrorMessage.FailedUpdateApplication}: ${message}`));
+    }
+  }
+)
+
+export const loadNotificationsAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+  }
+>
+(
+  `${NameSpace.User}/${Action.LoadNotifications}`,
+  async (_arg, {dispatch, extra: axiosApi}) => {
+    try {
+      const { data } = await axiosApi.get<ServerNotificationType[]>(APIPath.Notifications.Index);
+      const clientNotifications = data.map((notification) => adaptNotifications(notification))
+      dispatch(setNotifications(clientNotifications));
+    } catch (message) {
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadNotifications}: ${message}`));
     }
   }
 )

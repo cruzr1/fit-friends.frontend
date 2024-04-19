@@ -1,4 +1,3 @@
-import { addToFriendsAction, loadAvailableTrainingsCountAction, subscribeNotificationsAction } from './store/user/user.actions';
 import { AppRouteType } from './types';
 
 export const AUTH_TOKEN_KEY = 'ZGRmZGZkZkBkZmtsamRmLmNvbQ==';
@@ -64,6 +63,7 @@ export const DEFAULT_ORDER_COUNT = 5;
 
 export const errorStyle = {
   color: 'red',
+  fontSize: '16px',
 };
 
 export const DEFAULT_PATH = '/img/content';
@@ -119,6 +119,9 @@ export const APIPath = {
   Orders: {
     Index: 'orders',
   },
+  Notifications: {
+    Index: 'notifications',
+  },
   Applications: {
     Index: 'applications',
     List: 'applications/index',
@@ -162,6 +165,7 @@ export const Action = {
   UpdateApplication: 'updateApplication',
   LoadOrderedTrainings: 'loadOrderedTrainings',
   LoadPurchasedTrainings: 'loadPurchasedTrainings',
+  LoadNotifications: 'loadNotifications',
 } as const;
 
 export const AuthStatus = {
@@ -312,6 +316,7 @@ export const ErrorMessage = {
   FailedLoadOrderedTrainings: 'Failed to load ordered trainings',
   FailedCreateTraining: 'Failed to create training',
   FailedLoadPurchasedTrainings: 'Failed to load purchased training',
+  FailedLoadNotifications: 'Failed to load notifications',
  } as const;
 
 export const UserValidationParams = {

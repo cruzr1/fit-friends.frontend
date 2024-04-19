@@ -1,6 +1,5 @@
 import { StateType } from '../../types';
-import { ApplicationStatus, NameSpace } from '../../const';
-import { createSelector } from '@reduxjs/toolkit';
+import { NameSpace } from '../../const';
 
 export const selectUser = (state: StateType) => state[NameSpace.User].user;
 export const selectUserAuthStatus = (state: StateType) => state[NameSpace.User].authStatus;
@@ -17,3 +16,4 @@ export const selectUserItem = (state: StateType) => state[NameSpace.User].userIt
 export const selectUserFriends = (state: StateType) => state[NameSpace.User].userFriends;
 export const selectApplicationsList = (state: StateType) => state[NameSpace.User].applicationsList;
 export const selectUserUpdateStatus = (state: StateType) => state[NameSpace.User].updateUserStatus;
+export const selectNotifications = (state: StateType) => state[NameSpace.User].notifications;
