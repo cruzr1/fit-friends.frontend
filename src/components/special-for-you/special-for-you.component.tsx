@@ -2,17 +2,22 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectChoiseTrainings } from '../../store/training/training.selectors';
 import { loadChoiseTrainingsAction } from '../../store/training/training.actions';
-import { ITEMS_PER_PAGE, NULL_VALUE, STEP } from '../../const';
+import { AppRoute, ITEMS_PER_PAGE, NULL_VALUE, STEP } from '../../const';
 import ThumbnailTrainingPreviewComponent from '../thumbnail-training-preview/thumbnail-training-prevew.component';
 import { selectUser } from '../../store/user/user.selectors';
+import { Navigate } from 'react-router-dom';
+import { isStatusPending } from '../../helpers';
 
 
 export default function SpecialForYouComponent(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  if (!user) {
+    return <Navigate to={AppRoute.Index} />
+  }
   useEffect(() => {
     let isMounted = true;
-    if (isMounted && user?.email) {
+    if (isMounted) {
       const {trainType, level, caloriesDaily, duration} = user;
       dispatch(loadChoiseTrainingsAction({trainType, level, caloriesDaily, duration}));
     }

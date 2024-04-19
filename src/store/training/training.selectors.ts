@@ -19,7 +19,17 @@ export const selectTraining = (state: StateType) => state[NameSpace.Training].tr
 export const selectTrainer = (state: StateType) => state[NameSpace.Training].trainer;
 export const selectReviews = (state: StateType) => state[NameSpace.Training].reviews;
 export const selectTrainingItem = (trainingId: string) => createSelector(selectTrainingsList, (trainingsList) => trainingsList.find((training) => training.id === trainingId));
-export const selectDurationFilter= (state: StateType) => state[NameSpace.Training].durationFilter;
-export const selectPostTrainingStatus= (state: StateType) => state[NameSpace.Training].postTrainingStatus;
-export const selectIsActiveTrainings= (state: StateType) => state[NameSpace.Training].isActiveTrainings;
-
+export const selectDurationFilter = (state: StateType) => state[NameSpace.Training].durationFilter;
+export const selectPostTrainingStatus = (state: StateType) => state[NameSpace.Training].postTrainingStatus;
+export const selectIsActiveTrainings = (state: StateType) => state[NameSpace.Training].isActiveTrainings;
+export const selectLoadSpecialOffersStatus = (state: StateType) => state[NameSpace.Training].loadSpecialOffersStatus;
+export const selectLoadPopularTrainingsStatus = (state: StateType) => state[NameSpace.Training].loadPopularTrainingsStatus;
+export const selectLoadChoiseTrainingsStatus = (state: StateType) => state[NameSpace.Training].loadChoiseTrainingsStatus;
+export const selectLoadTrainingsStatus = (state: StateType) => state[NameSpace.Training].loadTrainingsStatus;
+export const selectLoadTrainingsPurchasedStatus = (state: StateType) => state[NameSpace.Training].loadTrainingsPurchasedStatus;
+export const selectLoadTrainingsOrderedStatus = (state: StateType) => state[NameSpace.Training].loadTrainingsOrderedStatus;
+export const selectLoadTrainingStatus = (state: StateType) => state[NameSpace.Training].loadTrainingStatus;
+export const selectUpdateTrainingStatus = (state: StateType) => state[NameSpace.Training].updateTrainingStatus;
+export const selectLoadTrainerStatus = (state: StateType) => state[NameSpace.Training].loadTrainerStatus;
+export const selectLoadReviewsStatus = (state: StateType) => state[NameSpace.Training].loadReviewsStatus;
+export const selectPostReviewStatus = (state: StateType) => state[NameSpace.Training].postReviewStatus;

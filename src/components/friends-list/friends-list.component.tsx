@@ -47,6 +47,7 @@ export default function FriendsListComponent({}): JSX.Element {
     evt.preventDefault();
     dispatch(setUsersTake(CATALOG_COUNT))
   };
+  
   return (
     <>
       {friends.length > NULL_VALUE &&
