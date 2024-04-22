@@ -2,8 +2,8 @@ import Slider from '@mui/material/Slider';
 import { ShowValue, sliderStyle } from '../../const';
 
 type RangeSliderComponentProps = {
-  value: number[],
-  maxValue: number,
+  value: number[];
+  maxValue: number;
   handleSliderChange: (value: number[]) => void;
   showValue: typeof ShowValue[keyof typeof ShowValue];
 }

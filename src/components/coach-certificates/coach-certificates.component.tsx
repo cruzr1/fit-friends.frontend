@@ -1,16 +1,16 @@
-import { useRef, useState, ChangeEvent } from 'react'
-import { CoachItemComponent } from '../index'
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { selectUser } from '../../store/user/user.selectors';
-import { UserType } from '../../types';
+import { useRef, useState, ChangeEvent } from 'react';
+import { CoachItemComponent } from '../index';
+import { useAppDispatch } from '../../hooks/hooks';
 import { ITEMS_PER_PAGE, NULL_VALUE, STEP } from '../../const';
 import { updateUserAction } from '../../store/user/user.actions';
 
+type CoachCertificatesComponentProps ={
+  certificates: string[];
+}
 
-export default function CoachCertificatesComponent(): JSX.Element {
+export default function CoachCertificatesComponent({certificates}: CoachCertificatesComponentProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const { certificates } = useAppSelector(selectUser) as UserType;
-  const [trainerCertificates, setTrainerCertificates] = useState<string[]>([certificates!] || []) ;
+  const [trainerCertificates, setTrainerCertificates] = useState<string[]>(certificates) ;
   const [first, setFirst] = useState<number>(NULL_VALUE);
   const certificatesVisible = trainerCertificates.slice(first, first + ITEMS_PER_PAGE);
   const [editCertificates, setEditCertificates] = useState<string[]>([]);
@@ -18,41 +18,41 @@ export default function CoachCertificatesComponent(): JSX.Element {
   const updateRef = useRef<HTMLInputElement>(null);
   const [updateCertificate, setUpdateCertificate] = useState<string>('');
   const handleLoadButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    evt.preventDefault()
-    inputRef.current?.click()
-  }
+    evt.preventDefault();
+    inputRef.current?.click();
+  };
   const handleSaveButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     setEditCertificates(editCertificates.filter((certificate) => certificate !== evt.currentTarget.value));
-    dispatch(updateUserAction({certificates: trainerCertificates[0]}))
-  }
+    dispatch(updateUserAction({certificates: trainerCertificates[NULL_VALUE]}));
+  };
   const handleEditButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     setEditCertificates(editCertificates.concat(evt.currentTarget.value));
-  }
+  };
   const handleNextButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first < trainerCertificates.length - ITEMS_PER_PAGE) {
-      setFirst(first + STEP)
+      setFirst(first + STEP);
     }
-  }
+  };
   const handlePreviousButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first > NULL_VALUE) {
-      setFirst(first - STEP)
+      setFirst(first - STEP);
     }
-  }
+  };
   const handleDeleteButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    evt.preventDefault()
+    evt.preventDefault();
     setEditCertificates(editCertificates.filter((certificate) => certificate !== evt.currentTarget.value));
     setTrainerCertificates(trainerCertificates.filter((certificate) => certificate !== evt.currentTarget.value));
 
-  }
+  };
   const handleUpdateButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    evt.preventDefault()
+    evt.preventDefault();
     setUpdateCertificate(evt.currentTarget.value);
-    updateRef.current?.click()
-  }
+    updateRef.current?.click();
+  };
   const handleUpdateChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const newCertificate = evt.target.files && evt.target.files[0];
     if (newCertificate && newCertificate.name !== updateCertificate && !trainerCertificates.includes(newCertificate.name)) {
@@ -64,15 +64,15 @@ export default function CoachCertificatesComponent(): JSX.Element {
         .filter((certificate) => certificate !== updateCertificate)
         .concat(newCertificate.name));
     }
-    return;
-  }
+
+  };
   const handleFileChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const newCertificate = evt.target.files && evt.target.files[0];
     if (!newCertificate) {
       return;
     }
     setTrainerCertificates(trainerCertificates.concat(newCertificate.name));
-  }
+  };
   return (
     <div className="personal-account-coach__additional-info">
       <div className="personal-account-coach__label-wrapper">
@@ -83,7 +83,7 @@ export default function CoachCertificatesComponent(): JSX.Element {
           ref={inputRef}
           onChange={(evt) => handleFileChange(evt)}
         />
-         <input
+        <input
           type="file"
           style={{display: 'none'}}
           ref={updateRef}
@@ -124,7 +124,8 @@ export default function CoachCertificatesComponent(): JSX.Element {
         </div>
       </div>
       <ul className="personal-account-coach__list">
-          {certificatesVisible.map((certificate) =>
+        {certificatesVisible.map((certificate) =>
+          (
             <li key={certificate}className="personal-account-coach__item">
               <CoachItemComponent
                 certificate={certificate}
@@ -135,8 +136,9 @@ export default function CoachCertificatesComponent(): JSX.Element {
                 isEdit={editCertificates.includes(certificate)}
               />
             </li>
-          )}
+          )
+        )}
       </ul>
     </div>
-  )
+  );
 }

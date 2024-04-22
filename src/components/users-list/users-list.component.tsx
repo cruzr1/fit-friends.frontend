@@ -32,24 +32,26 @@ export default function UsersListComponent({classApply}: UsersListComponentProps
     }
     return () => {
       isMounted = false;
-    }
+    };
   }, [dispatch, usersTake, locationFilter, trainTypeFilter, levelFilter, roleFilter]);
   const users = useAppSelector(selectUsersList);
   const handleShowMore = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
-    dispatch(setUsersTake(Math.min(usersTake + CATALOG_COUNT, usersTotalItems)))
+    dispatch(setUsersTake(Math.min(usersTake + CATALOG_COUNT, usersTotalItems)));
   };
   const handleReturn = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
-    dispatch(setUsersTake(CATALOG_COUNT))
+    dispatch(setUsersTake(CATALOG_COUNT));
   };
   return (
     <>
       <ul className="users-catalog__list">
         {users && users.map(({id, name, location, trainType = [], role, avatar}) =>
-          <li key={id} className="users-catalog__item">
-            <UserItemComponent {...{id, name, location, trainType, role, avatar}} />
-          </li>
+          (
+            <li key={id} className="users-catalog__item">
+              <UserItemComponent {...{id, name, location, trainType, role, avatar}} />
+            </li>
+          )
         )}
       </ul>
       <PaginationComponent
@@ -60,5 +62,5 @@ export default function UsersListComponent({classApply}: UsersListComponentProps
         classApply={classApply}
       />
     </>
-  )
+  );
 }

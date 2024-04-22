@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { AppRoute, NULL_VALUE, MAIN_ITEMS_PER_PAGE, STEP } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadPopularTrainingsAction } from '../../store/training/training.actions';
@@ -17,23 +17,23 @@ export default function PopularTrainingsComponent(): JSX.Element {
     }
     return () => {
       isMounted = false;
-    }
+    };
   }, [dispatch]);
   const popularTrainings = useAppSelector(selectPopularTrainings);
   const [first, setFirst] = useState<number>(NULL_VALUE);
-  const popularTrainingsVisible = popularTrainings.slice(first, first + MAIN_ITEMS_PER_PAGE)
+  const popularTrainingsVisible = popularTrainings.slice(first, first + MAIN_ITEMS_PER_PAGE);
   const handleNextButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first < popularTrainings.length - MAIN_ITEMS_PER_PAGE) {
-      setFirst(first + STEP)
+      setFirst(first + STEP);
     }
-  }
+  };
   const handlePreviousButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first > NULL_VALUE) {
-      setFirst(first - STEP)
+      setFirst(first - STEP);
     }
-  }
+  };
   return (
     <section className="popular-trainings">
       <div className="container">
@@ -77,15 +77,16 @@ export default function PopularTrainingsComponent(): JSX.Element {
           {popularTrainingsVisible.length > 0 &&
             <ul className="popular-trainings__list">
               {popularTrainingsVisible.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
-                <li key={id} className="popular-trainings__item">
-                  <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}}/>
-                </li>
+                (
+                  <li key={id} className="popular-trainings__item">
+                    <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}}/>
+                  </li>
+                )
               )}
-            </ul>
-          }
+            </ul>}
           {popularTrainingsVisible.length === 0 && <ThumbnailSpecGymComponent />}
         </div>
       </div>
     </section>
-  )
+  );
 }

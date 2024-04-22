@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom'
-import { Helmet } from "react-helmet-async";
+import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../../const';
 
 export default function ErrorPage (): JSX.Element {
@@ -15,8 +15,9 @@ export default function ErrorPage (): JSX.Element {
         <button
           className="button button__error button--small button--black-border"
           onClick={() => navigate(AppRoute.Index)}
-        >Продолжить работу</button>
+        >Продолжить работу
+        </button>
       </section>
     </div>
-  )
+  );
 }

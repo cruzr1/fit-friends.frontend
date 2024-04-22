@@ -5,12 +5,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser, selectUserItem } from '../../store/user/user.selectors';
 import { useEffect, useState } from 'react';
 import { applyPersonalTrainingAction, loadUserItemAction, loadUserItemTrainingsAction, subscribeNotificationsAction } from '../../store/user/user.actions';
-import LoadingPage from '../loading/loading.page';
 import { selectTrainingsList } from '../../store/training/training.selectors';
 import { Helmet } from 'react-helmet-async';
+import ErrorPage from '../error/error.page';
 
 export default function UserCardPage(): JSX.Element {
-  const userId= useParams().userId as string;
+  const userId = useParams().userId as string;
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -21,8 +21,8 @@ export default function UserCardPage(): JSX.Element {
     }
     return () => {
       isMounted = false;
-    }
-  }, [dispatch]);
+    };
+  }, [dispatch, userId]);
   const userItem = useAppSelector(selectUserItem);
   const trainings = useAppSelector(selectTrainingsList);
   const [isShownCertificate, setIsShownCertificate] = useState<boolean>(false);
@@ -35,52 +35,50 @@ export default function UserCardPage(): JSX.Element {
     if (isShownMap) {
       setIsShownMap(false);
     }
-  }
+  };
   const handleShowCertificatesButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     setIsShownMap(false);
     setIsShownCertificate(true);
-  }
+  };
   const handleApplicationButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     dispatch(applyPersonalTrainingAction(userId));
     setHasApplied(true);
-  }
+  };
   const handleMapLinkClick = (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     evt.preventDefault();
     setIsShownCertificate(false);
     setIsShownMap(true);
-  }
+  };
   const handleSubscribeStatusChange = () => {
     dispatch(subscribeNotificationsAction(userId));
-  }
+  };
   if (!userItem) {
-    return <LoadingPage />
+    return <ErrorPage />;
   }
   const {id, role, name, location, description, trainType = [], certificates, isReadyTrain } = userItem;
-  const isCoach = role === UserRole.Trainer ? true : false;
+  const isCoach = role === UserRole.Trainer;
   const classApply = isCoach ? 'user-card-coach' : 'user-card';
   return (
     <>
       <div className="inner-page inner-page--no-sidebar">
-      <Helmet>
-        <title>Карточка пользователя — Fit friends</title>
-      </Helmet>
+        <Helmet>
+          <title>Карточка пользователя — Fit friends</title>
+        </Helmet>
         <div className="container">
           <div className="inner-page__wrapper">
             <BackButtonComponent classApply={BackButtonClassApply.UserCard} />
             <div className="inner-page__content">
               <section className={`${classApply}`}>
-                <h1 className="visually-hidden">Карточка пользователя{ isCoach &&' роль тренер'}</h1>
+                <h1 className="visually-hidden">Карточка пользователя{ isCoach && ' роль тренер'}</h1>
                 <div className={`${classApply}__wrapper`}>
                   {isCoach &&
                     <div className={`${classApply}__card`}>
                       <UserCardContentComponent {...{ id, classApply, name, location, isCoach, description, trainType, handleShowCertificatesButtonClick, handleMapLinkClick, isReadyTrain }} />
-                    </div>
-                  }
+                    </div>}
                   {!isCoach &&
-                    <UserCardContentComponent {...{ id, classApply, name, location, isCoach, description, trainType, handleShowCertificatesButtonClick, handleMapLinkClick, isReadyTrain}} />
-                  }
+                    <UserCardContentComponent {...{ id, classApply, name, location, isCoach, description, trainType, handleShowCertificatesButtonClick, handleMapLinkClick, isReadyTrain}} />}
                   {isCoach &&
                     <div className="user-card-coach__training">
                       <div className="user-card-coach__training-head">
@@ -99,10 +97,12 @@ export default function UserCardPage(): JSX.Element {
                         </div>
                       </div>
                       <ul className="user-card-coach__training-list">
-                        {trainings.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
-                          <li key={id} className="user-card-coach__training-item">
-                            <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}} />
-                          </li>
+                        {trainings.map(({id: trainingId, price, name: trainingName, trainType: trainItemType, calories, description: trainDescription, rating, backgroundImage}) =>
+                          (
+                            <li key={trainingId} className="user-card-coach__training-item">
+                              <TrainingItemComponent {...{id: trainingId, price, name: trainingName, trainType: trainItemType, calories, description: trainDescription, rating, backgroundImage}} />
+                            </li>
+                          )
                         )}
                       </ul>
                       <form className="user-card-coach__training-form">
@@ -111,7 +111,8 @@ export default function UserCardPage(): JSX.Element {
                           type="button"
                           disabled={!isReadyTrain || hasApplied}
                           onClick={(evt) => handleApplicationButtonClick(evt)}
-                        >{hasApplied ? 'Запрос на тренировку отправлен' : 'Хочу персональную тренировку'}</button>
+                        >{hasApplied ? 'Запрос на тренировку отправлен' : 'Хочу персональную тренировку'}
+                        </button>
                         <div className="user-card-coach__training-check">
                           <div className="custom-toggle custom-toggle--checkbox">
                             <label>
@@ -121,16 +122,17 @@ export default function UserCardPage(): JSX.Element {
                                 name="user-agreement"
                                 checked={user?.subscribedFor?.includes(userId)}
                                 onChange={() => handleSubscribeStatusChange()}
-                              /><span className="custom-toggle__icon">
+                              />
+                              <span className="custom-toggle__icon">
                                 <svg width="9" height="6" aria-hidden="true">
                                   <use xlinkHref="#arrow-check"></use>
-                                </svg></span><span className="custom-toggle__label">Получать уведомление на почту о новой тренировке</span>
+                                </svg>
+                              </span><span className="custom-toggle__label">Получать уведомление на почту о новой тренировке</span>
                             </label>
                           </div>
                         </div>
                       </form>
-                    </div>
-                  }
+                    </div>}
                 </div>
               </section>
             </div>
@@ -138,11 +140,9 @@ export default function UserCardPage(): JSX.Element {
         </div>
       </div>
       {isShownCertificate && certificates &&
-        <PopupCertificatesComponent certificates={certificates} handleCloseButtonClick={handlePopupClose} />
-      }
+        <PopupCertificatesComponent certificates={certificates} handleCloseButtonClick={handlePopupClose} />}
       {isShownMap &&
-        <PopupMapComponent handlePopupClose={handlePopupClose} location={location} name={name} />
-      }
+        <PopupMapComponent handlePopupClose={handlePopupClose} location={location} name={name} />}
     </>
-  )
+  );
 }

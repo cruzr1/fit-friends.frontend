@@ -10,10 +10,12 @@ export default function OrdersListComponent({classApply}: OrdersListComponentPro
   return (
     <ul className={`${classApply}__list`}>
       {trainings.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
-        <li key={id} className={`${classApply}__item`}>
-          <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}} />
-        </li>
+        (
+          <li key={id} className={`${classApply}__item`}>
+            <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}} />
+          </li>
+        )
       )}
     </ul>
-  )
+  );
 }

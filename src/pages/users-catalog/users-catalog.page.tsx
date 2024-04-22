@@ -23,5 +23,5 @@ export default function UsersCataloguePage(): JSX.Element {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -21,5 +21,5 @@ export default function ThumbnailTrainingPreviewComponent({id, trainType}: Thumb
         </div>
       </div>
     </div>
-  )
+  );
 }

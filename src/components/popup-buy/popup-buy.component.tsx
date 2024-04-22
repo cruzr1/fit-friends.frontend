@@ -11,24 +11,27 @@ type PopupBuyComponentProps = {
 }
 
 export default function PopupBuyComponent({training, handlePopupClose}: PopupBuyComponentProps): JSX.Element {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const {backgroundImage, price, id} = training;
   const [count, setCount] = useState<number>(DEFAULT_ORDER_COUNT);
   const [payment, setPayment] = useState<Payment>(Payment.Visa);
   useEffect(() => {
     let isMounted = true;
-    blockPage()
     const handleKeyDown = (evt: KeyboardEvent) => {
       if (evt.key === KEY_ESCAPE) {
-        handlePopupClose()
+        handlePopupClose();
       }
+    };
+    if (isMounted) {
+      blockPage();
+      document.addEventListener('keydown', (evt) => handleKeyDown(evt));
+
     }
-    document.addEventListener('keydown', (evt) => handleKeyDown(evt));
     return () => {
       isMounted = false;
-      unblockPage()
-    }
-  }, [])
+      unblockPage();
+    };
+  }, [handlePopupClose]);
   const handleBuyClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     dispatch(orderTrainingsAction({
@@ -36,12 +39,13 @@ export default function PopupBuyComponent({training, handlePopupClose}: PopupBuy
       trainingId: id,
       trainingsCount: count,
       payment,
-    }))
+    }));
     handlePopupClose();
-  }
+  };
   return (
     <div
-      className="popup-form popup-form--buy">
+      className="popup-form popup-form--buy"
+    >
       <section className="popup">
         <div className="popup__wrapper">
           <div className="popup-head">
@@ -75,7 +79,7 @@ export default function PopupBuyComponent({training, handlePopupClose}: PopupBuy
                     className="btn-icon btn-icon--quantity"
                     type="button"
                     aria-label="minus"
-                    onClick={() => setCount((count) => count - 1)}
+                    onClick={() => setCount((item) => item - 1)}
                   >
                     <svg width="12" height="12" aria-hidden="true">
                       <use xlinkHref="#icon-minus"></use>
@@ -95,7 +99,7 @@ export default function PopupBuyComponent({training, handlePopupClose}: PopupBuy
                     className="btn-icon btn-icon--quantity"
                     type="button"
                     aria-label="plus"
-                    onClick={() => setCount((count) => count + 1)}
+                    onClick={() => setCount((item) => item + 1)}
                   >
                     <svg width="12" height="12" aria-hidden="true">
                       <use xlinkHref="#icon-plus"></use>
@@ -108,23 +112,27 @@ export default function PopupBuyComponent({training, handlePopupClose}: PopupBuy
               <h4 className="payment-method__title">Выберите способ оплаты</h4>
               <ul className="payment-method__list">
                 {Object.values(Payment).map((type) =>
-                  <li key={type} className="payment-method__item">
-                    <div className="btn-radio-image">
-                      <label>
-                        <input
-                          type="radio"
-                          name="payment-purchases"
-                          aria-label={type}
-                          value={type}
-                          checked={type === payment}
-                          onChange={(evt) => setPayment(evt.target.value as Payment)}
-                        /><span className="btn-radio-image__image">
-                          <svg width="58" height="20" aria-hidden="true">
-                            <use xlinkHref={`#${adaptType(type)}-logo`}></use>
-                          </svg></span>
-                      </label>
-                    </div>
-                  </li>
+                  (
+                    <li key={type} className="payment-method__item">
+                      <div className="btn-radio-image">
+                        <label>
+                          <input
+                            type="radio"
+                            name="payment-purchases"
+                            aria-label={type}
+                            value={type}
+                            checked={type === payment}
+                            onChange={(evt) => setPayment(evt.target.value as Payment)}
+                          />
+                          <span className="btn-radio-image__image">
+                            <svg width="58" height="20" aria-hidden="true">
+                              <use xlinkHref={`#${adaptType(type)}-logo`}></use>
+                            </svg>
+                          </span>
+                        </label>
+                      </div>
+                    </li>
+                  )
                 )}
               </ul>
             </section>
@@ -140,11 +148,12 @@ export default function PopupBuyComponent({training, handlePopupClose}: PopupBuy
                 className="btn"
                 type="button"
                 onClick={(evt) => handleBuyClick(evt)}
-              >Купить</button>
+              >Купить
+              </button>
             </div>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

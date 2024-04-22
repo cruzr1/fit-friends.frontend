@@ -20,8 +20,8 @@ export default function UserCardContentComponent({ id, classApply, name, locatio
   const dispatch = useAppDispatch();
   const handleAddToFriends = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
-    dispatch(addToFriendsAction(id))
-  }
+    dispatch(addToFriendsAction(id));
+  };
   const user = useAppSelector(selectUser);
   return (
     <>
@@ -33,9 +33,11 @@ export default function UserCardContentComponent({ id, classApply, name, locatio
           <a
             href="popup-user-map.html"
             onClick={(evt) => handleMapLinkClick(evt)}
-          ><svg className={`${classApply}__icon-location`} width="12" height="14" aria-hidden="true">
-            <use xlinkHref="#icon-location"></use>
-          </svg><span>{location}</span></a>
+          >
+            <svg className={`${classApply}__icon-location`} width="12" height="14" aria-hidden="true">
+              <use xlinkHref="#icon-location"></use>
+            </svg><span>{location}</span>
+          </a>
         </div>
         <div className={`${classApply}__status-container`}>
           {isCoach &&
@@ -43,8 +45,7 @@ export default function UserCardContentComponent({ id, classApply, name, locatio
               <svg className={`${classApply}__icon-cup`} width="12" height="13" aria-hidden="true">
                 <use xlinkHref="#icon-cup"></use>
               </svg><span>Тренер</span>
-            </div>
-          }
+            </div>}
           <div className={`${classApply}__status ${classApply}__status--check`}><span>{`${isReadyTrain ? 'Готов' : 'Не готов'} ${isCoach ? 'тренировать' : 'к тренировке'}`}</span></div>
         </div>
         <div className={`${classApply}__text`}>
@@ -59,20 +60,22 @@ export default function UserCardContentComponent({ id, classApply, name, locatio
             <svg width="12" height="13" aria-hidden="true">
               <use xlinkHref="#icon-teacher"></use>
             </svg><span>Посмотреть сертификаты</span>
-          </button>
-        }
+          </button>}
         <ul className={`${classApply}__hashtag-list`}>
           {trainType.map((type) =>
-            <li key={type} className={`${classApply}__hashtag-item`}>
-              <div className="hashtag"><span>#{TrainTypeCaption[type as TrainType]}</span></div>
-            </li>
+            (
+              <li key={type} className={`${classApply}__hashtag-item`}>
+                <div className="hashtag"><span>#{TrainTypeCaption[type as TrainType]}</span></div>
+              </li>
+            )
           )}
         </ul>
         <button
           className={`btn ${classApply}__btn`}
           type="button"
           onClick={(evt) => handleAddToFriends(evt)}
-        >{user?.friends?.includes(id) ? 'Удалить из друзей' : 'Добавить в друзья'}</button>
+        >{user?.friends?.includes(id) ? 'Удалить из друзей' : 'Добавить в друзья'}
+        </button>
       </div>
       <div className={`${classApply}__gallary`}>
         <ul className={`${classApply}__gallary-list`}>
@@ -84,5 +87,5 @@ export default function UserCardContentComponent({ id, classApply, name, locatio
       </div>
 
     </>
-  )
+  );
 }

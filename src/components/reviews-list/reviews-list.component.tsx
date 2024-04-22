@@ -21,8 +21,8 @@ export default function ReviewsListComponent({trainingId, isTrainer, handleRevie
     }
     return () => {
       isMounted = false;
-    }
-  }, [dispatch]);
+    };
+  }, [dispatch, trainingId]);
   const reviews = useAppSelector(selectReviews);
   const user = useAppSelector(selectUser);
   const forbiddenReview = reviews.some((review) => review.authorId === user?.id);
@@ -32,21 +32,23 @@ export default function ReviewsListComponent({trainingId, isTrainer, handleRevie
       <h2 className="reviews-side-bar__title">Отзывы</h2>
       <ul className="reviews-side-bar__list">
         {reviews.length === 0 &&
-          <div>Список отзывов пуст</div>
-        }
+          <div>Список отзывов пуст</div>}
         {reviews.length > 0 && reviews.map(({id, avatar, name, comment, rating}) =>
+          (
             <li key={id} className="reviews-side-bar__item">
               <ReviewItemComponent {...{name, avatar, comment, rating}} />
             </li>
+          )
         )}
       </ul>
       <button
-       className="btn btn--medium reviews-side-bar__button"
-       type="button"
-       onClick={(evt) => handleReviewButtonClick(evt)}
-       disabled={isTrainer || forbiddenReview}
-      >Оставить отзыв</button>
+        className="btn btn--medium reviews-side-bar__button"
+        type="button"
+        onClick={(evt) => handleReviewButtonClick(evt)}
+        disabled={isTrainer || forbiddenReview}
+      >Оставить отзыв
+      </button>
     </aside>
 
-  )
+  );
 }

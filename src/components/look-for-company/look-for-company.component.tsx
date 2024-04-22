@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute, NULL_VALUE, MAIN_ITEMS_PER_PAGE, STEP, TrainType } from '../../const';
+import { AppRoute, NULL_VALUE, MAIN_ITEMS_PER_PAGE, STEP } from '../../const';
 import ThumbnailSpecGymComponent from '../thumbnail-spec-gym/thumbnail-spec-gym.component';
 import UserItemComponent from '../user-item/user-item.component';
 import { selectUsersReadyTrain } from '../../store/user/user.selectors';
@@ -17,23 +17,23 @@ export default function LookForCompanyComponent(): JSX.Element {
     }
     return () => {
       isMounted = false;
-    }
+    };
   }, [dispatch]);
   const readyUsers = useAppSelector(selectUsersReadyTrain);
   const [first, setFirst] = useState<number>(NULL_VALUE);
-  const usersReadyVisible = readyUsers.slice(first, first + MAIN_ITEMS_PER_PAGE)
+  const usersReadyVisible = readyUsers.slice(first, first + MAIN_ITEMS_PER_PAGE);
   const handleNextButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first < readyUsers.length - MAIN_ITEMS_PER_PAGE) {
-      setFirst(first + STEP)
+      setFirst(first + STEP);
     }
-  }
+  };
   const handlePreviousButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first > NULL_VALUE) {
-      setFirst(first - STEP)
+      setFirst(first - STEP);
     }
-  }
+  };
   return (
     <section className="look-for-company">
       <div className="container">
@@ -76,14 +76,16 @@ export default function LookForCompanyComponent(): JSX.Element {
           {usersReadyVisible.length > 0 &&
           <ul className="look-for-company__list">
             {usersReadyVisible.map(({id, location, name, trainType = [], role, avatar}) =>
-              <li key={id} className="look-for-company__item">
-                <UserItemComponent {...{id, location, name, trainType, role, avatar}} />
-              </li>
+              (
+                <li key={id} className="look-for-company__item">
+                  <UserItemComponent {...{id, location, name, trainType, role, avatar}} />
+                </li>
+              )
             )}
           </ul>}
-          {usersReadyVisible.length === 0 &&  <ThumbnailSpecGymComponent />}
+          {usersReadyVisible.length === 0 && <ThumbnailSpecGymComponent />}
         </div>
       </div>
     </section>
-  )
+  );
 }

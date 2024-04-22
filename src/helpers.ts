@@ -9,7 +9,7 @@ export const isStatusRejected = (status: RequestStatusType) => status === Reques
 
 export const adaptPrice = (price: number) => price > 0 ? `${price}\xa0₽` : 'Бесплатно';
 
-export const adaptDate = (date: string) => `${date.slice(0, 4)}-${date.slice(5,7)}-${date.slice(8,10)} ${date.slice(11,16)}`
+export const adaptDate = (date: string) => `${date.slice(0, 4)}-${date.slice(5,7)}-${date.slice(8,10)} ${date.slice(11,16)}`;
 
 export const findReviewingApplication = (userId: string, applications: ApplicationType[]) => applications
   .filter((application) => application.status === ApplicationStatus.Reviewing)
@@ -27,7 +27,7 @@ export const adaptValue = (value: number) => `${value}\xa0₽`;
 
 export const adaptType = (type: Payment) => type.toLowerCase().replace('umoney', 'iomoney');
 
-export const adaptImage = (image: string | undefined) => image?.slice(0, image?.indexOf('.'));
+export const adaptImage = (image: string) => image.slice(0, image.indexOf('.'));
 
 export const adaptPathname = (pathname: string): TrainingItemClassApplyType => pathname.slice(1) as TrainingItemClassApplyType;
 
@@ -59,7 +59,7 @@ export const blockPage = () => {
   document.body.style.overflowX = BodyStyle.Blocked.OverflowX;
   document.body.style.paddingLeft = BodyStyle.Blocked.PaddingLeft;
   document.body.style.paddingRight = BodyStyle.Blocked.PaddingRight;
-}
+};
 
 export const unblockPage = () => {
   document.body.style.overflow = BodyStyle.Unblocked.Overflow;
@@ -67,4 +67,4 @@ export const unblockPage = () => {
   document.body.style.overflowX = BodyStyle.Unblocked.OverflowX;
   document.body.style.paddingLeft = BodyStyle.Unblocked.PaddingLeft;
   document.body.style.paddingRight = BodyStyle.Unblocked.PaddingRight;
-}
+};

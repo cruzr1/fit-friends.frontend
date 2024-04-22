@@ -27,7 +27,7 @@ export const loadUsersReadyTrainAction = createAsyncThunk<void, undefined, {
       });
       dispatch(setUsersReadyTrain(entities));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserReadyTrain}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserReadyTrain}: ${message as string}`));
     }
   },
 );
@@ -49,7 +49,7 @@ export const signinUserAction = createAsyncThunk<void, SigninType, {
       setRefreshToken(refreshToken);
     } catch (message) {
       dispatch(updateAuthStatus(AuthStatus.NoAuth));
-      dispatch(clearErrorAction(`${ErrorMessage.FailedUserSignin}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUserSignin}: ${message as string}`));
     }
   },
 );
@@ -69,7 +69,7 @@ export const authoriseUserAction = createAsyncThunk<void, undefined, {
       dispatch(setUser(data));
     } catch (message) {
       dispatch(updateAuthStatus(AuthStatus.NoAuth));
-      dispatch(clearErrorAction(`${ErrorMessage.UserUnauthorised}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.UserUnauthorised}: ${message as string}`));
     }
   },
 );
@@ -91,7 +91,7 @@ export const loginUserAction = createAsyncThunk<void, LoginType, {
       dispatch(setUser(user as UserType));
     } catch (message) {
       dispatch(updateAuthStatus(AuthStatus.NoAuth));
-      dispatch(clearErrorAction(`${ErrorMessage.FailedUserLogin}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUserLogin}: ${message as string}`));
     }
   }
 );
@@ -108,7 +108,7 @@ export const updateUserAction = createAsyncThunk<void, UpdateUserType, {
       const {data} = await axiosApi.patch<UserType>(APIPath.Users.Update, updateUser);
       dispatch(setUser(data));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedUserUpdate}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUserUpdate}: ${message as string}`));
     }
   }
 );
@@ -126,10 +126,10 @@ export const orderTrainingsAction = createAsyncThunk<void, CreateOrderType, {
       const { data } = await axiosApi.post<OrderType>(`${APIPath.Orders.Index}`, order);
       dispatch(loadAvailableTrainingsCountAction(data.trainingId));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedOrderTrainings}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedOrderTrainings}: ${message as string}`));
     }
   }
-)
+);
 
 export const loadAvailableTrainingsCountAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
@@ -144,12 +144,12 @@ export const loadAvailableTrainingsCountAction = createAsyncThunk<void, string, 
       const { data } = await axiosApi.get<AccountType>(`${APIPath.Accounts.Index}/${trainingId}`);
       dispatch(setTrainingsCount(data.trainingsActive || 0));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadAvailableTrainings}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadAvailableTrainings}: ${message as string}`));
     }
   }
-)
+);
 
-export const useActiveTrainingsAction = createAsyncThunk<void, string, {
+export const consumeActiveTrainingsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
   state: StateType;
   extra: AxiosInstance;
@@ -162,10 +162,10 @@ export const useActiveTrainingsAction = createAsyncThunk<void, string, {
       const { data } = await axiosApi.patch<AccountType>(`${APIPath.Accounts.Use}`, {trainingId, trainingsCount: 1});
       dispatch(setTrainingsCount(data.trainingsActive || 0));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedUseActiveTrainings}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUseActiveTrainings}: ${message as string}`));
     }
   }
-)
+);
 
 export const loadUsersListAction = createAsyncThunk<void, QueryUsersType, {
   dispatch: AppDispatchType;
@@ -188,10 +188,10 @@ export const loadUsersListAction = createAsyncThunk<void, QueryUsersType, {
         dispatch(setUsersTake(CATALOG_COUNT));
       }
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUsersList}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUsersList}: ${message as string}`));
     }
   }
-)
+);
 
 export const loadUserFriendsAction = createAsyncThunk<void, number, {
   dispatch: AppDispatchType;
@@ -209,10 +209,10 @@ export const loadUserFriendsAction = createAsyncThunk<void, number, {
       dispatch(setUserFriends(entities));
       dispatch(setUsersTotalItems(totalItems));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserFriends}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserFriends}: ${message as string}`));
     }
   }
-)
+);
 
 export const loadUserItemAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
@@ -227,10 +227,10 @@ export const loadUserItemAction = createAsyncThunk<void, string, {
       const { data } = await axiosApi.get<UserType>(`${APIPath.Users.Old}/${userId}`);
       dispatch(setUserItem(data));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserItem}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserItem}: ${message as string}`));
     }
   }
-)
+);
 
 export const addToFriendsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
@@ -245,10 +245,10 @@ export const addToFriendsAction = createAsyncThunk<void, string, {
       const { data } = await axiosApi.get<UserType>(`${APIPath.Users.Friends}/${userId}`);
       dispatch(setUser(data));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedAddToFriend}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedAddToFriend}: ${message as string}`));
     }
   }
-)
+);
 
 export const applyPersonalTrainingAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
@@ -262,10 +262,10 @@ export const applyPersonalTrainingAction = createAsyncThunk<void, string, {
     try {
       await axiosApi.post<ApplicationType>(`${APIPath.Applications.Index}/${userId}`);
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedApplyPersonalTraining}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedApplyPersonalTraining}: ${message as string}`));
     }
   }
-)
+);
 
 export const subscribeNotificationsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
@@ -280,10 +280,10 @@ export const subscribeNotificationsAction = createAsyncThunk<void, string, {
       const { data } = await axiosApi.get<UserType>(`${APIPath.Users.Subscribe}/${userId}`);
       dispatch(setUser(data));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedSubscribeNotifications}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedSubscribeNotifications}: ${message as string}`));
     }
   }
-)
+);
 
 export const loadUserItemTrainingsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
@@ -298,10 +298,10 @@ export const loadUserItemTrainingsAction = createAsyncThunk<void, string, {
       const { data: { entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(`${APIPath.Trainings.Trainer}/${userItemId}`);
       dispatch(setTrainingsList(entities));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserItemTrainings}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserItemTrainings}: ${message as string}`));
     }
   }
-)
+);
 
 export const loadUserApplicationsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
@@ -316,10 +316,10 @@ export const loadUserApplicationsAction = createAsyncThunk<void, string, {
       const { data } = await axiosApi.get<ApplicationType[]>(`${APIPath.Applications.List}/${userId}`);
       dispatch(setApplicationsList(data));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserApplications}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadUserApplications}: ${message as string}`));
     }
   }
-)
+);
 
 export const loadAuthorApplicationsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatchType;
@@ -334,10 +334,10 @@ export const loadAuthorApplicationsAction = createAsyncThunk<void, string, {
       const { data } = await axiosApi.get<ApplicationType[]>(`${APIPath.Applications.Author}/${userId}`);
       dispatch(setApplicationsList(data));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadAuthorApplications}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadAuthorApplications}: ${message as string}`));
     }
   }
-)
+);
 
 export const updateApplicationAction = createAsyncThunk<void, UpdateApplicationParams, {
   dispatch: AppDispatchType;
@@ -354,10 +354,10 @@ export const updateApplicationAction = createAsyncThunk<void, UpdateApplicationP
       });
       dispatch(loadUserApplicationsAction(userId));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedUpdateApplication}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedUpdateApplication}: ${message as string}`));
     }
   }
-)
+);
 
 export const loadNotificationsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
@@ -370,10 +370,10 @@ export const loadNotificationsAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: axiosApi}) => {
     try {
       const { data } = await axiosApi.get<ServerNotificationType[]>(APIPath.Notifications.Index);
-      const clientNotifications = data.map((notification) => adaptNotifications(notification))
+      const clientNotifications = data.map((notification) => adaptNotifications(notification));
       dispatch(setNotifications(clientNotifications));
     } catch (message) {
-      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadNotifications}: ${message}`));
+      dispatch(clearErrorAction(`${ErrorMessage.FailedLoadNotifications}: ${message as string}`));
     }
   }
-)
+);

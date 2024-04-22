@@ -12,5 +12,5 @@ export default function SignPage({isSignin}: SignProps):JSX.Element {
       {isSignin && <PopupSigninComponent />}
       {!isSignin && <PopupSignupComponent />}
     </>
-  )
+  );
 }

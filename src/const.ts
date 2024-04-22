@@ -14,9 +14,9 @@ export const PASSWORD_REGEX = /^.{6,12}$/;
 
 export const NAME_REGEX = /^.{1,15}$/;
 
-export const  COMMENT_REGEX = /^.{100,1024}$/;
+export const COMMENT_REGEX = /^.{100,1024}$/;
 
-export const  DESCRIPTION_REGEX = /^.{10,140}$/;
+export const DESCRIPTION_REGEX = /^.{10,140}$/;
 
 export const KEY_ESCAPE = 'Escape';
 
@@ -24,7 +24,7 @@ export const BIRTHDAY_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
 export const NUMBER_REGEX = /[^0-9]/;
 
-export const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+export const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const AVATAR_REGEX = /(.png$|.jpg$|.jpeg$)/;
 
@@ -35,6 +35,11 @@ export const ITEMS_PER_PAGE = 3;
 export const MAIN_ITEMS_PER_PAGE = 4;
 
 export const POPUP_CERTIFICATES_ITEMS_PER_PAGE = 1;
+
+export const NotificationsButtonStyle = {
+  border: 'none',
+  background: 'none'
+};
 
 export const BodyStyle = {
   Blocked: {
@@ -51,7 +56,7 @@ export const BodyStyle = {
     PaddingLeft: '0',
     PaddingRight: '0',
   }
-}
+};
 
 export const NULL_VALUE = 0;
 
@@ -317,7 +322,7 @@ export const ErrorMessage = {
   FailedCreateTraining: 'Failed to create training',
   FailedLoadPurchasedTrainings: 'Failed to load purchased training',
   FailedLoadNotifications: 'Failed to load notifications',
- } as const;
+} as const;
 
 export const UserValidationParams = {
   Image: {
@@ -352,7 +357,7 @@ export const MY_ORDERS_TRAININGS_COUNT = 4;
 
 export const CATALOG_COUNT = 6;
 
-export const PAGES_WITH_HEADER: AppRouteType[] = [AppRoute.Signin, AppRoute.Signup, AppRoute.Quest]
+export const PAGES_WITH_HEADER: AppRouteType[] = [AppRoute.Signin, AppRoute.Signup, AppRoute.Quest];
 
 export const USERS_READY_TRAIN = 8;
 
@@ -380,7 +385,7 @@ export const sliderStyle = {
   '& .MuiSlider-track': {
     height: '1px',
   },
-}
+};
 
 export const OrdersSortByFields = {
   Count: 'trainingsOrderedCount',

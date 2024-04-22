@@ -2,19 +2,17 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectChoiseTrainings } from '../../store/training/training.selectors';
 import { loadChoiseTrainingsAction } from '../../store/training/training.actions';
-import { AppRoute, ITEMS_PER_PAGE, NULL_VALUE, STEP } from '../../const';
+import { ITEMS_PER_PAGE, NULL_VALUE, STEP } from '../../const';
 import ThumbnailTrainingPreviewComponent from '../thumbnail-training-preview/thumbnail-training-prevew.component';
-import { selectUser } from '../../store/user/user.selectors';
-import { Navigate } from 'react-router-dom';
-import { isStatusPending } from '../../helpers';
+import { UserType } from '../../types';
+import ThumbnailSpecGymComponent from '../thumbnail-spec-gym/thumbnail-spec-gym.component';
 
+type SpecialForYouComponentProps = {
+  user: UserType;
+}
 
-export default function SpecialForYouComponent(): JSX.Element {
+export default function SpecialForYouComponent({user}: SpecialForYouComponentProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
-  if (!user) {
-    return <Navigate to={AppRoute.Index} />
-  }
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
@@ -23,23 +21,23 @@ export default function SpecialForYouComponent(): JSX.Element {
     }
     return () => {
       isMounted = false;
-    }
-  }, [dispatch]);
+    };
+  }, [dispatch, user]);
   const choiseTrainings = useAppSelector(selectChoiseTrainings);
   const [first, setFirst] = useState<number>(NULL_VALUE);
-  const choiseTrainingsVisible = choiseTrainings.slice(first, first + ITEMS_PER_PAGE)
+  const choiseTrainingsVisible = choiseTrainings.slice(first, first + ITEMS_PER_PAGE);
   const handleNextButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first < choiseTrainings.length - ITEMS_PER_PAGE) {
-      setFirst(first + STEP)
+      setFirst(first + STEP);
     }
-  }
+  };
   const handlePreviousButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first > NULL_VALUE) {
-      setFirst(first - STEP)
+      setFirst(first - STEP);
     }
-  }
+  };
   return (
     <section className="special-for-you">
       <div className="container">
@@ -74,14 +72,17 @@ export default function SpecialForYouComponent(): JSX.Element {
           {choiseTrainingsVisible.length > 0 &&
             <ul className="special-for-you__list">
               {choiseTrainingsVisible.map(({id, trainType}) =>
-                <li key ={id} className="special-for-you__item">
-                  <ThumbnailTrainingPreviewComponent {...{id, trainType}} />
-                </li>
+                (
+                  <li key ={id} className="special-for-you__item">
+                    <ThumbnailTrainingPreviewComponent {...{id, trainType}} />
+                  </li>
+                )
               )}
-            </ul>
-          }
+            </ul>}
+          {choiseTrainingsVisible.length === 0 &&
+            <ThumbnailSpecGymComponent />}
         </div>
       </div>
     </section>
-  )
+  );
 }

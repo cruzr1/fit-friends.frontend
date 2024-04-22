@@ -24,5 +24,5 @@ export default function ReviewItemComponent({name, avatar, comment, rating}: Rev
       </div>
       <p className="review__comment">{comment}</p>
     </div>
-  )
+  );
 }

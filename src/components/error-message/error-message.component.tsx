@@ -6,6 +6,6 @@ export default function ErrorMessageComponent(): JSX.Element | null {
   const error = useAppSelector(selectError);
   return (error) ?
     <div className='error-message' data-testid='error-message-text'>{error}</div> :
-    null
+    null;
 }
 

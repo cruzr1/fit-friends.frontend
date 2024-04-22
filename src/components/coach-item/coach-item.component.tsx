@@ -12,14 +12,14 @@ type CoachItemComponentProps = {
 export default function CoachItemComponent({certificate, handleDeleteButtonClick, handleUpdateButtonClick, handleSaveButtonClick, handleEditButtonClick, isEdit}: CoachItemComponentProps): JSX.Element {
 
   return (
-      <div className={`certificate-card ${isEdit ? 'certificate-card--edit' : 'certificate-card--save'}`}>
-        <div className="certificate-card__image">
-          <picture>
-            <source type="image/webp" srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.webp, /img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.webp 2x`} /><img src={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.jpg`} srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.jpg 2x`} width="294" height="360" alt={certificate} />
-          </picture>
-        </div>
-        <div className="certificate-card__buttons">
-          {!isEdit &&
+    <div className={`certificate-card ${isEdit ? 'certificate-card--edit' : 'certificate-card--save'}`}>
+      <div className="certificate-card__image">
+        <picture>
+          <source type="image/webp" srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.webp, /img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.webp 2x`} /><img src={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.jpg`} srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.jpg 2x`} width="294" height="360" alt={certificate} />
+        </picture>
+      </div>
+      <div className="certificate-card__buttons">
+        {!isEdit &&
             <button
               className="btn-flat btn-flat--underlined certificate-card__button certificate-card__button--edit"
               type="button"
@@ -29,9 +29,8 @@ export default function CoachItemComponent({certificate, handleDeleteButtonClick
               <svg width="12" height="12" aria-hidden="true">
                 <use xlinkHref="#icon-edit"></use>
               </svg><span>Изменить</span>
-            </button>
-          }
-          {isEdit &&
+            </button>}
+        {isEdit &&
             <>
               <button
                 className="btn-flat btn-flat--underlined certificate-card__button certificate-card__button--save"
@@ -67,9 +66,8 @@ export default function CoachItemComponent({certificate, handleDeleteButtonClick
                   </svg>
                 </button>
               </div>
-            </>
-          }
-        </div>
+            </>}
       </div>
-  )
+    </div>
+  );
 }

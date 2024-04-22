@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { BackButtonComponent, SortOrdersComponent, TrainingsListComponent } from '../../components'
+import { BackButtonComponent, SortOrdersComponent, TrainingsListComponent } from '../../components';
 import { adaptPathname } from '../../helpers';
 import { BackButtonClassApply, MY_ORDERS_TRAININGS_COUNT } from '../../const';
 import { useEffect } from 'react';
@@ -18,7 +18,7 @@ export default function MyOrdersPage(): JSX.Element {
     }
     return () => {
       isMounted = false;
-    }
+    };
   }, [dispatch ]);
   return (
     <section className="my-orders">
@@ -32,9 +32,9 @@ export default function MyOrdersPage(): JSX.Element {
             <h1 className="my-orders__title">Мои заказы</h1>
             <SortOrdersComponent />
           </div>
-          <TrainingsListComponent classApply={classApply}  isOrdered />
+          <TrainingsListComponent classApply={classApply} isOrdered />
         </div>
       </div>
     </section>
-  )
+  );
 }

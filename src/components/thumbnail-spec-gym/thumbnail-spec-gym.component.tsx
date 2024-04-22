@@ -7,9 +7,9 @@ export default function ThumbnailSpecGymComponent(): JSX.Element {
         </picture>
       </div>
       <p className="thumbnail-spec-gym__type">Ближайший зал</p>
-      <div className="thumbnail-spec-gym__header" style={{textAlign:"center"}}>
+      <div className="thumbnail-spec-gym__header" style={{textAlign: 'center'}}>
         <h3 className="thumbnail-spec-gym__title">Скоро здесь появится что - то полезное</h3>
       </div>
     </div>
-)
+  );
 }

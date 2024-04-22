@@ -25,21 +25,23 @@ export default function TrainingCardPage(): JSX.Element {
     if (showBuy) {
       setShowBuy(false);
     }
-  }
+  };
   useEffect(() => {
     let isMounted = true;
-    dispatch(loadTrainingAction(trainingId));
+    if (isMounted) {
+      dispatch(loadTrainingAction(trainingId));
+    }
     return () => {
       isMounted = false;
-    }
-  }, [dispatch]);
+    };
+  }, [dispatch, trainingId]);
   const training = useAppSelector(selectTraining) as TrainingType;
   const loadTrainer = useAppSelector(selectTrainer);
   const trainer = isTrainer ? user : loadTrainer;
   const handleReviewButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     setShowReview(true);
-  }
+  };
   const handleBuyButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     setShowBuy(true);
@@ -61,11 +63,9 @@ export default function TrainingCardPage(): JSX.Element {
         </div>
       </section>
       {showReview &&
-        <PopupReviewComponent trainingId={trainingId} handlePopupClose={handlePopupClose} />
-      }
+        <PopupReviewComponent trainingId={trainingId} handlePopupClose={handlePopupClose} />}
       {showBuy && training.price > 0 &&
-        <PopupBuyComponent training={training} handlePopupClose={handlePopupClose} />
-      }
+        <PopupBuyComponent training={training} handlePopupClose={handlePopupClose} />};
     </>
-  )
+  );
 }

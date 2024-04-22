@@ -13,7 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    // project: './tsconfig.json'
+    project: './tsconfig.json'
   },
   settings: { react: { version: 'detect' } },
   plugins: ['react-refresh'],

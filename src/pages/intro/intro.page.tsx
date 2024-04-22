@@ -31,5 +31,5 @@ export default function IntroPage(): JSX.Element {
         </div>
       </div>
     </div>
-  )
+  );
 }

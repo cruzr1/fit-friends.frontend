@@ -18,7 +18,7 @@ export default function MyTrainingsPage(): JSX.Element {
     }
     return () => {
       isMounted = false;
-    }
+    };
   }, [dispatch ]);
   return (
     <section className="inner-page">
@@ -37,5 +37,5 @@ export default function MyTrainingsPage(): JSX.Element {
         </div>
       </div>
     </section>
-  )
+  );
 }

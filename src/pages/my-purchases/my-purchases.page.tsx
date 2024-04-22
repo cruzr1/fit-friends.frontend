@@ -19,7 +19,7 @@ export default function MyPurchasesPage(): JSX.Element {
     }
     return () => {
       isMounted = false;
-    }
+    };
   }, [dispatch]);
   const isActiveTrainings = useAppSelector(selectIsActiveTrainings);
   return (
@@ -41,10 +41,12 @@ export default function MyPurchasesPage(): JSX.Element {
                     name="user-agreement"
                     checked={isActiveTrainings}
                     onChange={() => dispatch(setIsActiveTrainings(!isActiveTrainings))}
-                  /><span className="custom-toggle__icon">
+                  />
+                  <span className="custom-toggle__icon">
                     <svg width="9" height="6" aria-hidden="true">
                       <use xlinkHref="#arrow-check"></use>
-                    </svg></span><span className="custom-toggle__label">Только активные</span>
+                    </svg>
+                  </span><span className="custom-toggle__label">Только активные</span>
                 </label>
               </div>
             </div>
@@ -53,5 +55,5 @@ export default function MyPurchasesPage(): JSX.Element {
         </div>
       </div>
     </section>
-  )
+  );
 }

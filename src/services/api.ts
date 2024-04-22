@@ -17,9 +17,10 @@ export const createApi = (): AxiosInstance => {
   api.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
       const token = getToken();
-      if (config.headers)
-      if (token && config.headers) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+      if (config.headers) {
+        if (token && config.headers) {
+          config.headers['Authorization'] = `Bearer ${token}`;
+        }
       }
       return config;
     },

@@ -31,3 +31,4 @@ export { default as PopupReviewComponent } from './popup-review/popup-review.com
 export { default as PopupCertificatesComponent } from './popup-certifcates/popup-certificates.component';
 export { default as PopupMapComponent } from './popup-map/popup-map.component';
 export { default as MapComponent } from './map/map.component';
+export { default as PersonalAccountComponent } from './personal-account/personal-account.component';

@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet-async';
 
 export default function TrainingsCataloguePage(): JSX.Element {
   const {pathname} = useLocation();
-  const classApply=adaptPathname(pathname);
+  const classApply = adaptPathname(pathname);
   const dispatch = useAppDispatch();
   useEffect(() => {
     let isMounted = true;
@@ -18,7 +18,7 @@ export default function TrainingsCataloguePage(): JSX.Element {
     }
     return () => {
       isMounted = false;
-    }
+    };
   }, [dispatch ]);
   return (
     <section className="inner-page">
@@ -35,5 +35,5 @@ export default function TrainingsCataloguePage(): JSX.Element {
         </div>
       </div>
     </section>
-  )
+  );
 }

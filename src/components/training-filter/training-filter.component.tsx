@@ -12,7 +12,7 @@ export type TrainingFilterComponentProps = {
 export default function TrainingFilterComponent({isMyTrainingsPage}: TrainingFilterComponentProps): JSX.Element {
   const classApply = isMyTrainingsPage ? 'my-training' : 'gym-catalog';
   const dispatch = useAppDispatch();
-  const backButtonClassApply = isMyTrainingsPage ? BackButtonClassApply.TrainingForm : BackButtonClassApply.TrainingCatalog
+  const backButtonClassApply = isMyTrainingsPage ? BackButtonClassApply.TrainingForm : BackButtonClassApply.TrainingCatalog;
   const [priceMin, priceMax] = useAppSelector(selectPriceFilter);
   const [caloriesMin, caloriesMax] = useAppSelector(selectCaloriesFilter);
   const [ratingMin, ratingMax] = useAppSelector(selectRatingFilter);
@@ -21,9 +21,9 @@ export default function TrainingFilterComponent({isMyTrainingsPage}: TrainingFil
   const durationFilter = useAppSelector(selectDurationFilter);
   const handleTrainTypeFilterChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (trainTypeFilter.includes(evt.target.value as TrainType)) {
-      dispatch(setTrainTypeFilter(trainTypeFilter.filter((type) => type !== evt.target.value)))
+      dispatch(setTrainTypeFilter(trainTypeFilter.filter((type) => type !== evt.target.value)));
     } else {
-      dispatch(setTrainTypeFilter(trainTypeFilter.concat(evt.target.value as TrainType)))
+      dispatch(setTrainTypeFilter(trainTypeFilter.concat(evt.target.value as TrainType)));
     }
   };
   const handlePriceSlideChange = (value: number[]) => {
@@ -118,54 +118,61 @@ export default function TrainingFilterComponent({isMyTrainingsPage}: TrainingFil
               <h4 className="my-training-form__block-title">Длительность</h4>
               <ul className="my-training-form__check-list">
                 {Object.values(Duration).map((duration) =>
-                  <li key={duration} className="my-training-form__check-list-item">
-                  <div className="custom-toggle custom-toggle--checkbox">
-                    <label>
-                      <input
-                        type="checkbox"
-                        value={duration}
-                        name="duration"
-                        checked={duration === durationFilter}
-                        onChange={(evt) => dispatch(setDurationFilter(evt.target.value as Duration))}
-                      /><span className="custom-toggle__icon">
-                        <svg width="9" height="6" aria-hidden="true">
-                          <use xlinkHref="#arrow-check"></use>
-                        </svg></span><span className="custom-toggle__label">{QuestionDurationCaption[duration]}</span>
-                    </label>
-                  </div>
-                </li>
+                  (
+                    <li key={duration} className="my-training-form__check-list-item">
+                      <div className="custom-toggle custom-toggle--checkbox">
+                        <label>
+                          <input
+                            type="checkbox"
+                            value={duration}
+                            name="duration"
+                            checked={duration === durationFilter}
+                            onChange={(evt) => dispatch(setDurationFilter(evt.target.value as Duration))}
+                          />
+                          <span className="custom-toggle__icon">
+                            <svg width="9" height="6" aria-hidden="true">
+                              <use xlinkHref="#arrow-check"></use>
+                            </svg>
+                          </span><span className="custom-toggle__label">{QuestionDurationCaption[duration]}</span>
+                        </label>
+                      </div>
+                    </li>
+                  )
                 )}
               </ul>
-            </div>
-          }
+            </div>}
           {!isMyTrainingsPage &&
             <>
               <div className={`${classApply}-form__block ${classApply}-form__block--type`}>
                 <h4 className={`${classApply}-form__block-title`}>Тип</h4>
                 <ul className={`${classApply}-form__check-list`}>
                   {Object.values(TrainType).map((type) =>
-                    <li key={type} className={`${classApply}-form__check-list-item`}>
-                      <div className="custom-toggle custom-toggle--checkbox">
-                        <label>
-                          <input
-                            type="checkbox"
-                            value={type}
-                            name="type"
-                            checked={trainTypeFilter.includes(type)}
-                            onChange={(evt) => handleTrainTypeFilterChange(evt)}
-                          /><span className="custom-toggle__icon">
-                            <svg width="9" height="6" aria-hidden="true">
-                              <use xlinkHref="#arrow-check"></use>
-                            </svg></span><span className="custom-toggle__label">{TrainTypeCaption[type]}</span>
-                        </label>
-                      </div>
-                    </li>
+                    (
+                      <li key={type} className={`${classApply}-form__check-list-item`}>
+                        <div className="custom-toggle custom-toggle--checkbox">
+                          <label>
+                            <input
+                              type="checkbox"
+                              value={type}
+                              name="type"
+                              checked={trainTypeFilter.includes(type)}
+                              onChange={(evt) => handleTrainTypeFilterChange(evt)}
+                            />
+                            <span className="custom-toggle__icon">
+                              <svg width="9" height="6" aria-hidden="true">
+                                <use xlinkHref="#arrow-check"></use>
+                              </svg>
+                            </span><span className="custom-toggle__label">{TrainTypeCaption[type]}</span>
+                          </label>
+                        </div>
+                      </li>
+                    )
                   )}
                 </ul>
               </div>
               <div className={`${classApply}-form__block ${classApply}-form__block--sort`}>
                 <h4 className={`${classApply}-form__title ${classApply}-form__title--sort`}>Сортировка</h4>
-                <div className="btn-radio-sort ${classApply}-form__radio">
+                <div className={`btn-radio-sort ${classApply}-form__radio`}>
                   <label>
                     <input
                       type="radio"
@@ -192,10 +199,9 @@ export default function TrainingFilterComponent({isMyTrainingsPage}: TrainingFil
                   </label>
                 </div>
               </div>
-            </>
-          }
+            </>}
         </form>
       </div>
     </div>
-  )
+  );
 }

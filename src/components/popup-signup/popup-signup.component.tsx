@@ -33,22 +33,22 @@ export default function PopupSignupComponent(): JSX.Element {
       return;
     }
     setAvatarURL(`/img/content/${newAvatar.name}`);
-  }
+  };
   const handleAvatarClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.preventDefault();
-    avatarRef.current?.click()
-  }
-  const handleLocationItemChange = (target: HTMLUListElement ) => {
+    avatarRef.current?.click();
+  };
+  const handleLocationItemChange = (target: HTMLUListElement) => {
     setLocation(target.id as Location);
-    setLocationOpen(false)
-  }
+    setLocationOpen(false);
+  };
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setSubmit(true);
     if (!isFormValid) {
       return;
     }
-    const newUser ={
+    const newUser = {
       name,
       email,
       avatar: avatarURL,
@@ -59,9 +59,9 @@ export default function PopupSignupComponent(): JSX.Element {
       description: 'some additional info about user...',
       location,
       backgroundImage: avatarURL,
-    }
+    };
     dispatch(signinUserAction(newUser));
-  }
+  };
   return (
     <div className="popup-form popup-form--sign-up">
       <Helmet>
@@ -84,13 +84,15 @@ export default function PopupSignupComponent(): JSX.Element {
                         accept="image/png, image/jpeg"
                         ref={avatarRef}
                         onChange={(evt) => handleAvatarChange(evt)}
-                      /><span
-                          className="input-load-avatar__btn"
-                          onClick={(evt) => handleAvatarClick(evt)}
-                        >
+                      />
+                      <span
+                        className="input-load-avatar__btn"
+                        onClick={(evt) => handleAvatarClick(evt)}
+                      >
                         <svg width="20" height="20" aria-hidden="true">
                           <use xlinkHref="#icon-import"></use>
-                        </svg></span>
+                        </svg>
+                      </span>
                     </label>
                   </div>
                   <div className="sign-up__description">
@@ -99,64 +101,77 @@ export default function PopupSignupComponent(): JSX.Element {
                 </div>
                 <div className="sign-up__data">
                   <div className="custom-input">
-                    <label><span className="custom-input__label">Имя</span><span className="custom-input__wrapper">
+                    <label><span className="custom-input__label">Имя</span>
+                      <span className="custom-input__wrapper">
                         <input
                           type="text"
                           name="name"
                           ref={nameRef}
                           onChange={(evt) => setName(evt.target.value)}
-                        /></span>
-                        {name.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
+                        />
+                      </span>
+                      {name.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                     </label>
                   </div>
                   <div className="custom-input">
-                    <label><span className="custom-input__label">E-mail</span><span className="custom-input__wrapper">
+                    <label>
+                      <span className="custom-input__label">E-mail</span>
+                      <span className="custom-input__wrapper">
                         <input
                           type="email"
                           name="email"
                           ref={emailRef}
                           onChange={(evt) => setEmail(evt.target.value)}
-                        /></span>
-                        {email.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
+                        />
+                      </span>
+                      {email.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                     </label>
                   </div>
                   <div className="custom-input">
-                    <label><span className="custom-input__label">Дата рождения</span><span className="custom-input__wrapper">
+                    <label>
+                      <span className="custom-input__label">Дата рождения</span>
+                      <span className="custom-input__wrapper">
                         <input
                           type="date"
                           name="birthday"
                           max="2009-12-31"
                           ref={birthDateRef}
                           onChange={(evt) => setBirthDate(evt.target.value)}
-                        /></span>
-                        {birthDate.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
+                        />
+                      </span>
+                      {birthDate.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                     </label>
                   </div>
                   <div className={`custom-select ${locationOpen ? 'is-open' : ''}`}><span className="custom-select__label">Ваша локация</span>
-                  <button
-                    className="custom-select__button"
-                    type="button"
-                    aria-label="Выберите одну из опций"
-                    onClick={() => setLocationOpen(!locationOpen)}
-                  >{LocationCaption[location]}<span className="custom-select__icon">
-                            <svg width="15" height="6" aria-hidden="true">
-                              <use xlinkHref="#arrow-down"></use>
-                            </svg></span></button>
-                            <ul className="custom-select__list" role="listbox" onClick={(evt) => handleLocationItemChange(evt.target as HTMLUListElement)}>
-                              {Object.values(Location).map((option) =>
-                              <li key={option} className="custom-select__item" id={option} role='option'>{LocationCaption[option]}</li>)}
-                            </ul>
+                    <button
+                      className="custom-select__button"
+                      type="button"
+                      aria-label="Выберите одну из опций"
+                      onClick={() => setLocationOpen(!locationOpen)}
+                    >{LocationCaption[location]}
+                      <span className="custom-select__icon">
+                        <svg width="15" height="6" aria-hidden="true">
+                          <use xlinkHref="#arrow-down"></use>
+                        </svg>
+                      </span>
+                    </button>
+                    <ul className="custom-select__list" role="listbox" onClick={(evt) => handleLocationItemChange(evt.target as HTMLUListElement)}>
+                      {Object.values(Location).map((option) =>
+                        <li key={option} className="custom-select__item" id={option} aria-selected={option === location} role='option'>{LocationCaption[option]}</li>)}
+                    </ul>
                   </div>
                   <div className="custom-input">
-                    <label><span className="custom-input__label">Пароль</span><span className="custom-input__wrapper">
+                    <label><span className="custom-input__label">Пароль</span>
+                      <span className="custom-input__wrapper">
                         <input
                           type="password"
                           name="password"
                           autoComplete="off"
                           ref={passwordRef}
                           onChange={(evt) => setPassword(evt.target.value)}
-                        /></span>
-                        {password.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
+                        />
+                      </span>
+                      {password.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
                     </label>
                   </div>
                   <div className="sign-up__radio"><span className="sign-up__label">Пол</span>
@@ -174,7 +189,7 @@ export default function PopupSignupComponent(): JSX.Element {
                       </div>
                       <div className="custom-toggle-radio__block">
                         <label>
-                        <input
+                          <input
                             type="radio"
                             name="sex"
                             value={Gender.Female}
@@ -185,7 +200,7 @@ export default function PopupSignupComponent(): JSX.Element {
                       </div>
                       <div className="custom-toggle-radio__block">
                         <label>
-                        <input
+                          <input
                             type="radio"
                             name="sex"
                             checked={gender === Gender.Any}
@@ -209,10 +224,12 @@ export default function PopupSignupComponent(): JSX.Element {
                           value="Trainer"
                           checked={role === UserRole.Trainer}
                           onChange={(evt) => setRole(evt.target.value as UserRole)}
-                        /><span className="role-btn__icon">
+                        />
+                        <span className="role-btn__icon">
                           <svg width="12" height="13" aria-hidden="true">
                             <use xlinkHref="#icon-cup"></use>
-                          </svg></span><span className="role-btn__btn">Я хочу тренировать</span>
+                          </svg>
+                        </span><span className="role-btn__btn">Я хочу тренировать</span>
                       </label>
                     </div>
                     <div className="role-btn">
@@ -224,20 +241,24 @@ export default function PopupSignupComponent(): JSX.Element {
                           value="User"
                           checked={role === UserRole.User}
                           onChange={(evt) => setRole(evt.target.value as UserRole)}
-                        /><span className="role-btn__icon">
+                        />
+                        <span className="role-btn__icon">
                           <svg width="12" height="13" aria-hidden="true">
                             <use xlinkHref="#icon-weight"></use>
-                          </svg></span><span className="role-btn__btn">Я хочу тренироваться</span>
+                          </svg>
+                        </span><span className="role-btn__btn">Я хочу тренироваться</span>
                       </label>
                     </div>
                   </div>
                 </div>
                 <div className="sign-up__checkbox">
                   <label>
-                    <input type="checkbox" value="user-agreement" name="user-agreement" /><span className="sign-up__checkbox-icon">
+                    <input type="checkbox" value="user-agreement" name="user-agreement" />
+                    <span className="sign-up__checkbox-icon">
                       <svg width="9" height="6" aria-hidden="true">
                         <use xlinkHref="#arrow-check"></use>
-                      </svg></span><span className="sign-up__checkbox-label">Я соглашаюсь с <span>политикой конфиденциальности</span> компании</span>
+                      </svg>
+                    </span><span className="sign-up__checkbox-label">Я соглашаюсь с <span>политикой конфиденциальности</span> компании</span>
                   </label>
                 </div>
                 <button className="btn sign-up__button" type="submit">Продолжить</button>
@@ -247,5 +268,5 @@ export default function PopupSignupComponent(): JSX.Element {
         </div>
       </div>
     </div>
-  )
+  );
 }

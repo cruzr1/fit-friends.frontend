@@ -1,5 +1,5 @@
 import HeaderComponent from '../header/header.component';
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from 'react-router-dom';
 import { PAGES_WITH_HEADER } from '../../const';
 import { AppRouteType } from '../../types';
 
@@ -13,5 +13,5 @@ export default function LayoutComponent():JSX.Element {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }

@@ -16,5 +16,5 @@ export default function BackButtonComponent({classApply}: BackButtonProps): JSX.
         <use xlinkHref="#arrow-left"></use>
       </svg><span>Назад</span>
     </button>
-  )
+  );
 }

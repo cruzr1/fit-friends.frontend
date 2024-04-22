@@ -11,9 +11,11 @@ export const checkTokenExpiration: Middleware<unknown, Reducer> =
         const token = getToken();
         if(token) {
           const expired = jwtDecode(token).exp;
-          if (expired! < Date.now() / 1000) {
-            localStorage.clear();
+          if (expired) {
+            if (expired < Date.now() / 1000) {
+              localStorage.clear();
+            }
           }
         }
         next(action);
-};
+      };

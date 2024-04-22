@@ -11,8 +11,8 @@ export type MapProps = {
 export default function MapComponent({location}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
-  const icon = new Icon(IconParams);
   useEffect(() => {
+    const icon = new Icon(IconParams);
     let isMounted = true;
     if (isMounted && map) {
       const markerLayer = layerGroup().addTo(map);
@@ -27,7 +27,7 @@ export default function MapComponent({location}: MapProps): JSX.Element {
     return () => {
       isMounted = false;
     };
-  }, [map]);
+  }, [map, location]);
 
   return (
     <div className="popup__content popup__content-map" >

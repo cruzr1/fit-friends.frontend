@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace, TrainType, Duration, OrdersSortByFields, RequestStatus } from '../../const'
+import { NameSpace, TrainType, Duration, OrdersSortByFields, RequestStatus } from '../../const';
 import { OrdersSortByFieldType, RequestStatusType, ReviewType, SortOrderType, TrainingOrderedType, TrainingType, UserType } from '../../types';
 import { postTrainingAction, loadPopularTrainingsAction, loadChoiseTrainingsAction, loadReviewsAction, loadSpecialOffersAction, loadTrainerAction, loadTrainingAction, loadTrainingsAction, loadTrainingsOrderedAction, loadTrainingsPurchasedAction, postReviewAction, updateTrainingAction } from './training.actions';
 
@@ -67,7 +67,7 @@ export const trainingState: TrainingStateType = {
   loadTrainerStatus: RequestStatus.Idle,
   loadReviewsStatus: RequestStatus.Idle,
   postReviewStatus: RequestStatus.Idle,
-}
+};
 
 export const training = createSlice({
   name: NameSpace.Training,
@@ -240,28 +240,28 @@ export const training = createSlice({
       })
       .addCase(postReviewAction.fulfilled, (state) => {
         state.postReviewStatus = RequestStatus.Fulfilled;
-      })
+      });
   },
 });
 
 export const {
   setSpecialOffers,
-   setPopularTrainings,
-   setChoiseTrainings,
-   setTrainingsList,
-   setTake,
-   setCaloriesFilter,
-   setPriceFilter,
-   setRatingFilter,
-   setSortByOrder,
-   setTrainTypeFilter,
-   setTotalItems,
-   setTraining,
-   setTrainer,
-   setReviews,
-   addReview,
-   setDurationFilter,
-   setTrainingsOrderedList,
-   setSortByField,
-   setIsActiveTrainings,
+  setPopularTrainings,
+  setChoiseTrainings,
+  setTrainingsList,
+  setTake,
+  setCaloriesFilter,
+  setPriceFilter,
+  setRatingFilter,
+  setSortByOrder,
+  setTrainTypeFilter,
+  setTotalItems,
+  setTraining,
+  setTrainer,
+  setReviews,
+  addReview,
+  setDurationFilter,
+  setTrainingsOrderedList,
+  setSortByField,
+  setIsActiveTrainings,
 } = training.actions;

@@ -10,32 +10,34 @@ type PopupCertificatesComponentProps = {
 export default function PopupCertificatesComponent({certificates, handleCloseButtonClick}: PopupCertificatesComponentProps): JSX.Element {
   useEffect(() => {
     let isMounted = true;
-    blockPage()
     const handleKeyDown = (evt: KeyboardEvent) => {
       if (evt.key === KEY_ESCAPE) {
-        handleCloseButtonClick()
+        handleCloseButtonClick();
       }
+    };
+    if (isMounted) {
+      blockPage();
+      document.addEventListener('keydown', (evt) => handleKeyDown(evt));
     }
-    document.addEventListener('keydown', (evt) => handleKeyDown(evt));
     return () => {
       isMounted = false;
-      unblockPage()
-    }
-  }, [])
+      unblockPage();
+    };
+  }, [handleCloseButtonClick]);
   const [first, setFirst] = useState<number>(NULL_VALUE);
   const certificatesVisible = [...certificates].slice(first, first + POPUP_CERTIFICATES_ITEMS_PER_PAGE);
   const handleNextButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first < certificates.length - POPUP_CERTIFICATES_ITEMS_PER_PAGE) {
-      setFirst(first + STEP)
+      setFirst(first + STEP);
     }
-  }
+  };
   const handlePreviousButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (first > NULL_VALUE) {
-      setFirst(first - STEP)
+      setFirst(first - STEP);
     }
-  }
+  };
   return (
     <div className="popup-form">
       <section className="popup">
@@ -80,20 +82,22 @@ export default function PopupCertificatesComponent({certificates, handleCloseBut
             </div>
             <ul className="personal-account-coach__list">
               {certificatesVisible.map((certificate) =>
-                <li key={certificate}className="personal-account-coach__item">
-                  <div className="certificate-card">
-                    <div className="certificate-card__image">
-                      <picture>
-                        <source type="image/webp" srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.webp, /img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.webp 2x`} /><img src={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.jpg`} srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.jpg 2x`} width="294" height="360" alt={certificate} />
-                      </picture>
+                (
+                  <li key={certificate}className="personal-account-coach__item">
+                    <div className="certificate-card">
+                      <div className="certificate-card__image">
+                        <picture>
+                          <source type="image/webp" srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.webp, /img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.webp 2x`} /><img src={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.jpg`} srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.jpg 2x`} width="294" height="360" alt={certificate} />
+                        </picture>
+                      </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                )
               )}
             </ul>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

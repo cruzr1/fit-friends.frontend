@@ -26,18 +26,18 @@ export default function TrainingsListComponent({classApply, shouldIncludeDuratio
   const trainTypeFilter = useAppSelector(selectTrainTypeFilter);
   const sortByOrder = useAppSelector(selectSortByOrder);
   const sortByField = useAppSelector(selectSortByField);
-  const durationFilter= useAppSelector(selectDurationFilter);
+  const durationFilter = useAppSelector(selectDurationFilter);
   useEffect(() => {
     let isMounted = true;
     if (isMounted && take > 0) {
       const query: QueryTrainingsType = {
         take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder
-      }
-      if( shouldIncludeDuration) {
+      };
+      if(shouldIncludeDuration) {
         query.durationFilter = durationFilter;
       }
       if (isPurchased) {
-        dispatch(loadTrainingsPurchasedAction({take, isActiveTrainings}))
+        dispatch(loadTrainingsPurchasedAction({take, isActiveTrainings}));
       } else if (isOrdered) {
         dispatch(loadTrainingsOrderedAction({take, sortByField, sortByOrder}));
       } else {
@@ -46,30 +46,34 @@ export default function TrainingsListComponent({classApply, shouldIncludeDuratio
     }
     return () => {
       isMounted = false;
-    }
-  }, [dispatch, take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder, durationFilter, isActiveTrainings]);
+    };
+  }, [dispatch, take, priceFilter, caloriesFilter, ratingFilter, trainTypeFilter, sortByOrder, durationFilter, isActiveTrainings, isOrdered, isPurchased, shouldIncludeDuration, sortByField]);
   const trainingsList = useAppSelector(selectTrainingsList);
   const trainingsOrderedList = useAppSelector(selectTrainingsOrderedList);
   const handleShowMore = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
-    dispatch(setTake(Math.min(take + MY_ORDERS_TRAININGS_COUNT, totalItems)))
+    dispatch(setTake(Math.min(take + MY_ORDERS_TRAININGS_COUNT, totalItems)));
   };
   const handleReturn = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
-    dispatch(setTake(MY_ORDERS_TRAININGS_COUNT))
+    dispatch(setTake(MY_ORDERS_TRAININGS_COUNT));
   };
   return (
     <>
       <ul className={`${classApply}__list`}>
         {!isOrdered && trainingsList.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
-          <li key={id} className={`${classApply}__item`}>
-            <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}} />
-          </li>
+          (
+            <li key={id} className={`${classApply}__item`}>
+              <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage}} />
+            </li>
+          )
         )}
         {isOrdered && trainingsOrderedList.map(({training: {id, price, name, trainType, calories, description, rating, backgroundImage}, trainingsCount, trainingsSum}) =>
-          <li key={id} className={`${classApply}__item`}>
-            <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage, isOrdered, trainingsCount, trainingsSum}} />
-          </li>
+          (
+            <li key={id} className={`${classApply}__item`}>
+              <TrainingItemComponent {...{id, price, name, trainType, calories, description, rating, backgroundImage, isOrdered, trainingsCount, trainingsSum}} />
+            </li>
+          )
         )}
       </ul>
       <PaginationComponent
@@ -80,5 +84,5 @@ export default function TrainingsListComponent({classApply, shouldIncludeDuratio
         classApply={classApply}
       />
     </>
-  )
+  );
 }

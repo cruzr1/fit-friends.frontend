@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { updateTrainingAction } from '../../store/training/training.actions';
 import { adaptImage } from '../../helpers';
 import { selectTrainingsCount } from '../../store/user/user.selectors';
-import { loadAvailableTrainingsCountAction, useActiveTrainingsAction } from '../../store/user/user.actions';
+import { loadAvailableTrainingsCountAction, consumeActiveTrainingsAction } from '../../store/user/user.actions';
 
 type TrainingCardComponentProps = {
   training: TrainingType;
@@ -16,22 +16,23 @@ type TrainingCardComponentProps = {
 export default function TrainingCardComponent({training, trainer, isTrainer, handleBuyButtonClick}: TrainingCardComponentProps): JSX.Element {
   const dispatch = useAppDispatch();
   const trainingsCount = useAppSelector(selectTrainingsCount);
+  const {id, name: trainingName, description: trainDescription, isSpecial: trainingIsSpecial, videoURL: trainingVideoURL, price: trainingPrice} = training;
   useEffect(() => {
     let isMounted = true;
     if (isMounted && !isTrainer) {
-      dispatch(loadAvailableTrainingsCountAction(training.id));
+      dispatch(loadAvailableTrainingsCountAction(id));
     }
     return () => {
       isMounted = false;
-    }
-  }, [dispatch, trainingsCount ]);
+    };
+  }, [dispatch, trainingsCount, isTrainer, id ]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [name, setName] = useState<string>(training.name);
-  const [description, setDescription] = useState<string>(training.description);
-  const [price, setPrice] = useState<number>(training.price);
-  const [isSpecial, setIsSpecial] = useState<boolean>(training.isSpecial);
+  const [name, setName] = useState<string>(trainingName);
+  const [description, setDescription] = useState<string>(trainDescription);
+  const [price, setPrice] = useState<number>(trainingPrice);
+  const [isSpecial, setIsSpecial] = useState<boolean>(trainingIsSpecial);
   const [video, setVideo] = useState<File | undefined>(undefined);
-  const [videoURL, setVideoURL] = useState<string | undefined>(training.videoURL);
+  const [videoURL, setVideoURL] = useState<string | undefined>(trainingVideoURL);
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const [isTrainingActive, setIsTrainingActive] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -60,14 +61,14 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
     setVideo(undefined);
     setVideoURL(undefined);
     if (inputRef.current) {
-      inputRef.current.value ='';
+      inputRef.current.value = '';
     }
   };
   const handleSaveVideoButtonClick = () => {
     dispatch(updateTrainingAction({
-      id: training.id,
+      id,
       videoURL
-    }))
+    }));
     setIsVideoPlaying(false);
   };
   const handlePlayButtonClick = () => {
@@ -84,13 +85,13 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
   const handleUseButtonClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
     if (isTrainingActive) {
-      dispatch(useActiveTrainingsAction(training.id));
+      dispatch(consumeActiveTrainingsAction(id));
     }
     setIsTrainingActive(!isTrainingActive);
     setIsVideoPlaying(false);
-  }
+  };
   return (
-    <div className={`training-card ${isEdit ? 'training-card--edit': ''}`}>
+    <div className={`training-card ${isEdit ? 'training-card--edit' : ''}`}>
       <div className="training-info">
         <h2 className="visually-hidden">Информация о тренировке</h2>
         <div className="training-info__header">
@@ -111,8 +112,7 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
               <svg width="12" height="12" aria-hidden="true">
                 <use xlinkHref="#icon-edit"></use>
               </svg><span>Редактировать</span>
-            </button>
-          }
+            </button>}
           {isTrainer && isEdit &&
             <button
               className="btn-flat btn-flat--light btn-flat--underlined training-info__edit training-info__edit--save"
@@ -122,8 +122,7 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
               <svg width="12" height="12" aria-hidden="true">
                 <use xlinkHref="#icon-edit"></use>
               </svg><span>Сохранить</span>
-            </button>
-          }
+            </button>}
         </div>
         <div className="training-info__main-content">
           <form action="#" method="get">
@@ -148,16 +147,19 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
                       value={description}
                       disabled={!isEdit}
                       onChange={(evt) => setDescription(evt.target.value)}
-                      ></textarea>
+                    >
+                    </textarea>
                   </label>
                 </div>
               </div>
               <div className="training-info__rating-wrapper">
                 <div className="training-info__input training-info__input--rating">
-                  <label><span className="training-info__label">Рейтинг</span><span className="training-info__rating-icon">
+                  <label><span className="training-info__label">Рейтинг</span>
+                    <span className="training-info__rating-icon">
                       <svg width="18" height="18" aria-hidden="true">
                         <use xlinkHref="#icon-star"></use>
-                      </svg></span>
+                      </svg>
+                    </span>
                     <input type="number" name="rating" value={training.rating} disabled={!isEdit} />
                   </label>
                 </div>
@@ -194,16 +196,18 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
                       type="button"
                       onClick={() => handleDiscountClick()}
                     >
-                    <svg width="14" height="14" aria-hidden="true">
-                      <use xlinkHref="#icon-discount"></use>
-                    </svg><span>{!isSpecial ? 'Сделать скидку 10%' : 'Отменить скидку'}</span>
+                      <svg width="14" height="14" aria-hidden="true">
+                        <use xlinkHref="#icon-discount"></use>
+                      </svg><span>{!isSpecial ? 'Сделать скидку 10%' : 'Отменить скидку'}</span>
+                    </button>}
+                {!isTrainer &&
+                  <button
+                    className="btn training-info__buy"
+                    type="button"
+                    onClick={(evt) => handleBuyButtonClick(evt)}
+                    disabled={trainingsCount > 0}
+                  >Купить
                   </button>}
-                {!isTrainer && <button
-                  className="btn training-info__buy"
-                  type="button"
-                  onClick={(evt) => handleBuyButtonClick(evt)}
-                  disabled={trainingsCount > 0}
-                >Купить</button>}
               </div>
             </div>
           </form>
@@ -221,8 +225,7 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
                 height="566"
                 ref={videoRef}
                 controls={isVideoPlaying}
-              />
-            }
+              />}
             {!isVideoPlaying &&
               !isTrainer &&
               isTrainingActive &&
@@ -231,71 +234,75 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
                 className="training-video__play-button btn-reset"
                 onClick={() => handlePlayButtonClick()}
               >
-              <svg width="18" height="30" aria-hidden="true">
-                <use xlinkHref="#icon-arrow"></use>
-              </svg>
-            </button>
-            }
+                <svg width="18" height="30" aria-hidden="true">
+                  <use xlinkHref="#icon-arrow"></use>
+                </svg>
+              </button>}
             {!isVideoPlaying && isTrainer &&
               <button
                 className="training-video__play-button btn-reset"
                 onClick={() => handlePlayButtonClick()}
               >
-              <svg width="18" height="30" aria-hidden="true">
-                <use xlinkHref="#icon-arrow"></use>
-              </svg>
-            </button>
-            }
+                <svg width="18" height="30" aria-hidden="true">
+                  <use xlinkHref="#icon-arrow"></use>
+                </svg>
+              </button>}
           </div>
 
         </div>
-        {!video && !videoURL && isTrainer && <div className="training-video__drop-files" style={{ display: 'flex'}}>
-          <form action="#" method="post">
-            <div className="training-video__form-wrapper">
-              <div className="drag-and-drop">
-                <label>
-                  <span className="drag-and-drop__label" tabIndex={0}>
-                    'Загрузите сюда файлы формата MOV, AVI или MP4'
-                    <svg width="20" height="20" aria-hidden="true">
-                      <use xlinkHref="#icon-import-video"></use>
-                    </svg>
-                  </span>
-                  <input
-                    type="file"
-                    name="import"
-                    ref={inputRef}
-                    required
-                    tabIndex={-1}
-                    accept=".mov, .avi, .mp4"
-                    onChange={(evt) => handleVideoDrop(evt)}
-                    disabled={!isEdit}
-                  />
-                </label>
+        {!video && !videoURL && isTrainer &&
+          <div className="training-video__drop-files" style={{ display: 'flex'}}>
+            <form action="#" method="post">
+              <div className="training-video__form-wrapper">
+                <div className="drag-and-drop">
+                  <label>
+                    <span className="drag-and-drop__label" tabIndex={0}>
+                      Загрузите сюда файлы формата MOV, AVI или MP4
+                      <svg width="20" height="20" aria-hidden="true">
+                        <use xlinkHref="#icon-import-video"></use>
+                      </svg>
+                    </span>
+                    <input
+                      type="file"
+                      name="import"
+                      ref={inputRef}
+                      required
+                      tabIndex={-1}
+                      accept=".mov, .avi, .mp4"
+                      onChange={(evt) => handleVideoDrop(evt)}
+                      disabled={!isEdit}
+                    />
+                  </label>
+                </div>
               </div>
-            </div>
-          </form>
-        </div>}
+            </form>
+          </div>}
         <div className="training-video__buttons-wrapper">
-          {!isTrainer && <button
+          {!isTrainer &&
+          <button
             className="btn training-video__button training-video__button--start"
             disabled={trainingsCount === 0 && !isTrainingActive}
             type="button"
             onClick={(evt) => handleUseButtonClick(evt)}
-          >{isTrainingActive ? 'Закончить' : 'Приступить'}</button>}
-          {isTrainer && isEdit && <div className="training-video__edit-buttons">
-            <button
-              className="btn"
-              type="button"
-              onClick={() => handleSaveVideoButtonClick()}
-            >Сохранить</button>
-            <button
-              className="btn btn--outlined"
-              type="button"
-              onClick={() => handleDeleteVideoButtonClick()}
-            >Удалить</button>
-          </div>}
+          >{isTrainingActive ? 'Закончить' : 'Приступить'}
+          </button>}
+          {isTrainer && isEdit &&
+            <div className="training-video__edit-buttons">
+              <button
+                className="btn"
+                type="button"
+                onClick={() => handleSaveVideoButtonClick()}
+              >Сохранить
+              </button>
+              <button
+                className="btn btn--outlined"
+                type="button"
+                onClick={() => handleDeleteVideoButtonClick()}
+              >Удалить
+              </button>
+            </div>}
         </div>
       </div>
     </div>
-  )
+  );
 }

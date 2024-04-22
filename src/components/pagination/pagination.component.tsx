@@ -16,15 +16,15 @@ export default function PaginationComponent({classApply, take, totalItems, handl
           className="btn show-more__button show-more__button--more"
           type="button"
           onClick={(evt) => handleShowMore(evt)}
-        >Показать еще</button>
-      }
+        >Показать еще
+        </button>}
       {take === totalItems &&
         <button
           className="btn show-more__button show-more__button--more"
           type="button"
           onClick={(evt) => handleReturn(evt)}
-        >Вернуться в начало</button>
-      }
-  </div>
-  )
+        >Вернуться в начало
+        </button>}
+    </div>
+  );
 }

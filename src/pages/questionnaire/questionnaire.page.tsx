@@ -10,5 +10,5 @@ export default function QuestionnairePage(): JSX.Element {
       <BackgroundLogoComponent />
       <PopupQuestionnaireComponent />
     </>
-  )
+  );
 }

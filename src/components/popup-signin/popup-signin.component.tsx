@@ -36,27 +36,32 @@ export default function PopupSigninComponent(): JSX.Element {
             >
               <div className="sign-in">
                 <div className="custom-input sign-in__input">
-                  <label><span className="custom-input__label">E-mail</span><span className="custom-input__wrapper">
+                  <label>
+                    <span className="custom-input__label">E-mail</span>
+                    <span className="custom-input__wrapper">
                       <input
                         type="email"
                         name="email"
                         ref={emailRef}
                         onChange={() => setEmail(emailRef.current?.value ?? '')}
-                      /></span>
-                      {email.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
-                      {!isEmailValid(email) && submit && <p style={errorStyle}>Должен быть указан валидный e-mail</p>}
+                      />
+                    </span>
+                    {email.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
+                    {!isEmailValid(email) && submit && <p style={errorStyle}>Должен быть указан валидный e-mail</p>}
                   </label>
                 </div>
                 <div className="custom-input sign-in__input">
-                  <label><span className="custom-input__label">Пароль</span><span className="custom-input__wrapper">
+                  <label><span className="custom-input__label">Пароль</span>
+                    <span className="custom-input__wrapper">
                       <input
                         type="password"
                         name="password"
                         ref={passwordRef}
                         onChange={() => setPassword(passwordRef.current?.value ?? '')}
-                      /></span>
-                      {password.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
-                      {!isPasswordValid(password) && submit && <p style={errorStyle}>Длина пароля должна составлять от 6 до 12 символов.</p>}
+                      />
+                    </span>
+                    {password.length === NULL_VALUE && submit && <p style={errorStyle}>Заполните поле</p>}
+                    {!isPasswordValid(password) && submit && <p style={errorStyle}>Длина пароля должна составлять от 6 до 12 символов.</p>}
                   </label>
                 </div>
                 <button className="btn sign-in__button" type="submit">Продолжить</button>
@@ -66,5 +71,5 @@ export default function PopupSigninComponent(): JSX.Element {
         </div>
       </div>
     </div>
-  )
+  );
 }

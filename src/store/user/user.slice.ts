@@ -3,7 +3,7 @@ import { AuthStatus, CATALOG_COUNT, Level, Location, NameSpace, RequestStatus, T
 import { ApplicationType, AuthStatusType, ClientNotificationType, RequestStatusType, UserType } from '../../types';
 import { logoutUser } from '../action';
 import { removeToken } from '../../services/token';
-import { signinUserAction, addToFriendsAction, applyPersonalTrainingAction, authoriseUserAction, useActiveTrainingsAction, loadAuthorApplicationsAction, loadAvailableTrainingsCountAction, updateApplicationAction, loadUserApplicationsAction, loginUserAction, loadUsersReadyTrainAction, updateUserAction, loadUserItemAction, loadUsersListAction, orderTrainingsAction, loadUserFriendsAction, loadNotificationsAction, loadUserItemTrainingsAction, subscribeNotificationsAction} from './user.actions';
+import { signinUserAction, addToFriendsAction, applyPersonalTrainingAction, authoriseUserAction, consumeActiveTrainingsAction, loadAuthorApplicationsAction, loadAvailableTrainingsCountAction, updateApplicationAction, loadUserApplicationsAction, loginUserAction, loadUsersReadyTrainAction, updateUserAction, loadUserItemAction, loadUsersListAction, orderTrainingsAction, loadUserFriendsAction, loadNotificationsAction, loadUserItemTrainingsAction, subscribeNotificationsAction} from './user.actions';
 
 export type UserStateType = {
   authStatus: AuthStatusType;
@@ -111,14 +111,14 @@ export const user = createSlice({
       if (state.locationFilter.includes(payload)) {
         state.locationFilter = state.locationFilter.filter((location) => location !== payload);
       } else {
-        state.locationFilter =  state.locationFilter.concat(payload);
+        state.locationFilter = state.locationFilter.concat(payload);
       }
     },
     setTrainTypeFilter: (state, {payload}: PayloadAction<TrainType>) => {
       if (state.trainTypeFilter.includes(payload)) {
         state.trainTypeFilter = state.trainTypeFilter.filter((type) => type !== payload);
       } else {
-        state.trainTypeFilter =  state.trainTypeFilter.concat(payload);
+        state.trainTypeFilter = state.trainTypeFilter.concat(payload);
       }
     },
     setLevelFilter: (state, {payload}: PayloadAction<Level>) => {
@@ -165,7 +165,7 @@ export const user = createSlice({
       .addCase(loadAvailableTrainingsCountAction.pending, (state) => {
         state.loadAvailableTrainingsCountStatus = RequestStatus.Pending;
       })
-      .addCase(useActiveTrainingsAction.pending, (state) => {
+      .addCase(consumeActiveTrainingsAction.pending, (state) => {
         state.useActiveTrainingsStatus = RequestStatus.Pending;
       })
       .addCase(loadUsersListAction.pending, (state) => {
@@ -222,7 +222,7 @@ export const user = createSlice({
       .addCase(loadAvailableTrainingsCountAction.rejected, (state) => {
         state.loadAvailableTrainingsCountStatus = RequestStatus.Rejected;
       })
-      .addCase(useActiveTrainingsAction.rejected, (state) => {
+      .addCase(consumeActiveTrainingsAction.rejected, (state) => {
         state.useActiveTrainingsStatus = RequestStatus.Rejected;
       })
       .addCase(loadUsersListAction.rejected, (state) => {
@@ -279,7 +279,7 @@ export const user = createSlice({
       .addCase(loadAvailableTrainingsCountAction.fulfilled, (state) => {
         state.loadAvailableTrainingsCountStatus = RequestStatus.Fulfilled;
       })
-      .addCase(useActiveTrainingsAction.fulfilled, (state) => {
+      .addCase(consumeActiveTrainingsAction.fulfilled, (state) => {
         state.useActiveTrainingsStatus = RequestStatus.Fulfilled;
       })
       .addCase(loadUsersListAction.fulfilled, (state) => {
@@ -314,24 +314,24 @@ export const user = createSlice({
       })
       .addCase(loadNotificationsAction.fulfilled, (state) => {
         state.loadNotificationsStatus = RequestStatus.Fulfilled;
-      })
+      });
   },
 });
 
 export const {
   updateAuthStatus,
-   setUser,
-   setUsersReadyTrain,
-   setTrainingsCount,
-   setLocationFilter,
-   setRoleFilter,
-   setLevelFilter,
-   setTrainTypeFilter,
-   setUsersList,
-   setUsersTake,
-   setUsersTotalItems,
-   setUserItem,
-   setUserFriends,
-   setApplicationsList,
-   setNotifications,
+  setUser,
+  setUsersReadyTrain,
+  setTrainingsCount,
+  setLocationFilter,
+  setRoleFilter,
+  setLevelFilter,
+  setTrainTypeFilter,
+  setUsersList,
+  setUsersTake,
+  setUsersTotalItems,
+  setUserItem,
+  setUserFriends,
+  setApplicationsList,
+  setNotifications,
 } = user.actions;

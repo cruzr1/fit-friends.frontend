@@ -12,18 +12,20 @@ type PopupMapComponentProps = {
 export default function PopupMapComponent({handlePopupClose, location, name}: PopupMapComponentProps): JSX.Element {
   useEffect(() => {
     let isMounted = true;
-    blockPage()
     const handleKeyDown = (evt: KeyboardEvent) => {
       if (evt.key === KEY_ESCAPE) {
-        handlePopupClose()
+        handlePopupClose();
       }
+    };
+    if (isMounted) {
+      blockPage();
+      document.addEventListener('keydown', handleKeyDown);
     }
-    document.addEventListener('keydown', (evt) => handleKeyDown(evt));
     return () => {
       isMounted = false;
-      unblockPage()
-    }
-  }, [])
+      unblockPage();
+    };
+  }, [handlePopupClose]);
   return (
     <div className="popup-form popup-form--map">
       <section className="popup">
@@ -50,5 +52,5 @@ export default function PopupMapComponent({handlePopupClose, location, name}: Po
         </div>
       </section>
     </div>
-  )
+  );
 }
