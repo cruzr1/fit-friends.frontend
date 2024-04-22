@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../../const';
-import LoadingPage from '../../pages/loading/loading.page';
+import {LoadingPage} from '../../pages/index';
 import { useAppSelector } from '../../hooks/hooks';
 import { selectUserAuthStatus } from '../../store/user/user.selectors';
 

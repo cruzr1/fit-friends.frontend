@@ -83,7 +83,7 @@ export default function PopupCertificatesComponent({certificates, handleCloseBut
             <ul className="personal-account-coach__list">
               {certificatesVisible.map((certificate) =>
                 (
-                  <li key={certificate}className="personal-account-coach__item">
+                  <li key={certificate} className="personal-account-coach__item">
                     <div className="certificate-card">
                       <div className="certificate-card__image">
                         <picture>

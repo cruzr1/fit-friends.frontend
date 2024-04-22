@@ -4,7 +4,7 @@ import { selectSpecialOffers } from '../../store/training/training.selectors';
 import { loadSpecialOffersAction } from '../../store/training/training.actions';
 import { adaptImage, adaptOldPrice} from '../../helpers';
 import { NULL_VALUE, SpecialSlideNumbers } from '../../const';
-import ThumbnailSpecGymComponent from '../thumbnail-spec-gym/thumbnail-spec-gym.component';
+import {ThumbnailSpecGymComponent} from '../index';
 
 export default function SpecialOffersComponent(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -62,16 +62,12 @@ export const NULL_VALUE = 0;
 
 export const STEP = 1;
 
-export const DEFAULT_PAGE_NUMBER = 1;
-
 export const DEFAULT_ORDER_COUNT = 5;
 
 export const errorStyle = {
   color: 'red',
   fontSize: '16px',
 };
-
-export const DEFAULT_PATH = '/img/content';
 
 export const SAMPLE_TRAINING_IMAGE = 'training-1.jpg';
 
@@ -360,8 +356,6 @@ export const CATALOG_COUNT = 6;
 export const PAGES_WITH_HEADER: AppRouteType[] = [AppRoute.Signin, AppRoute.Signup, AppRoute.Quest];
 
 export const USERS_READY_TRAIN = 8;
-
-export const POPULAR_TRAININGS_VISIBLE_COUNT = 4;
 
 export const POPULAR_TRAININGS_SORT_FIELD = 'rating';
 

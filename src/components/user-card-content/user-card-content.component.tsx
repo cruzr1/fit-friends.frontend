@@ -1,4 +1,4 @@
-import { TrainType, TrainTypeCaption } from '../../const';
+import { NotificationsButtonStyle, TrainType, TrainTypeCaption } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { addToFriendsAction } from '../../store/user/user.actions';
 import { selectUser } from '../../store/user/user.selectors';
@@ -31,6 +31,7 @@ export default function UserCardContentComponent({ id, classApply, name, locatio
         </div>
         <div className={`${classApply}__label`}>
           <a
+            style={NotificationsButtonStyle}
             href="popup-user-map.html"
             onClick={(evt) => handleMapLinkClick(evt)}
           >

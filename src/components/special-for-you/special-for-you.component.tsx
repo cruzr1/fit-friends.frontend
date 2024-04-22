@@ -3,9 +3,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectChoiseTrainings } from '../../store/training/training.selectors';
 import { loadChoiseTrainingsAction } from '../../store/training/training.actions';
 import { ITEMS_PER_PAGE, NULL_VALUE, STEP } from '../../const';
-import ThumbnailTrainingPreviewComponent from '../thumbnail-training-preview/thumbnail-training-prevew.component';
+import {ThumbnailTrainingPreviewComponent, ThumbnailSpecGymComponent} from '../index';
 import { UserType } from '../../types';
-import ThumbnailSpecGymComponent from '../thumbnail-spec-gym/thumbnail-spec-gym.component';
 
 type SpecialForYouComponentProps = {
   user: UserType;

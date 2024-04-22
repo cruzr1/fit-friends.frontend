@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, NULL_VALUE, MAIN_ITEMS_PER_PAGE, STEP } from '../../const';
-import ThumbnailSpecGymComponent from '../thumbnail-spec-gym/thumbnail-spec-gym.component';
-import UserItemComponent from '../user-item/user-item.component';
+import {ThumbnailSpecGymComponent, UserItemComponent} from '../index';
 import { selectUsersReadyTrain } from '../../store/user/user.selectors';
 import { loadUsersReadyTrainAction } from '../../store/user/user.actions';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';

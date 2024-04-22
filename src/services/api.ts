@@ -1,6 +1,8 @@
 import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { getToken } from './token';
-import { BASE_URL, REQUEST_TIMEOUT, } from '../const';
+import { AppRoute, BASE_URL, REQUEST_TIMEOUT, } from '../const';
+import { StatusCodes } from 'http-status-codes';
+import { redirectToRoute } from '../store/action';
 
 
 type DetailMessageType = {
@@ -29,6 +31,9 @@ export const createApi = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     ({response}: AxiosError<DetailMessageType>) => {
+      if (response && response.status === StatusCodes.UNAUTHORIZED) {
+        redirectToRoute(AppRoute.Index);
+      }
       throw response?.data.message;
     }
   );

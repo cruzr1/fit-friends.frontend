@@ -4,8 +4,7 @@ import { AppRoute, NULL_VALUE, MAIN_ITEMS_PER_PAGE, STEP } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadPopularTrainingsAction } from '../../store/training/training.actions';
 import { selectPopularTrainings } from '../../store/training/training.selectors';
-import ThumbnailSpecGymComponent from '../thumbnail-spec-gym/thumbnail-spec-gym.component';
-import TrainingItemComponent from '../training-item/training-item.component';
+import {ThumbnailSpecGymComponent, TrainingItemComponent} from '../index';
 
 export default function PopularTrainingsComponent(): JSX.Element {
   const navigate = useNavigate();

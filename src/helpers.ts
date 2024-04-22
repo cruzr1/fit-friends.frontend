@@ -31,10 +31,6 @@ export const adaptImage = (image: string) => image.slice(0, image.indexOf('.'));
 
 export const adaptPathname = (pathname: string): TrainingItemClassApplyType => pathname.slice(1) as TrainingItemClassApplyType;
 
-export const isTrainingType = (trainingsList: TrainingType[] | TrainingOrderedType[]): trainingsList is TrainingType[] => (trainingsList as TrainingType[])[0].name !== undefined;
-
-export const isTrainingOrderedType = (trainingsList: TrainingType[] | TrainingOrderedType[]): trainingsList is TrainingOrderedType[] => (trainingsList as TrainingOrderedType[])[0].training !== undefined;
-
 export const isPasswordValid = (pass: string): boolean => PASSWORD_REGEX.test(pass);
 
 export const isEmailValid = (mail: string): boolean => EMAIL_REGEX.test(mail);
