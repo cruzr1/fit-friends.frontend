@@ -29,7 +29,7 @@ export default function UserCardComponent({userId}: UserCardComponentProps): JSX
     return () => {
       isMounted = false;
     };
-  }, [dispatch, userId]);
+  }, [dispatch, userId, isCoach]);
 
   const trainings = useAppSelector(selectTrainingsList);
   const [isShownCertificate, setIsShownCertificate] = useState<boolean>(false);
