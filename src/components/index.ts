@@ -32,3 +32,4 @@ export { default as PopupCertificatesComponent } from './popup-certifcates/popup
 export { default as PopupMapComponent } from './popup-map/popup-map.component';
 export { default as MapComponent } from './map/map.component';
 export { default as PersonalAccountComponent } from './personal-account/personal-account.component';
+export { default as UserCardComponent } from './user-card/user-card.component';

@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { NULL_VALUE, NUMBER_REGEX, QuestionDurationCaption, TrainType, TrainTypeCaption, Duration, LevelCaption, Level, Gender, TrainingFormGenderCaption, errorStyle, SAMPLE_TRAINING_IMAGE, AppRoute } from '../../const';
-import { isCaloriesValueValid, isDescriptionValid, isNameValid } from '../../helpers';
-import { useAppDispatch } from '../../hooks/hooks';
+import { NULL_VALUE, NUMBER_REGEX, QuestionDurationCaption, TrainType, TrainTypeCaption, Duration, LevelCaption, Level, Gender, TrainingFormGenderCaption, errorStyle, SAMPLE_TRAINING_IMAGE, AppRoute, RequestStatus } from '../../const';
+import { isCaloriesValueValid, isDescriptionValid, isNameValid, isStatusFulfilled, isStatusPending } from '../../helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { postTrainingAction } from '../../store/training/training.actions';
 import { Helmet } from 'react-helmet-async';
+import { selectPostTrainingStatus } from '../../store/training/training.selectors';
+import { setPostTrainingStatus } from '../../store/training/training.slice';
 
 
 export default function CreateTrainingPage (): JSX.Element {
@@ -52,6 +54,7 @@ export default function CreateTrainingPage (): JSX.Element {
     }
     setVideoURL(newVideo.name);
   };
+  const isDataFulfilled = isStatusFulfilled(useAppSelector(selectPostTrainingStatus));
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setIsSubmit(true);
@@ -69,9 +72,13 @@ export default function CreateTrainingPage (): JSX.Element {
         videoURL,
         isSpecial: false,
       }));
-      navigate(AppRoute.PersonalAccount);
+      if (isDataFulfilled) {
+        dispatch(setPostTrainingStatus(RequestStatus.Idle));
+        navigate(AppRoute.PersonalAccount);
+      }
     }
   };
+  const isDataPending = isStatusPending(useAppSelector(selectPostTrainingStatus));
   return (
     <div className="popup-form popup-form--create-training">
       <Helmet>
@@ -277,6 +284,7 @@ export default function CreateTrainingPage (): JSX.Element {
                 <button
                   className="btn create-training__button"
                   type="submit"
+                  disabled={isDataPending}
                 >Опубликовать
                 </button>
               </div>

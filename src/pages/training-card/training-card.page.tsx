@@ -5,10 +5,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../store/user/user.selectors';
 import { TrainingType } from '../../types';
 import { UserRole } from '../../const';
-import { selectTrainer, selectTraining } from '../../store/training/training.selectors';
+import { selectLoadTrainingStatus, selectTrainer, selectTraining } from '../../store/training/training.selectors';
 import { loadTrainingAction } from '../../store/training/training.actions';
 import PopupBuyComponent from '../../components/popup-buy/popup-buy.component';
 import { Helmet } from 'react-helmet-async';
+import { isStatusFulfilled, isStatusPending } from '../../helpers';
+import LoadingPage from '../loading/loading.page';
 
 
 export default function TrainingCardPage(): JSX.Element {
@@ -46,26 +48,30 @@ export default function TrainingCardPage(): JSX.Element {
     evt.preventDefault();
     setShowBuy(true);
   };
-
-
+  const isDataPending = isStatusPending(useAppSelector(selectLoadTrainingStatus));
+  const isDataFulfilled = isStatusFulfilled(useAppSelector(selectLoadTrainingStatus));
   return (
     <>
-      <section className="inner-page">
-        <Helmet>
-          <title>Карточка тренировки — Fit friends</title>
-        </Helmet>
-        <div className="container">
-          <div className="inner-page__wrapper">
-            <h1 className="visually-hidden">Карточка тренировки</h1>
-            <ReviewsListComponent trainingId={trainingId} isTrainer={isTrainer} handleReviewButtonClick={handleReviewButtonClick} />
-            {training && trainer && <TrainingCardComponent training={training} trainer={trainer} handleBuyButtonClick={handleBuyButtonClick} isTrainer={isTrainer} />}
-          </div>
-        </div>
-      </section>
-      {showReview &&
-        <PopupReviewComponent trainingId={trainingId} handlePopupClose={handlePopupClose} />}
-      {showBuy && training.price > 0 &&
-        <PopupBuyComponent training={training} handlePopupClose={handlePopupClose} />};
+      {isDataPending && <LoadingPage />}
+      {isDataFulfilled &&
+        <>
+          <section className="inner-page">
+            <Helmet>
+              <title>Карточка тренировки — Fit friends</title>
+            </Helmet>
+            <div className="container">
+              <div className="inner-page__wrapper">
+                <h1 className="visually-hidden">Карточка тренировки</h1>
+                <ReviewsListComponent trainingId={trainingId} isTrainer={isTrainer} handleReviewButtonClick={handleReviewButtonClick} />
+                {training && trainer && <TrainingCardComponent training={training} trainer={trainer} handleBuyButtonClick={handleBuyButtonClick} isTrainer={isTrainer} />}
+              </div>
+            </div>
+          </section>
+          {showReview &&
+            <PopupReviewComponent trainingId={trainingId} handlePopupClose={handlePopupClose} />}
+          {showBuy && training.price > 0 &&
+            <PopupBuyComponent training={training} handlePopupClose={handlePopupClose} />};
+        </>}
     </>
   );
 }

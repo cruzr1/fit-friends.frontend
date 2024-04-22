@@ -73,6 +73,9 @@ export const training = createSlice({
   name: NameSpace.Training,
   initialState: trainingState,
   reducers: {
+    setPostTrainingStatus: (state, {payload}: PayloadAction<RequestStatusType>) => {
+      state.postTrainingStatus = payload;
+    },
     setSpecialOffers: (state, {payload}: PayloadAction<TrainingType[]>) => {
       state.specialOffers = payload;
     },
@@ -264,4 +267,5 @@ export const {
   setTrainingsOrderedList,
   setSortByField,
   setIsActiveTrainings,
+  setPostTrainingStatus
 } = training.actions;
