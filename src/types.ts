@@ -1,4 +1,4 @@
-import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location, Payment, OrderPayment, UserRole, ApplicationStatus, OrdersSortByFields, SortOrder } from './const';
+import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location, Payment, OrderPayment, UserRole, ApplicationStatus, OrdersSortByFields, SortOrder, NotifyStatus } from './const';
 import { store } from './store/store';
 
 export type StateType = ReturnType<typeof store.getState>;
@@ -14,10 +14,6 @@ export type RequestStatusType = typeof RequestStatus[keyof typeof RequestStatus]
 
 export type BackButtonClassApplyType = typeof BackButtonClassApply[keyof typeof BackButtonClassApply];
 
-export enum NotifyStatus {
-  Created = 'Created',
-  Sent = 'Sent',
-}
 
 export type NotificationPayloadType = {
   to: string;

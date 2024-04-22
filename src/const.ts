@@ -41,6 +41,12 @@ export const NotificationsButtonStyle = {
   background: 'none'
 };
 
+
+export enum NotifyStatus {
+  Created = 'Created',
+  Sent = 'Sent',
+}
+
 export const BodyStyle = {
   Blocked: {
     Overflow: 'hidden',

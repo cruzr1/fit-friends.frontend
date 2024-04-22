@@ -1,5 +1,5 @@
 import { RequestStatus, PASSWORD_REGEX, EMAIL_REGEX, NAME_REGEX, BIRTHDAY_REGEX, AVATAR_REGEX, CERTIFICATE_REGEX, COMMENT_REGEX, UserValidationParams, Payment, BodyStyle, ApplicationStatus, NULL_VALUE, SortOrder, DESCRIPTION_REGEX } from './const';
-import { RequestStatusType, TrainingItemClassApplyType, TrainingType, TrainingOrderedType, ApplicationType, SortOrderType } from './types';
+import { RequestStatusType, TrainingItemClassApplyType, ApplicationType, SortOrderType } from './types';
 
 export const isStatusPending = (status: RequestStatusType) => status === RequestStatus.Pending;
 

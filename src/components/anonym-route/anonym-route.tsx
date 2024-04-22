@@ -5,9 +5,9 @@ import {LoadingPage} from '../../pages/index';
 import { useAppSelector } from '../../hooks/hooks';
 import { selectUser, selectUserAuthStatus } from '../../store/user/user.selectors';
 
-type PrivateRouteProps = PropsWithChildren;
+type PublicRouteProps = PropsWithChildren;
 
-export default function AnonymRoute ({children}: PrivateRouteProps): JSX.Element | ReactNode {
+export default function PublicRoute ({children}: PublicRouteProps): JSX.Element | ReactNode {
   const authStatus = useAppSelector(selectUserAuthStatus);
   const userRole = useAppSelector(selectUser)?.role;
   return (
