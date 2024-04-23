@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AppRoute, UserRole } from '../../const';
 import { HelmetProvider } from 'react-helmet-async';
 import LayoutComponent from '../layout/layout.component';
-import PublicRoute from '../anonym-route/anonym-route';
+import PublicRoute from '../public-route/public-route';
 import PrivateRoute from '../private-route/private-route';
 import PrivateRouteRole from '../private-route-role/private-route-role';
 import {CreateTrainingPage, SignPage, QuestionnairePage, PersonalAccountPage, MyTrainingsPage, MyOrdersPage, FriendsListPage, MainPage, MyPurchasesPage, UserCardPage, UsersCataloguePage, TrainingCardPage, TrainingCataloguePage, IntroPage, ErrorPage} from '../../pages/index';
