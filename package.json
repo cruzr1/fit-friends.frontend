@@ -5,9 +5,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx",
-    "preview": "vite preview",
-    "test": "vitest --passWithNoTests"
+    "lint": "eslint src --ext ts,tsx"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

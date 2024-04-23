@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthStatus, UserRole} from '../../const';
 import {LoadingPage} from '../../pages/index';
@@ -7,7 +7,7 @@ import { selectUser, selectUserAuthStatus } from '../../store/user/user.selector
 
 type PublicRouteProps = PropsWithChildren;
 
-export default function PublicRoute ({children}: PublicRouteProps): JSX.Element | ReactNode {
+export default function PublicRoute ({children}: PublicRouteProps): JSX.Element {
   const authStatus = useAppSelector(selectUserAuthStatus);
   const userRole = useAppSelector(selectUser)?.role;
   return (

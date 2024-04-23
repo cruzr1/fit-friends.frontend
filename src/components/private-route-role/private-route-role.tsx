@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthStatus, UserRole} from '../../const';
 import {LoadingPage} from '../../pages/index';
@@ -8,7 +8,7 @@ import { selectUser, selectUserAuthStatus } from '../../store/user/user.selector
 type PrivateRouteProps = PropsWithChildren<{role: UserRole}>;
 
 
-export default function PrivateRouteRole ({children, role}: PrivateRouteProps): JSX.Element | ReactNode {
+export default function PrivateRouteRole ({children, role}: PrivateRouteProps): JSX.Element {
   const authStatus = useAppSelector(selectUserAuthStatus);
   const user = useAppSelector(selectUser);
   return (
