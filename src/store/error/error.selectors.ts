@@ -1,4 +1,4 @@
 import { StateType } from '../../types';
-import { NameSpace } from '../../const';
+import { StateName } from '../../const';
 
-export const selectError = (state: StateType) => state[NameSpace.Error].error;
+export const selectError = (state: Pick<StateType, StateName.Error>) => state[StateName.Error].error;

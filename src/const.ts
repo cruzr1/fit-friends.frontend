@@ -294,6 +294,13 @@ export const NameSpace = {
   Training: 'training',
 } as const;
 
+export enum StateName {
+  User = 'user',
+  Error = 'error',
+  Route = 'route',
+  Training = 'training',
+}
+
 export const ErrorMessage = {
   UserUnauthorised: 'User is unauthorised',
   FailedUserLogout: 'Failed to log user out',
