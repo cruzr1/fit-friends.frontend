@@ -1,5 +1,7 @@
+import { Action, ThunkDispatch } from '@reduxjs/toolkit';
 import { AuthStatus, RequestStatus, Level, TrainType, Duration, Gender, TrainingItemClassApply, AppRoute, BackButtonClassApply, Location, Payment, OrderPayment, UserRole, ApplicationStatus, OrdersSortByFields, SortOrder, NotifyStatus } from './const';
 import { store } from './store/store';
+import { createApi } from './services/api';
 
 export type StateType = ReturnType<typeof store.getState>;
 
@@ -11,6 +13,7 @@ export type AppRouteType = typeof AppRoute[keyof typeof AppRoute];
 
 export type RequestStatusType = typeof RequestStatus[keyof typeof RequestStatus];
 
+export type AppThunkDispatchType = ThunkDispatch<StateType, ReturnType<typeof createApi>, Action>;
 
 export type BackButtonClassApplyType = typeof BackButtonClassApply[keyof typeof BackButtonClassApply];
 

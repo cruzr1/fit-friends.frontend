@@ -349,7 +349,7 @@ export const updateApplicationAction = createAsyncThunk<void, UpdateApplicationP
   `${NameSpace.User}/${Action.UpdateApplication}`,
   async ({applicationStatus, applicationId, userId}, {dispatch, extra: axiosApi}) => {
     try {
-      await axiosApi.patch<ApplicationType[]>(`${APIPath.Applications.Index}/${applicationId}`, {
+      await axiosApi.patch<ApplicationType>(`${APIPath.Applications.Index}/${applicationId}`, {
         status: applicationStatus,
       });
       dispatch(loadUserApplicationsAction(userId));

@@ -62,7 +62,7 @@ export const loadChoiseTrainingsAction = createAsyncThunk<void, UserFeaturesType
   `${NameSpace.Training}/${Action.LoadChoiseTrainings}`,
   async ({duration, trainType, level,caloriesDaily}, {dispatch, extra: axiosApi}) => {
     try {
-      const { data : { entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Index,{
+      const { data : { entities } } = await axiosApi.get<EntitiesWithPaginationType<TrainingType>>(APIPath.Trainings.Index, {
         params: {
           take: CHOISE_TRAININGS_COUNT,
           caloriesFilter: [NULL_VALUE, caloriesDaily],
