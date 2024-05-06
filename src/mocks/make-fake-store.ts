@@ -1,0 +1,82 @@
+import { AuthStatus, CATALOG_COUNT, Duration, Level, Location, NULL_VALUE, OrdersSortByFields, RATING_LIST, RequestStatus, SortOrder, StateName, TrainType, UserRole, UserValidationParams } from '../const';
+import { StateType, TrainingType, UserType } from '../types';
+import {MOCK_TRAININGS as trainings} from './mock-trainings';
+import {MOCK_USERS as users} from './mock-users';
+
+const MAX_FAKE_PRICE_FILTER = 20000;
+const FAKE_TRAININGS_COUNT = 10;
+
+export const makeFakeStore = (): StateType => ({
+  [StateName.User]: {
+    authStatus: AuthStatus.Auth,
+    user: users[NULL_VALUE] as UserType,
+    userItem: users[NULL_VALUE] as UserType,
+    usersReadyTrain: [],
+    userFriends: users as UserType[],
+    trainingsCount: FAKE_TRAININGS_COUNT,
+    locationFilter:[Location.Petrogradskaya],
+    trainTypeFilter:[TrainType.Yoga],
+    levelFilter: Level.Amateur,
+    roleFilter: UserRole.Trainer,
+    usersList: [],
+    notifications: [],
+    usersTake: CATALOG_COUNT,
+    usersTotalItems: CATALOG_COUNT,
+    applicationsList: [],
+    updateUserStatus: RequestStatus.Idle,
+    loadUsersReadyTrainStatus: RequestStatus.Idle,
+    signinUserStatus: RequestStatus.Idle,
+    authoriseUserStatus: RequestStatus.Idle,
+    loginUserStatus: RequestStatus.Idle,
+    orderTrainingsStatus: RequestStatus.Idle,
+    loadAvailableTrainingsCountStatus: RequestStatus.Idle,
+    useActiveTrainingsStatus: RequestStatus.Idle,
+    loadUsersListStatus: RequestStatus.Idle,
+    loadUserFriendsStatus: RequestStatus.Idle,
+    loadUserItemStatus: RequestStatus.Idle,
+    addToFriendsStatus: RequestStatus.Idle,
+    applyPersonalTrainingStatus: RequestStatus.Idle,
+    subscribeNotificationsStatus: RequestStatus.Idle,
+    loadUserItemTrainingsStatus: RequestStatus.Idle,
+    loadUserApplicationsStatus: RequestStatus.Idle,
+    loadAuthorApplicationsStatus: RequestStatus.Idle,
+    updateApplicationStatus: RequestStatus.Idle,
+    loadNotificationsStatus: RequestStatus.Idle,
+  },
+  [StateName.Error]: {
+    error: null,
+  },
+  [StateName.Training]: {
+    trainingsList: [],
+    trainingsOrderedList: [],
+    specialOffers: [],
+    popularTrainings: [],
+    choiseTrainings: [],
+    durationFilter: Duration.From10to30min,
+    take: CATALOG_COUNT,
+    priceFilter: [NULL_VALUE, MAX_FAKE_PRICE_FILTER],
+    caloriesFilter: [ UserValidationParams.Calories.Value.Minimum, UserValidationParams.Calories.Value.Maximum],
+    ratingFilter: [Math.min(...RATING_LIST), Math.max(...RATING_LIST)],
+    trainTypeFilter: [TrainType.Yoga],
+    sortByOrder: SortOrder.Desc,
+    sortByField: OrdersSortByFields.Count,
+    totalItems: CATALOG_COUNT,
+    training: trainings[NULL_VALUE] as TrainingType,
+    trainer: users[NULL_VALUE] as UserType,
+    reviews: [],
+    isActiveTrainings: false,
+    postTrainingStatus: RequestStatus.Idle,
+    loadSpecialOffersStatus: RequestStatus.Idle,
+    loadPopularTrainingsStatus: RequestStatus.Idle,
+    loadChoiseTrainingsStatus: RequestStatus.Idle,
+    loadTrainingsStatus: RequestStatus.Idle,
+    loadTrainingsPurchasedStatus: RequestStatus.Idle,
+    loadTrainingsOrderedStatus: RequestStatus.Idle,
+    loadTrainingStatus: RequestStatus.Idle,
+    updateTrainingStatus: RequestStatus.Idle,
+    loadTrainerStatus: RequestStatus.Idle,
+    loadReviewsStatus: RequestStatus.Idle,
+    postReviewStatus: RequestStatus.Idle,
+  }
+});
+
