@@ -25,7 +25,7 @@ export default function HeaderComponent (): JSX.Element {
     setIsActivelist(newActiveList);
   };
   return (
-    <header className="header">
+    <header className="header" data-testid='header'>
       <div className="container">
         <Link className="header__logo" to={AppRoute.Index} aria-label="Переход на главную">
           <svg width="187" height="70" aria-hidden="true">

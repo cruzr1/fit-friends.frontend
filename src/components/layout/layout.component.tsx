@@ -7,7 +7,7 @@ export default function LayoutComponent():JSX.Element {
   const pathname = useLocation().pathname as AppRouteType;
   const shouldDisplayHeader = !PAGES_WITH_HEADER.includes(pathname);
   return (
-    <div className="wrapper">
+    <div className="wrapper" data-testid='layout'>
       {shouldDisplayHeader && <HeaderComponent />}
       <main>
         <Outlet />

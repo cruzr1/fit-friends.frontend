@@ -27,7 +27,7 @@ export default function ReviewsListComponent({trainingId, isTrainer, handleRevie
   const user = useAppSelector(selectUser);
   const forbiddenReview = reviews.some((review) => review.authorId === user?.id);
   return (
-    <aside className="reviews-side-bar">
+    <aside className="reviews-side-bar" data-testid='reviewsList'>
       <BackButtonComponent classApply={BackButtonClassApply.ReviewsList} />
       <h2 className="reviews-side-bar__title">Отзывы</h2>
       <ul className="reviews-side-bar__list">

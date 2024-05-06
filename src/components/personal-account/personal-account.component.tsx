@@ -86,7 +86,7 @@ export default function PersonalAccountComponent({user}: PersonalAccountComponen
       <div className="container">
         <div className="inner-page__wrapper">
           <h1 className="visually-hidden">Личный кабинет</h1>
-          <section className="user-info">
+          <section className="user-info" data-testid='userinfo'>
             <div className="user-info__header">
               <div className="input-load-avatar">
                 <label>
@@ -255,7 +255,7 @@ export default function PersonalAccountComponent({user}: PersonalAccountComponen
               </div>
             </form>
           </section>
-          <div className="inner-page__content">
+          <div className="inner-page__content" data-testid='content'>
             {!isCoach &&
               <div className="personal-account-user">
                 <div className="personal-account-user__schedule">

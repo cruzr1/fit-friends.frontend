@@ -11,7 +11,7 @@ export default function UserFilterComponent(): JSX.Element {
   const levelFilter = useAppSelector(selectLevelFilter);
   const roleFilter = useAppSelector(selectRoleFilter);
   return (
-    <div className="user-catalog-form">
+    <div className="user-catalog-form" data-testid='filter'>
       <h2 className="visually-hidden">Каталог пользователя</h2>
       <div className="user-catalog-form__wrapper">
         <BackButtonComponent classApply={BackButtonClassApply.UserForm} />

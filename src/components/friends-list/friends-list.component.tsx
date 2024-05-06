@@ -54,7 +54,7 @@ export default function FriendsListComponent({user}: FriendsListComponentProps):
           <ul className="friends-list__list">
             {friends.map(({id: friendId, name, location, trainType, isReadyTrain, role: friendRole}) =>
               (
-                <li key={friendId} className="friends-list__item">
+                <li key={friendId} className="friends-list__item" data-testid='friendItem'>
                   <FriendsListItemComponent {...{
                     userId,
                     name,
@@ -79,7 +79,7 @@ export default function FriendsListComponent({user}: FriendsListComponentProps):
           />
         </>}
       {friends.length === NULL_VALUE &&
-        <div>Пока друзей нет.</div>}
+        <div data-testid='noFriends'>Пока друзей нет.</div>}
     </>
   );
 }

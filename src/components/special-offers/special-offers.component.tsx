@@ -21,7 +21,7 @@ export default function SpecialOffersComponent(): JSX.Element {
   const [slideVisible, setSlideVisible] = useState<number>(NULL_VALUE);
   const offerVisible = specialOffers[slideVisible];
   return (
-    <section className="special-offers">
+    <section className="special-offers" data-testid='special'>
       <div className="container">
         <div className="special-offers__wrapper">
           <h2 className="visually-hidden">Специальные предложения</h2>

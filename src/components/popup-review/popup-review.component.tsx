@@ -48,7 +48,7 @@ export default function PopupReviewComponent({trainingId, handlePopupClose}: Pop
   };
 
   return (
-    <div className="popup-form popup-form--feedback">
+    <div className="popup-form popup-form--feedback" data-testid='popup'>
       <section className="popup">
         <div className="popup__wrapper">
           <div className="popup-head">

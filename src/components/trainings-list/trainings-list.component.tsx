@@ -60,7 +60,7 @@ export default function TrainingsListComponent({classApply, shouldIncludeDuratio
   };
   return (
     <>
-      <ul className={`${classApply}__list`}>
+      <ul className={`${classApply}__list`} data-testid='list'>
         {!isOrdered && trainingsList.map(({id, price, name, trainType, calories, description, rating, backgroundImage}) =>
           (
             <li key={id} className={`${classApply}__item`}>

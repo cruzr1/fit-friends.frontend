@@ -8,7 +8,7 @@ type ThumbnailTrainingPreviewComponentProps = {
 
 export default function ThumbnailTrainingPreviewComponent({id, trainType}: ThumbnailTrainingPreviewComponentProps): JSX.Element {
   return (
-    <div className="thumbnail-preview">
+    <div className="thumbnail-preview" data-testid='preview'>
       <div className="thumbnail-preview__image">
         <picture>
           <source type="image/webp" srcSet="/img/content/thumbnails/preview-03.webp, /img/content/thumbnails/preview-03@2x.webp 2x" /><img src="/img/content/thumbnails/preview-03.jpg" srcSet="/img/content/thumbnails/preview-03@2x.jpg 2x" width="452" height="191" alt="" />

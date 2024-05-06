@@ -34,7 +34,7 @@ export default function PopularTrainingsComponent(): JSX.Element {
     }
   };
   return (
-    <section className="popular-trainings">
+    <section className="popular-trainings" data-testid='popularTrainings'>
       <div className="container">
         <div className="popular-trainings__wrapper">
           <div className="popular-trainings__title-wrapper">

@@ -13,7 +13,7 @@ type UserItemProps = {
 
 export default function UserItemComponent({id, name, location, trainType, role, avatar}: UserItemProps): JSX.Element {
   return (
-    <div className={`thumbnail-user thumbnail-user--role-${role === UserRole.User ? 'user' : 'coach'}`}>
+    <div className={`thumbnail-user thumbnail-user--role-${role === UserRole.User ? 'user' : 'coach'}`} data-testid='userItem'>
       <div className="thumbnail-user__image">
         <picture>
           <source type="image/webp" srcSet={`/img/content/thumbnails/${adaptImage(avatar)}.webp, /img/content/thumbnails/${adaptImage(avatar)}@2x.webp 2x`} /><img src={`"/img/content/thumbnails/${adaptImage(avatar)}.jpg" srcSet="/img/content/thumbnails/${adaptImage(avatar)}@2x.jpg 2x"`} width="82" height="82" alt="" />

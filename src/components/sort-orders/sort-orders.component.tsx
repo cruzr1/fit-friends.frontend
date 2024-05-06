@@ -28,7 +28,7 @@ export default function SortOrdersComponent(): JSX.Element {
     }
   };
   return (
-    <div className="sort-for">
+    <div className="sort-for" data-testid='sort'>
       <p>Сортировать по:</p>
       <div className="sort-for__btn-container">
         <button

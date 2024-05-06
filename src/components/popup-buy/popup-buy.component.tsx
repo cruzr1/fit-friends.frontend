@@ -45,6 +45,7 @@ export default function PopupBuyComponent({training, handlePopupClose}: PopupBuy
   return (
     <div
       className="popup-form popup-form--buy"
+      data-testid='popup'
     >
       <section className="popup">
         <div className="popup__wrapper">

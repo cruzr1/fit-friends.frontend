@@ -63,7 +63,7 @@ export default function PopupSignupComponent(): JSX.Element {
     dispatch(signinUserAction(newUser));
   };
   return (
-    <div className="popup-form popup-form--sign-up">
+    <div className="popup-form popup-form--sign-up" data-testid='popup'>
       <Helmet>
         <title>Регистрация — Fit friends</title>
       </Helmet>
@@ -74,7 +74,7 @@ export default function PopupSignupComponent(): JSX.Element {
           </div>
           <div className="popup-form__form">
             <form method="get" onSubmit={(evt) => handleFormSubmit(evt)}>
-              <div className="sign-up">
+              <div className="sign-up" data-testid='signup'>
                 <div className="sign-up__load-photo">
                   <div className="input-load-avatar">
                     <label>

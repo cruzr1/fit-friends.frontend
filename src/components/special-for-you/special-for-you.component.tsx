@@ -38,7 +38,7 @@ export default function SpecialForYouComponent({user}: SpecialForYouComponentPro
     }
   };
   return (
-    <section className="special-for-you">
+    <section className="special-for-you" data-testid='special'>
       <div className="container">
         <div className="special-for-you__wrapper">
           <div className="special-for-you__title-wrapper">

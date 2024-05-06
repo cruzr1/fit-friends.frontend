@@ -10,7 +10,7 @@ type PaginationComponentProps = {
 
 export default function PaginationComponent({classApply, take, totalItems, handleShowMore, handleReturn}: PaginationComponentProps): JSX.Element {
   return (
-    <div className={`show-more ${classApply}__show-more`}>
+    <div className={`show-more ${classApply}__show-more`} data-testid='showMore'>
       {take < totalItems &&
         <button
           className="btn show-more__button show-more__button--more"

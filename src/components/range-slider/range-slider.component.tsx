@@ -17,6 +17,7 @@ export default function RangeSliderComponent({value, maxValue, handleSliderChang
       onChange={({target}) => handleSliderChange((target as HTMLInputElement)?.value as unknown as number[])}
       sx={sliderStyle}
       valueLabelDisplay={showValue}
+      data-testid='slider'
     />
   );
 }

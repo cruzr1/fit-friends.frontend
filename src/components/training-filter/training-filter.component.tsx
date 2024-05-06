@@ -36,7 +36,7 @@ export default function TrainingFilterComponent({isMyTrainingsPage}: TrainingFil
     dispatch(setRatingFilter(value));
   };
   return (
-    <div className={`${classApply}-form`}>
+    <div className={`${classApply}-form`} data-testid='filter'>
       <h2 className="visually-hidden">Мои тренировки Фильтр</h2>
       <div className={`${classApply}-form__wrapper`}>
         <BackButtonComponent classApply={backButtonClassApply} />

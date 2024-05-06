@@ -34,7 +34,7 @@ export default function LookForCompanyComponent(): JSX.Element {
     }
   };
   return (
-    <section className="look-for-company">
+    <section className="look-for-company" data-testid='lookForCompany'>
       <div className="container">
         <div className="look-for-company__wrapper">
           <div className="look-for-company__title-wrapper">

@@ -46,7 +46,7 @@ export default function FriendsListItemComponent({userId, name, location, trainT
     }
   };
   return (
-    <div className="thumbnail-friend">
+    <div className="thumbnail-friend" data-testid='friend'>
       <div className={`thumbnail-friend__info thumbnail-friend__info--theme${isFriendTrainer ? '-dark' : '-light'}`}>
         <div className="thumbnail-friend__image-status">
           <div className="thumbnail-friend__image">

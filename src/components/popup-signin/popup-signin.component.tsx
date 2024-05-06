@@ -20,7 +20,7 @@ export default function PopupSigninComponent(): JSX.Element {
     }
   };
   return (
-    <div className="popup-form popup-form--sign-in">
+    <div className="popup-form popup-form--sign-in" data-testid='popup'>
       <Helmet>
         <title>Вход — Fit friends</title>
       </Helmet>
@@ -34,7 +34,7 @@ export default function PopupSigninComponent(): JSX.Element {
               method="get"
               onSubmit={(evt) => handleFormSubmit(evt)}
             >
-              <div className="sign-in">
+              <div className="sign-in" data-testid='signin'>
                 <div className="custom-input sign-in__input">
                   <label>
                     <span className="custom-input__label">E-mail</span>

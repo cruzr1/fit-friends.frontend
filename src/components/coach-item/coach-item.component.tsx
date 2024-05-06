@@ -13,7 +13,7 @@ export default function CoachItemComponent({certificate, handleDeleteButtonClick
 
   return (
     <div className={`certificate-card ${isEdit ? 'certificate-card--edit' : 'certificate-card--save'}`}>
-      <div className="certificate-card__image">
+      <div className="certificate-card__image" data-testid='cardImage'>
         <picture>
           <source type="image/webp" srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.webp, /img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.webp 2x`} /><img src={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}.jpg`} srcSet={`/img/content/certificates-and-diplomas/${adaptImage(certificate)}@2x.jpg 2x`} width="294" height="360" alt={certificate} />
         </picture>
@@ -49,6 +49,7 @@ export default function CoachItemComponent({certificate, handleDeleteButtonClick
                   aria-label="next"
                   value={certificate}
                   onClick={(evt) => handleUpdateButtonClick(evt)}
+                  data-testid='change'
                 >
                   <svg width="16" height="16" aria-hidden="true">
                     <use xlinkHref="#icon-change"></use>
@@ -60,6 +61,7 @@ export default function CoachItemComponent({certificate, handleDeleteButtonClick
                   aria-label="next"
                   value={certificate}
                   onClick={(evt) => handleDeleteButtonClick(evt)}
+                  data-testid='delete'
                 >
                   <svg width="14" height="16" aria-hidden="true">
                     <use xlinkHref="#icon-trash"></use>

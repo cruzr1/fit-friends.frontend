@@ -27,7 +27,7 @@ export default function PopupMapComponent({handlePopupClose, location, name}: Po
     };
   }, [handlePopupClose]);
   return (
-    <div className="popup-form popup-form--map">
+    <div className="popup-form popup-form--map" data-testid='popup'>
       <section className="popup">
         <div className="popup__wrapper popup__wrapper--map">
           <div className="popup-head popup-head--address">

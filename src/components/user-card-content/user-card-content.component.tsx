@@ -25,7 +25,7 @@ export default function UserCardContentComponent({ id, classApply, name, locatio
   const user = useAppSelector(selectUser);
   return (
     <>
-      <div className={`${classApply}__content`}>
+      <div className={`${classApply}__content`} data-testid='userCard'>
         <div className={`${classApply}__head`}>
           <h2 className={`${classApply}__title`}>{name}</h2>
         </div>

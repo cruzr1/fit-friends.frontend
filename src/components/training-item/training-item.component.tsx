@@ -20,7 +20,7 @@ export type TrainingItemComponentProps = {
 
 export default function TrainingItemComponent({id, price, name, trainType, calories, description, rating, backgroundImage, isOrdered, trainingsCount, trainingsSum}: TrainingItemComponentProps): JSX.Element {
   return (
-    <div className="thumbnail-training">
+    <div className="thumbnail-training" data-testid='item'>
       <div className="thumbnail-training__inner">
         <div className="thumbnail-training__image">
           <picture>

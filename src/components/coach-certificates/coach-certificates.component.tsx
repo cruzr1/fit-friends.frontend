@@ -126,7 +126,7 @@ export default function CoachCertificatesComponent({certificates}: CoachCertific
       <ul className="personal-account-coach__list">
         {certificatesVisible.map((certificate) =>
           (
-            <li key={certificate} className="personal-account-coach__item">
+            <li key={certificate} className="personal-account-coach__item" data-testid='item'>
               <CoachItemComponent
                 certificate={certificate}
                 handleDeleteButtonClick={handleDeleteButtonClick}

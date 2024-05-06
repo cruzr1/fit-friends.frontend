@@ -39,7 +39,7 @@ export default function PopupCertificatesComponent({certificates, handleCloseBut
     }
   };
   return (
-    <div className="popup-form">
+    <div className="popup-form" data-testid='popup'>
       <section className="popup">
         <div className="popup__wrapper">
           <div className="popup-head">

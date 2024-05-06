@@ -69,12 +69,12 @@ export default function UserCardComponent({userId}: UserCardComponentProps): JSX
       {isUserItemTraindingDataPending && <LoadingPage />};
       {isUserItemTraindingDataFulfilled &&
       <>
-        <div className="inner-page inner-page--no-sidebar">
+        <div className="inner-page inner-page--no-sidebar" data-testid='card'>
           <Helmet>
             <title>Карточка пользователя — Fit friends</title>
           </Helmet>
           <div className="container">
-            <div className="inner-page__wrapper">
+            <div className="inner-page__wrapper" data-testid='wrapper'>
               <BackButtonComponent classApply={BackButtonClassApply.UserCard} />
               <div className="inner-page__content">
                 <section className={`${classApply}`}>

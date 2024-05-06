@@ -66,12 +66,12 @@ export default function PopupQuestionnaireComponent(): JSX.Element {
     return <Navigate to={isCoach ? AppRoute.PersonalAccount : AppRoute.Main}></Navigate>;
   }
   return (
-    <div className={`popup-form popup-form--questionnaire-${classApply}`}>
+    <div className={`popup-form popup-form--questionnaire-${classApply}`} data-testid='popup'>
       <div className="popup-form__wrapper">
         <div className="popup-form__content">
           <div className="popup-form__form">
             <form method="get" onSubmit={(evt) => handleFormSubmit(evt)}>
-              <div className={`questionnaire-${classApply}`}>
+              <div className={`questionnaire-${classApply}`} data-testid='quest'>
                 <h1 className="visually-hidden">Опросник</h1>
                 <div className={`questionnaire-${classApply}__wrapper`}>
                   <div className={`questionnaire-${classApply}__block`}><span className={`questionnaire-${classApply}__legend`}>Ваша специализация (тип) тренировок</span>

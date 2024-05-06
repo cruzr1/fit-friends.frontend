@@ -11,6 +11,7 @@ export default function BackButtonComponent({classApply}: BackButtonProps): JSX.
       className={`btn-flat ${classApply}`}
       type="button"
       onClick={() => browserHistory.back()}
+      data-testid='buttonBack'
     >
       <svg width="14" height="10" aria-hidden="true">
         <use xlinkHref="#arrow-left"></use>

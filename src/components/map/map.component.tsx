@@ -30,7 +30,7 @@ export default function MapComponent({location}: MapProps): JSX.Element {
   }, [map, location]);
 
   return (
-    <div className="popup__content popup__content-map" >
+    <div className="popup__content popup__content-map" data-testid='map-element'>
       <div className="popup__map" style={MapStyle} ref={mapRef}>
       </div>
     </div>

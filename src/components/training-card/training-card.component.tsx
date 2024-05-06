@@ -91,7 +91,7 @@ export default function TrainingCardComponent({training, trainer, isTrainer, han
     setIsVideoPlaying(false);
   };
   return (
-    <div className={`training-card ${isEdit ? 'training-card--edit' : ''}`}>
+    <div className={`training-card ${isEdit ? 'training-card--edit' : ''}`} data-testid='trainingCard'>
       <div className="training-info">
         <h2 className="visually-hidden">Информация о тренировке</h2>
         <div className="training-info__header">

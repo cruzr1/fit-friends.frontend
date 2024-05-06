@@ -45,7 +45,7 @@ export default function UsersListComponent({classApply}: UsersListComponentProps
   };
   return (
     <>
-      <ul className="users-catalog__list">
+      <ul className="users-catalog__list" data-testid='usersList'>
         {users && users.map(({id, name, location, trainType = [], role, avatar}) =>
           (
             <li key={id} className="users-catalog__item">

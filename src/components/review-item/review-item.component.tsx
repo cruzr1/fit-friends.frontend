@@ -9,7 +9,7 @@ type ReviewItemComponentProps = {
 
 export default function ReviewItemComponent({name, avatar, comment, rating}: ReviewItemComponentProps): JSX.Element {
   return (
-    <div className="review">
+    <div className="review" data-testid='review'>
       <div className="review__user-info">
         <div className="review__user-photo">
           <picture>
