@@ -29,7 +29,7 @@ export default function TrainingsCataloguePage(): JSX.Element {
         <div className="inner-page__wrapper">
           <h1 className="visually-hidden">Каталог тренировок</h1>
           <TrainingFilterComponent />
-          <div className="training-catalog">
+          <div className="training-catalog" data-testid='trainingCatalog'>
             <TrainingsListComponent classApply={classApply} />
           </div>
         </div>

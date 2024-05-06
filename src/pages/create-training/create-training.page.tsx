@@ -91,7 +91,7 @@ export default function CreateTrainingPage (): JSX.Element {
           </div>
           <div className="popup-form__form">
             <form method="get" onSubmit={(evt) => handleFormSubmit(evt)}>
-              <div className="create-training">
+              <div className="create-training" data-testid='createTraining'>
                 <div className="create-training__wrapper">
                   <div className="create-training__block">
                     <h2 className="create-training__legend">Название тренировки</h2>

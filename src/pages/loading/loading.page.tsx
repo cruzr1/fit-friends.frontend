@@ -6,7 +6,7 @@ import { RequestStatus } from '../../const';
 export default function LoadingPage(): JSX.Element {
   const isDataLoading = isStatusPending(RequestStatus.Pending);
   return (
-    <div className="spinner-container " >
+    <div className="spinner-container " data-testid='loading'>
       <Helmet>
         <title>Загрузка страницы — Fit friends</title>
       </Helmet>

@@ -11,7 +11,7 @@ export default function FriendsListPage():JSX.Element {
     return <Navigate to={AppRoute.Index} />;
   }
   return (
-    <section className="friends-list">
+    <section className="friends-list" data-testid='friendsList'>
       <Helmet>
         <title>Список друзей — Fit friends</title>
       </Helmet>

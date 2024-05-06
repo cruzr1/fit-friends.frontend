@@ -6,7 +6,7 @@ export default function IntroPage(): JSX.Element {
   const navigate = useNavigate();
 
   return (
-    <div className="intro">
+    <div className="intro" data-testid='intro'>
       <Helmet>
         <title>Fit friends</title>
       </Helmet>

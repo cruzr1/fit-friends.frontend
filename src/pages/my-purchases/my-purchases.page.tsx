@@ -28,7 +28,7 @@ export default function MyPurchasesPage(): JSX.Element {
         <title>Мои покупки — Fit friends</title>
       </Helmet>
       <div className="container">
-        <div className="my-purchases__wrapper">
+        <div className="my-purchases__wrapper" data-testid='myPurchases'>
           <BackButtonComponent classApply={BackButtonClassApply.MyPurchases} />
           <div className="my-purchases__title-wrapper">
             <h1 className="my-purchases__title">Мои покупки</h1>

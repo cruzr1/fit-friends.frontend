@@ -30,7 +30,7 @@ export default function MyTrainingsPage(): JSX.Element {
           <h1 className="visually-hidden">Мои тренировки</h1>
           <TrainingFilterComponent isMyTrainingsPage />
           <div className="inner-page__content">
-            <div className="my-trainings">
+            <div className="my-trainings" data-testid='myTrainings'>
               <TrainingsListComponent classApply={classApply} shouldIncludeDuration />
             </div>
           </div>

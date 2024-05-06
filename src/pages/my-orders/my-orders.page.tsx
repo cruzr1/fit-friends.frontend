@@ -21,7 +21,7 @@ export default function MyOrdersPage(): JSX.Element {
     };
   }, [dispatch ]);
   return (
-    <section className="my-orders">
+    <section className="my-orders" data-testid='myOrders'>
       <Helmet>
         <title>Мои заказы — Fit friends</title>
       </Helmet>

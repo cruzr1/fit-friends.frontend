@@ -9,7 +9,7 @@ export default function ErrorPage (): JSX.Element {
       <Helmet>
         <title>404 — Fit friends</title>
       </Helmet>
-      <section className="error">
+      <section className="error" data-testid='error'>
         <h1 className="error__title">404</h1><span className="error__subtitle">Страница не найдена.</span>
         <p className="error__text"> Возможно, страница была удалена или<br/>её вовсе не существовало.</p>
         <button

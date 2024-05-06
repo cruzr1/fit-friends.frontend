@@ -60,7 +60,7 @@ export default function TrainingCardPage(): JSX.Element {
               <title>Карточка тренировки — Fit friends</title>
             </Helmet>
             <div className="container">
-              <div className="inner-page__wrapper">
+              <div className="inner-page__wrapper" data-testid='wrapper'>
                 <h1 className="visually-hidden">Карточка тренировки</h1>
                 <ReviewsListComponent trainingId={trainingId} isTrainer={isTrainer} handleReviewButtonClick={handleReviewButtonClick} />
                 {training && trainer && <TrainingCardComponent training={training} trainer={trainer} handleBuyButtonClick={handleBuyButtonClick} isTrainer={isTrainer} />}

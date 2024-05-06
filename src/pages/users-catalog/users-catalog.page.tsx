@@ -12,7 +12,7 @@ export default function UsersCataloguePage(): JSX.Element {
         <title>Каталог пользователей — Fit friends</title>
       </Helmet>
       <div className="container">
-        <div className="inner-page__wrapper">
+        <div className="inner-page__wrapper" data-testid='wrapper'>
           <h1 className="visually-hidden">Каталог пользователей</h1>
           <UserFilterComponent />
           <div className="inner-page__content">
