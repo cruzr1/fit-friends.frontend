@@ -5,7 +5,8 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx"
+    "lint": "eslint src --ext ts,tsx",
+    "test": "vitest --passWithNoTests"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -38,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "5.60.1",
     "@typescript-eslint/parser": "5.57.1",
     "@vitejs/plugin-react": "4.0.1",
+    "@vitest/coverage-v8": "^1.5.2",
     "axios-mock-adapter": "1.21.5",
     "eslint": "8.43.0",
     "eslint-config-htmlacademy": "9.1.1",
@@ -48,7 +50,7 @@
     "jsdom": "22.1.0",
     "typescript": "5.0.4",
     "vite": "^4.5.3",
-    "vitest": "0.32.2"
+    "vitest": "1.5.2"
   },
   "browserslist": {
     "production": [
