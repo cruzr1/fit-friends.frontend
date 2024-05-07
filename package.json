@@ -3,10 +3,11 @@
   "version": "4.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx",
-    "test": "vitest --passWithNoTests"
+    "test": "vitest --passWithNoTests",
+    "buildDocker": "npm run build && docker build -f ./Dockerfile -t fit-friends.frontend:latest ."
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
