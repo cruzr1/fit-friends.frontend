@@ -366,7 +366,7 @@ export const MY_ORDERS_TRAININGS_COUNT = 4;
 
 export const CATALOG_COUNT = 6;
 
-export const PAGES_WITH_HEADER: AppRouteType[] = [AppRoute.Signin, AppRoute.Signup, AppRoute.Quest];
+export const PAGES_WITHOUT_HEADER: AppRouteType[] = [AppRoute.Index, AppRoute.Signin, AppRoute.Signup, AppRoute.Quest];
 
 export const USERS_READY_TRAIN = 8;
 

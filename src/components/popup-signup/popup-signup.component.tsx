@@ -83,6 +83,7 @@ export default function PopupSignupComponent(): JSX.Element {
                         type="file"
                         accept="image/png, image/jpeg"
                         ref={avatarRef}
+                        src={avatarURL}
                         onChange={(evt) => handleAvatarChange(evt)}
                       />
                       <span

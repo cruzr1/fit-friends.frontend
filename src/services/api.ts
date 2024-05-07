@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { getToken } from './token';
+import { getToken, removeAccessRefreshTokens } from './token';
 import { AppRoute, BASE_URL, REQUEST_TIMEOUT, } from '../const';
 import { StatusCodes } from 'http-status-codes';
 import { redirectToRoute } from '../store/action';
@@ -32,6 +32,7 @@ export const createApi = (): AxiosInstance => {
     (response) => response,
     ({response}: AxiosError<DetailMessageType>) => {
       if (response && response.status === StatusCodes.UNAUTHORIZED) {
+        removeAccessRefreshTokens();
         redirectToRoute(AppRoute.Index);
       }
       throw response?.data.message;
