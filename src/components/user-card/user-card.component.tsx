@@ -66,8 +66,8 @@ export default function UserCardComponent({userId}: UserCardComponentProps): JSX
 
   return (
     <>
-      {isUserItemTraindingDataPending && <LoadingPage />};
-      {isUserItemTraindingDataFulfilled &&
+      {isUserItemTraindingDataPending && <LoadingPage />}
+      {(!isCoach || isUserItemTraindingDataFulfilled) &&
       <>
         <div className="inner-page inner-page--no-sidebar" data-testid='card'>
           <Helmet>

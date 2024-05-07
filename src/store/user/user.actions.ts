@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { updateAuthStatus, setUser, setUsersReadyTrain, setTrainingsCount, setUsersList, setUsersTotalItems, setUsersTake, setUserItem, setUserFriends, setApplicationsList, setNotifications } from './user.slice';
-import { setRefreshToken, setToken} from '../../services/token';
+import { removeAccessRefreshTokens, setRefreshToken, setToken} from '../../services/token';
 import { clearErrorAction } from '../error/error.actions';
 import { NameSpace, Action, APIPath, AuthStatus, ErrorMessage, UserRole, USERS_READY_TRAIN, CATALOG_COUNT } from '../../const';
 import { StateType, AppDispatchType, UserType, LoggedUserType, SigninType, LoginType, UpdateUserType, EntitiesWithPaginationType, CreateOrderType, OrderType, AccountType, QueryUsersType, ApplicationType, TrainingType, UpdateApplicationParams, ServerNotificationType } from '../../types';
@@ -69,6 +69,7 @@ export const authoriseUserAction = createAsyncThunk<void, undefined, {
       dispatch(setUser(data));
     } catch (message) {
       dispatch(updateAuthStatus(AuthStatus.NoAuth));
+      removeAccessRefreshTokens();
       dispatch(clearErrorAction(`${ErrorMessage.UserUnauthorised}: ${message as string}`));
     }
   },

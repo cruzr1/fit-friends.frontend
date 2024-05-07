@@ -17,3 +17,8 @@ export const getToken = (): string => {
 export const removeToken = (): void => {
   localStorage.removeItem(AUTH_TOKEN_KEY);
 };
+
+export const removeAccessRefreshTokens = (): void => {
+  localStorage.removeItem(AUTH_TOKEN_KEY);
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
+};
