@@ -13,7 +13,7 @@ export default function ReviewItemComponent({name, avatar, comment, rating}: Rev
       <div className="review__user-info">
         <div className="review__user-photo">
           <picture>
-            <source type="image/webp" srcSet={`/img/content/avatars/users//${adaptImage(avatar)}.webp, /img/content/avatars/users//${adaptImage(avatar)}@2x.webp 2x`} /><img src={`/img/content/avatars/users//${adaptImage(avatar)}.png" srcSet="/img/content/avatars/users//${adaptImage(avatar)}@2x.png 2x`} width="64" height="64" alt="Изображение пользователя" />
+            <source type="image/webp" srcSet={`/img/content/avatars/users/${adaptImage(avatar)}.webp, /img/content/avatars/users/${adaptImage(avatar)}@2x.webp 2x`} /><img src={`/img/content/avatars/users/${adaptImage(avatar)}.png" srcSet="/img/content/avatars/users/${adaptImage(avatar)}@2x.png 2x`} width="64" height="64" alt="Изображение пользователя" />
           </picture>
         </div><span className="review__user-name">{name}</span>
         <div className="review__rating">
